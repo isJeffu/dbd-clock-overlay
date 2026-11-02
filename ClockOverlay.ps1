@@ -70,7 +70,7 @@ $noMaps = -not (Get-ChildItem (Join-Path $root 'maps') -Filter *.png -ErrorActio
 $opacities = @(0.35, 0.55, 0.75, 1.0)
 $heights   = @(260, 340, 440, 560)          # map height in screen units
 $corners   = @('TopLeft', 'TopRight', 'BottomLeft', 'BottomRight', 'Left', 'Right')
-$state = @{ Opacity = 2; Size = 1; Corner = 0; TimerPos = 0; TimerSize = 1; AutoDetect = $true; Visible = $true; Map = $null; Perks = @(); PerkTiers = [pscustomobject]@{}; AssumeLethal = $false; AutoPerks = $true; CountsPer360 = $null; CompassOn = $false; CalibSens = $null; TimersOn = $false }   # compass (trial) + timers (pre-10.2 perk values) start off; F1 / settings.json turn them on
+$state = @{ Opacity = 2; Size = 1; Corner = 0; TimerPos = 0; TimerSize = 1; AutoDetect = $true; Visible = $true; Map = $null; Perks = @(); PerkTiers = [pscustomobject]@{}; AssumeLethal = $false; AutoPerks = $true; CountsPer360 = $null; CompassOn = $false; CalibSens = $null; TimersOn = $false; UiLayout = 'auto' }   # compass (trial) + timers (pre-10.2 perk values) start off; F1 / settings.json turn them on
 if (Test-Path $settingsPath) {
     try {
         $saved = Get-Content $settingsPath -Raw | ConvertFrom-Json
@@ -89,10 +89,12 @@ if (Test-Path $settingsPath) {
         # Perk / unhook / exhaustion / chase timers (the collapse countdown is separate)
         if ($null -ne $saved.TimersOn) { $state.TimersOn = [bool]$saved.TimersOn }
         if ($saved.CalibSens -gt 0) { $state.CalibSens = [int]$saved.CalibSens }
+        # where DbD's menus sit on non-16:9 screens (see UiLayout.ps1)
+        if ($saved.UiLayout -in 'auto', '16:9') { $state.UiLayout = [string]$saved.UiLayout }
     } catch {}
 }
 function Save-Settings {
-    @{ Opacity = $state.Opacity; Size = $state.Size; Corner = $state.Corner; TimerPos = $state.TimerPos; TimerSize = $state.TimerSize; AutoDetect = $state.AutoDetect; Perks = @($state.Perks); PerkTiers = $state.PerkTiers; AssumeLethal = $state.AssumeLethal; AutoPerks = $state.AutoPerks; CountsPer360 = $state.CountsPer360; CompassOn = $state.CompassOn; CalibSens = $state.CalibSens; TimersOn = $state.TimersOn } |
+    @{ Opacity = $state.Opacity; Size = $state.Size; Corner = $state.Corner; TimerPos = $state.TimerPos; TimerSize = $state.TimerSize; AutoDetect = $state.AutoDetect; Perks = @($state.Perks); PerkTiers = $state.PerkTiers; AssumeLethal = $state.AssumeLethal; AutoPerks = $state.AutoPerks; CountsPer360 = $state.CountsPer360; CompassOn = $state.CompassOn; CalibSens = $state.CalibSens; TimersOn = $state.TimersOn; UiLayout = $state.UiLayout } |
         ConvertTo-Json | Set-Content $settingsPath -Encoding utf8
 }
 
@@ -122,6 +124,7 @@ $window = New-OverlayWindow 'DbD Clock Overlay'
 $pillWindow = New-OverlayWindow 'DbD Clock Overlay status'
 . (Join-Path $root 'Timers.ps1')
 . (Join-Path $root 'Compass.ps1')
+. (Join-Path $root 'UiLayout.ps1')
 . (Join-Path $root 'Roulette.ps1')
 
 $image = New-Object System.Windows.Controls.Image
@@ -214,9 +217,10 @@ function Update-Collapse {
     if (-not $collapse.Shown) {
         $collapse.Shown = $true
         $collapseWindow.Show(); $collapseWindow.UpdateLayout()
-        $sw = [System.Windows.SystemParameters]::PrimaryScreenWidth; $sh = [System.Windows.SystemParameters]::PrimaryScreenHeight
-        $collapseWindow.Left = $sw * 0.812
-        $collapseWindow.Top = [Math]::Max(0, $sh * 0.0361 - $collapseWindow.ActualHeight / 2)
+        # just right of the bar's end (design px 1559, row 39, pinned to the middle like the bar)
+        $ui = Get-DbdUi ([System.Windows.SystemParameters]::PrimaryScreenWidth) ([System.Windows.SystemParameters]::PrimaryScreenHeight) $state.UiLayout
+        $collapseWindow.Left = Get-DbdX $ui 1559 'center'
+        $collapseWindow.Top = [Math]::Max(0, (Get-DbdY $ui 39) - $collapseWindow.ActualHeight / 2)
         Update-CompassLayout   # the compass moves down so it doesn't cover the bar
     }
 }
@@ -262,6 +266,10 @@ try { $crops = Get-Content (Join-Path $root 'crops.json') -Raw -Encoding UTF8 | 
 
 function Update-MapLabels {
     $labelCanvas.Children.Clear()
+    # no size of its own until a labelled map sets one: a size left over from
+    # Midwich / Wreckers' Yard kept the window that wide, and a narrower map
+    # (Coal Tower) then sat centred in it, indented from the corner (user, 2 Nov)
+    $labelCanvas.Width = 0; $labelCanvas.Height = 0
     if (-not $state.Map -or -not $landmarks) { return }
     $list = $landmarks.($state.Map.name)
     if (-not $list) { return }
@@ -423,7 +431,7 @@ function Show-Picker {
 }
 
 # ---------- Background map detection ----------
-$sync = [hashtable]::Synchronized(@{ Enabled = $state.AutoDetect; Paused = $false; Quit = $false; Blackout = $null; Detected = $null; Seq = 0; MenuStreak = 0; ScanNow = $false; HaveMap = $false; RescueSeq = 0; UnhookedSeq = 0; UnhookedSource = @(); CarriedSeq = 0; DeadSeq = 0; EscMenu = $false; EffectSeq = 0; EffectText = ''; ChaseEndSeq = 0; AutoPerks = $state.AutoPerks; PerkSeq = 0; DetectedPerks = @(); PerkScores = @(); LobbyScanned = $false; KillerSeq = 0; KillerTitle = ''; CollapseSeq = 0; CollapseFrac = 0.0; CollapseOrange = $false; CollapseAt = $null; LobbyAt = $null; LoadoutNow = $false; LoadoutAt = $null })
+$sync = [hashtable]::Synchronized(@{ Enabled = $state.AutoDetect; Paused = $false; Quit = $false; Blackout = $null; Detected = $null; Seq = 0; MenuStreak = 0; ScanNow = $false; HaveMap = $false; RescueSeq = 0; UnhookedSeq = 0; UnhookedSource = @(); CarriedSeq = 0; DeadSeq = 0; EscMenu = $false; EffectSeq = 0; EffectText = ''; ChaseEndSeq = 0; AutoPerks = $state.AutoPerks; PerkSeq = 0; DetectedPerks = @(); PerkScores = @(); LobbyScanned = $false; KillerSeq = 0; KillerTitle = ''; CollapseSeq = 0; CollapseFrac = 0.0; CollapseOrange = $false; CollapseAt = $null; LobbyAt = $null; LoadoutNow = $false; LoadoutAt = $null; UiLayout = $state.UiLayout })
 $runspace = [runspacefactory]::CreateRunspace()
 $runspace.ApartmentState = 'MTA'
 $runspace.Open()
@@ -435,6 +443,7 @@ $detector = [powershell]::Create()
 $detector.Runspace = $runspace
 [void]$detector.AddScript({
     . (Join-Path $root 'OcrLib.ps1')
+    . (Join-Path $root 'UiLayout.ps1')
     . (Join-Path $root 'PerkMatch.ps1')
     $perkJson = Get-Content (Join-Path $root 'perks.json') -Raw -Encoding UTF8 | ConvertFrom-Json
     $perkList = $perkJson.perks
@@ -446,10 +455,11 @@ $detector.Runspace = $runspace
     $prevEffects = @()
     $iconDir = Join-Path $root 'icons'
     # Where your 4 perk diamonds sit in the lobby (next to your character, top
-    # right), as fractions of the screen so other resolutions work. Measured on
-    # a 3840x2160 screen; the diamond half-diagonal is 55 px there.
-    $perkSlots = @(@{X=0.9049; Y=0.1597}, @{X=0.8880; Y=0.1898}, @{X=0.9219; Y=0.1898}, @{X=0.9049; Y=0.2199})
-    $perkHalfFrac = 55 / 2160
+    # right), in 1080p design pixels pinned to the RIGHT edge (UiLayout.ps1), so
+    # other resolutions and ultrawide work. Measured on a 3840x2160 screen
+    # (fractions .9049/.8880/.9219 x .1597/.1898/.2199); half-diagonal 55 px there.
+    $perkSlots = @(@{X=1737.4; Y=172.5}, @{X=1705.0; Y=205.0}, @{X=1770.0; Y=205.0}, @{X=1737.4; Y=237.5})
+    $perkHalf = 27.5
     $lastFlat = ''; $tabScan = $false
     # Match start: for a while after the loading screen / lobby, scan fast and
     # also read the bottom-left corner zoomed in (the map name there is small).
@@ -491,11 +501,11 @@ $detector.Runspace = $runspace
                 # loadout panel on screen right now (the perk roulette only shows then)
                 # (a full-screen read now and then misses the word - the quick title
                 # check gets the last say, so the button doesn't blink off mid-spin)
-                $sync.LoadoutNow = ($menuHits -contains 'LOADOUT') -or ($sync.DbdInFront -and -not $testShot -and $menuHits.Count -and (Test-LoadoutTitle))
+                $sync.LoadoutNow = ($menuHits -contains 'LOADOUT') -or ($sync.DbdInFront -and -not $testShot -and $menuHits.Count -and (Test-LoadoutTitle -layout $sync.UiLayout))
                 if ($sync.LoadoutNow) { $sync.LoadoutAt = Get-Date }
                 if ($text -match 'OPEN ESCAPE') { $sync.GatesPowered = $true }      # gate switch prompt = all gens done
                 # Endgame Collapse bar: how full it is (pixels only, a few ms)
-                $cb = Get-CollapseBar $bmp
+                $cb = Get-CollapseBar $bmp $sync.UiLayout
                 if ($cb) { $sync.CollapseFrac = $cb.Frac; $sync.CollapseOrange = $cb.Orange; $sync.CollapseAt = Get-Date; $sync.CollapseSeq++ }
                 if ($saveEnd) {
                     if ($text -match 'OPEN ESCAPE') { if (((Get-Date) - $gatesSeen).TotalMinutes -gt 6) { $endFrames = 0 }; $gatesSeen = Get-Date }
@@ -539,9 +549,9 @@ $detector.Runspace = $runspace
                 # In the lobby (READY button showing): read the 4 perk diamonds once
                 if ($sync.AutoPerks -and -not $sync.LobbyScanned -and ($menuHits -contains 'READY')) {
                     try {
-                        $sh = $bmp.Height; $swd = $bmp.Width
-                        $centers = $perkSlots | ForEach-Object { @{ X = [int]($_.X * $swd); Y = [int]($_.Y * $sh) } }
-                        $found = Find-PerksInBitmap $bmp $centers $iconDir $perkList ([int]($perkHalfFrac * $sh))
+                        $ui = Get-DbdUi $bmp.Width $bmp.Height $sync.UiLayout
+                        $centers = $perkSlots | ForEach-Object { @{ X = [int](Get-DbdX $ui $_.X 'right'); Y = [int](Get-DbdY $ui $_.Y) } }
+                        $found = Find-PerksInBitmap $bmp $centers $iconDir $perkList ([int]($perkHalf * $ui.U))
                         # keep a slot only when it's a clear match
                         $names = @($found | Where-Object { $_.Name -and $_.Score -ge 0.62 -and ($_.Score - $_.SecondScore) -ge 0.03 } | ForEach-Object { $_.Name })
                         $sync.PerkScores = @($found | ForEach-Object { "$($_.Name) $($_.Score)" })
@@ -630,7 +640,7 @@ $detector.Runspace = $runspace
                 $nextQuick = (Get-Date).AddMilliseconds(200)
                 try {
                     $front = Test-DbdInFront
-                    $lo = $front -and (Test-LoadoutTitle)
+                    $lo = $front -and (Test-LoadoutTitle -layout $sync.UiLayout)
                     $sync.DbdInFront = $front
                     if ($lo) { $sync.LoadoutAt = Get-Date }
                     $sync.LoadoutNow = $lo; $sync.LastScan = Get-Date

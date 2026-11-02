@@ -124,9 +124,11 @@ function Invoke-RouletteSound([string]$which) {
     } catch {}
 }
 
-# ---- Scale: 1080p pixels -> WPF units on this screen ----
-function Get-RouletteUnit { [System.Windows.SystemParameters]::PrimaryScreenHeight / 1080.0 }
-$rlU = Get-RouletteUnit
+# ---- Scale: 1080p pixels -> WPF units on this screen. The loadout panel is
+# pinned to the LEFT edge (UiLayout.ps1), so everything here is placed from
+# the DbD UI's left / top ($rlX0, $rlY0 - 0 on 16:9 and ultrawide) ----
+$rlUi = Get-DbdUi ([System.Windows.SystemParameters]::PrimaryScreenWidth) ([System.Windows.SystemParameters]::PrimaryScreenHeight) $(if ($state) { $state.UiLayout } else { 'auto' })
+$rlU = $rlUi.U; $rlX0 = $rlUi.Left; $rlY0 = $rlUi.Top
 $rlOff = if ($env:DBD_OVERLAY_OFFSCREEN) { -20000 } else { 0 }   # tests: keep it off your screen
 
 # ---- DbD look (user, 2 Nov: "match DbD's theme"): slots are mottled purple
@@ -285,7 +287,7 @@ $rlDpi = 0
 function Set-ReelAt($r, [double]$cx, [double]$cy, [double]$s) {
     $r.CX = $cx; $r.CY = $cy; $r.S = $s
     $r.Scale.ScaleX = $s; $r.Scale.ScaleY = $s
-    $x = ($cx - $rlHalf - $rlPad) * $rlU + $rlOff; $y = ($cy - $rlHalf - $rlPad) * $rlU
+    $x = ($cx - $rlHalf - $rlPad) * $rlU + $rlX0 + $rlOff; $y = ($cy - $rlHalf - $rlPad) * $rlU + $rlY0
     if ($r.Win.IsVisible) {
         if ($r.Hwnd -eq [IntPtr]::Zero) { $r.Hwnd = (New-Object System.Windows.Interop.WindowInteropHelper $r.Win).Handle }
         if (-not $script:rlDpi) { $script:rlDpi = [System.Windows.Media.VisualTreeHelper]::GetDpi($r.Win).DpiScaleX }
@@ -330,20 +332,24 @@ $rlButton.Width = $rlBtnW * $rlU; $rlButton.Height = $rlBtnH * $rlU
 $rlButton.HorizontalAlignment = 'Left'; $rlButton.VerticalAlignment = 'Top'
 $rlButton.Cursor = [System.Windows.Input.Cursors]::Hand
 # styled like the game's own boxes (SEARCH, BACK [ESC]): black, a worn light
-# grey line just inside the edge, Roboto Bold in light grey. Hover = READY's
-# blood-red smear from the left.
+# grey line just inside the edge, Roboto Bold in light grey. Hover (user, 2
+# Nov: "keep it black and white, the gradient moves with your mouse"): a soft
+# white glow centred under the pointer, following it across the button.
 $rlButton.BorderBrush = New-Object System.Windows.Media.SolidColorBrush ([System.Windows.Media.Color]::FromRgb(24, 24, 26)); $rlButton.BorderThickness = 1 * $rlU
-function New-RouletteSmear([byte]$r, [byte]$g, [byte]$b) {
-    $br = New-Object System.Windows.Media.LinearGradientBrush
-    $br.StartPoint = '0,0.5'; $br.EndPoint = '1,0.5'
-    $br.GradientStops.Add((New-Object System.Windows.Media.GradientStop ([System.Windows.Media.Color]::FromRgb($r, $g, $b)), 0))
-    $br.GradientStops.Add((New-Object System.Windows.Media.GradientStop ([System.Windows.Media.Color]::FromRgb([byte]($r / 2), [byte]($g / 2), [byte]($b / 2))), 0.55))
-    $br.GradientStops.Add((New-Object System.Windows.Media.GradientStop ([System.Windows.Media.Color]::FromRgb(6, 2, 2)), 1))
-    $br.Freeze(); $br
-}
 $rlBtnBrush = New-Object System.Windows.Media.SolidColorBrush ([System.Windows.Media.Color]::FromArgb(240, 10, 10, 11))
-$rlBtnHover = New-RouletteSmear 150 10 14
+$rlBtnHover = New-Object System.Windows.Media.RadialGradientBrush
+$rlBtnHover.GradientStops.Add((New-Object System.Windows.Media.GradientStop ([System.Windows.Media.Color]::FromArgb(245, 92, 92, 96)), 0))
+$rlBtnHover.GradientStops.Add((New-Object System.Windows.Media.GradientStop ([System.Windows.Media.Color]::FromArgb(242, 34, 34, 37)), 0.55))
+$rlBtnHover.GradientStops.Add((New-Object System.Windows.Media.GradientStop ([System.Windows.Media.Color]::FromArgb(240, 10, 10, 11)), 1))
+# a round-ish spot on a wide button: radius as a share of the button's width / height
+$rlBtnHover.RadiusX = 0.42; $rlBtnHover.RadiusY = 1.45
 $rlButton.Background = $rlBtnBrush
+function Set-RouletteGlow($e) {
+    $p = $e.GetPosition($rlButton)
+    $w = [Math]::Max(1.0, $rlButton.ActualWidth); $h = [Math]::Max(1.0, $rlButton.ActualHeight)
+    $c = New-Object System.Windows.Point ([Math]::Min(1.0, [Math]::Max(0.0, $p.X / $w))), ([Math]::Min(1.0, [Math]::Max(0.0, $p.Y / $h)))
+    $rlBtnHover.Center = $c; $rlBtnHover.GradientOrigin = $c
+}
 $rlBtnGrid = New-Object System.Windows.Controls.Grid
 [void]$rlBtnGrid.Children.Add((New-RouletteFrame 3))
 $rlBtnText = New-Object System.Windows.Controls.TextBlock
@@ -353,7 +359,8 @@ $rlBtnText.HorizontalAlignment = 'Center'; $rlBtnText.VerticalAlignment = 'Cente
 $rlBtnText.Foreground = New-Object System.Windows.Media.SolidColorBrush ([System.Windows.Media.Color]::FromRgb(226, 226, 226))
 [void]$rlBtnGrid.Children.Add($rlBtnText)
 $rlButton.Child = $rlBtnGrid
-$rlButton.Add_MouseEnter({ $rlButton.Background = $rlBtnHover })
+$rlButton.Add_MouseEnter({ param($s, $e) Set-RouletteGlow $e; $rlButton.Background = $rlBtnHover })
+$rlButton.Add_MouseMove({ param($s, $e) Set-RouletteGlow $e })
 $rlButton.Add_MouseLeave({ $rlButton.Background = $rlBtnBrush })
 $rlButton.Add_MouseLeftButtonUp({ Start-PerkSpin })
 $rlBtnWindow.Content = $rlButton
@@ -532,8 +539,8 @@ function Get-RouletteLayout {
 }
 function Set-RoulettePosition {
     $l = Get-RouletteLayout
-    $rlBtnWindow.Left = $l.BtnLeft + $rlOff; $rlBtnWindow.Top = $l.BtnTop
-    $rlListWin.Left = $rlListAreaX * $rlU + $rlOff; $rlListWin.Top = $rlListAreaY * $rlU
+    $rlBtnWindow.Left = $l.BtnLeft + $rlX0 + $rlOff; $rlBtnWindow.Top = $l.BtnTop + $rlY0
+    $rlListWin.Left = $rlListAreaX * $rlU + $rlX0 + $rlOff; $rlListWin.Top = $rlListAreaY * $rlU + $rlY0
     foreach ($r in $rlReelsUi) { Set-ReelAt $r $r.CX $r.CY $r.S }
 }
 

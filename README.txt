@@ -178,14 +178,18 @@ No registry entries, no changes to the game.
 
 SCREEN SETUP
 ------------
-- Any 16:9 resolution (1080p, 1440p, 4K) and any Windows display scaling
-  work: everything is placed relative to your screen size. Animations run at
-  your monitor's refresh rate (60 / 144 / 240 Hz...).
+- Any resolution (1080p, 1440p, 4K), ultrawide (21:9, 32:9) and any Windows
+  display scaling: everything is placed relative to your screen, the way DbD
+  places its own menus (loadout panel on the left, your lobby perks on the
+  right, collapse bar in the middle). Animations run at your monitor's
+  refresh rate (60 / 144 / 240 Hz...).
 - Play DbD on your MAIN monitor, in Windowed Fullscreen.
 - Keep DbD's own UI / HUD scale at 100%: perk reading, the SPIN button and
   the collapse countdown look at fixed spots on the screen.
-- Ultrawide (21:9) and 16:10 screens are untested: the map callouts work,
-  but perk reading, the roulette and the collapse countdown may be off.
+- Ultrawide and things look off (SPIN button not on your perks, wrong perks
+  read, no collapse countdown)? Close the overlay, open settings.json, set
+  "UiLayout": "16:9" (for DbD showing its menus in a 16:9 box in the middle)
+  and start it again. "auto" is the default.
 
 GOOD TO KNOW
 ------------

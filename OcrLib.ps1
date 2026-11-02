@@ -155,14 +155,13 @@ function Get-ScreenBitmap([System.Drawing.Rectangle]$blackout = [System.Drawing.
 }
 
 # Is the loadout panel open? Reads only its "LOADOUT" title (top left, under
-# the character name; DbD's menus scale with screen height and sit against
-# the left edge) - tens of ms instead of a full-screen read, so the perk
-# roulette button can follow the panel quickly. $from = a screenshot to read
-# instead of the screen (tests).
-function Test-LoadoutTitle([System.Drawing.Bitmap]$from) {
+# the character name; pinned to the LEFT edge, UiLayout.ps1) - tens of ms
+# instead of a full-screen read, so the perk roulette button can follow the
+# panel quickly. $from = a screenshot to read instead of the screen (tests).
+function Test-LoadoutTitle([System.Drawing.Bitmap]$from, [string]$layout = 'auto') {
     $b = if ($from) { New-Object System.Drawing.Rectangle 0, 0, $from.Width, $from.Height } else { [System.Windows.Forms.Screen]::PrimaryScreen.Bounds }
-    $u = $b.Height / 1080.0
-    $src = New-Object System.Drawing.Rectangle ($b.X + [int](360 * $u)), ($b.Y + [int](50 * $u)), ([int](170 * $u)), ([int](58 * $u))
+    $ui = Get-DbdUi $b.Width $b.Height $layout; $u = $ui.U
+    $src = New-Object System.Drawing.Rectangle ($b.X + [int](Get-DbdX $ui 360 'left')), ($b.Y + [int](Get-DbdY $ui 50)), ([int](170 * $u)), ([int](58 * $u))
     # resampled to 3x its 1080p size: OCR reads text ~40 px tall best
     $big = New-Object System.Drawing.Bitmap 510, 174
     $g = [System.Drawing.Graphics]::FromImage($big)
@@ -255,11 +254,13 @@ function Get-ScoreEvents([string]$text) {
 # fill drains right to left; it is grey-white (~118) or orange (195/105/0), the
 # drained part is dark blue-grey. Returns @{ Frac = 0..1; Orange = $true/$false }
 # or $null when no bar is there. Pixels only, no OCR.
-function Get-CollapseBar([System.Drawing.Bitmap]$bmp) {
-    $w = $bmp.Width; $h = $bmp.Height
-    $x0 = [int]($w * 0.1912); $x1 = [int]($w * 0.8060)
-    $ya = [int]($h * 0.0343); $yb = [int]($h * 0.0380)
-    $step = [Math]::Max(1, [int]($w / 1280))
+# In 1080p design pixels the track is x 367-1548 (pinned to the MIDDLE of the
+# screen, UiLayout.ps1), rows 37 and 41 - so it's found on ultrawide too.
+function Get-CollapseBar([System.Drawing.Bitmap]$bmp, [string]$layout = 'auto') {
+    $ui = Get-DbdUi $bmp.Width $bmp.Height $layout
+    $x0 = [Math]::Max(0, [int](Get-DbdX $ui 367.1 'center')); $x1 = [Math]::Min($bmp.Width - 1, [int](Get-DbdX $ui 1547.5 'center'))
+    $ya = [int](Get-DbdY $ui 37.04); $yb = [int](Get-DbdY $ui 41.04)
+    $step = [Math]::Max(1, [int](1.5 * $ui.U))
     $cls = New-Object System.Text.StringBuilder
     $orange = 0
     for ($x = $x0; $x -le $x1; $x += $step) {
