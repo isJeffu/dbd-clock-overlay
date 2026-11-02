@@ -198,7 +198,11 @@ $script:MenuWords = @('READY', 'FIND MATCH', 'CONTINUE', 'BLOODWEB', 'STORE', 'A
     # seen in the log on the real end screen and lobby (17 Oct)
     'SPECTATE', 'MATCH RESULT', 'BLOODPOINTS EARNED', 'LEAVE PARTY', 'PLAY', 'ENTER TEXT', 'IN A MATCH',
     # report-player window on the end screen
-    'SELECT A CATEGORY', 'SUBMIT', 'REPORT')
+    'SELECT A CATEGORY', 'SUBMIT', 'REPORT',
+    # loadout panel only: with just LOADOUT read (chat box OCR'd as "Entenext...",
+    # READY turned into CANCEL) it counted as in-match, and its SEARCH box as a
+    # HUD prompt - that cleared the roulette (Consy's log, 2 Nov)
+    'PRESET', 'ADD-ONS', 'INVENTORY/PERKS')
 
 function Get-MenuWordHits([string]$text) {
     $key = ' ' + (ConvertTo-MatchKey ($text -replace "`n", ' ')) + ' '

@@ -20,6 +20,18 @@
 #   (keys only work while DbD is the window in front; never F11 - it toggles DbD's fullscreen)
 #   Pause   quit (or tray icon > Quit)
 
+# Per-monitor DPI handling, set before any window exists. Otherwise WPF makes
+# the process "system DPI aware", and on a PC whose game monitor uses another
+# scaling than Windows' main setting (two monitors at 100% / 125%, or scaling
+# changed without signing out) Windows bitmap-stretches the see-through
+# windows: Consy's SPIN button was drawn ~20% too big, down-right of its
+# clickable spot, and only on hover (2 Nov). Where the scaling matches (most
+# PCs) nothing changes - WPF sees the same screen size either way.
+try {
+    Add-Type -Namespace DbdOverlay -Name Dpi -MemberDefinition '[DllImport("user32.dll")] public static extern bool SetProcessDpiAwarenessContext(IntPtr v);'
+    [void][DbdOverlay.Dpi]::SetProcessDpiAwarenessContext([IntPtr](-4))   # PER_MONITOR_AWARE_V2 (Windows 10 1703+)
+} catch {}
+
 Add-Type -AssemblyName PresentationFramework, PresentationCore, WindowsBase, System.Windows.Forms, System.Drawing
 
 Add-Type -ReferencedAssemblies System.Windows.Forms @"
