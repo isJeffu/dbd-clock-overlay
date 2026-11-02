@@ -31,7 +31,8 @@ if ($latest -le $local) {
 Write-Host "New version: v$latest (you have v$local)" -ForegroundColor Green
 if ($rel.body) { Write-Host ''; Write-Host ($rel.body.Trim()); Write-Host '' }
 
-$asset = $rel.assets | Where-Object { $_.name -eq 'DbD Clock Overlay.zip' } | Select-Object -First 1
+# (GitHub rewrites spaces in file names, so match loosely: DbD-Clock-Overlay.zip)
+$asset = $rel.assets | Where-Object { $_.name -match 'Overlay\.zip$' } | Select-Object -First 1
 if (-not $asset) { Write-Host 'That release has no download attached - try again later.' -ForegroundColor Yellow; [void](Read-Host 'Press Enter to close'); exit 1 }
 $tmp = Join-Path $env:TEMP ('dbdco-update-' + [guid]::NewGuid())
 New-Item -ItemType Directory $tmp | Out-Null

@@ -10,7 +10,7 @@ reads or changes the game's files or memory. Fan-made; use at your own risk.
 
 ## Install
 
-1. Download **`DbD Clock Overlay Setup.cmd`** from the
+1. Download **`DbD-Clock-Overlay-Setup.cmd`** from the
    [latest release](../../releases/latest).
 2. Double-click it. Windows may ask before running it because it isn't
    signed: click **Run** (or **More info -> Run anyway**).
@@ -19,7 +19,7 @@ reads or changes the game's files or memory. Fan-made; use at your own risk.
 Updates: Start menu -> DbD Clock Overlay -> **Update**.
 Remove: Start menu -> DbD Clock Overlay -> **Uninstall**.
 
-Prefer unzipping by hand? Use `DbD Clock Overlay.zip` from the release
+Prefer unzipping by hand? Use `DbD-Clock-Overlay.zip` from the release
 (see README.txt inside).
 
 ## Credits
