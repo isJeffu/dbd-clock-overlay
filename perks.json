@@ -1,0 +1,1152 @@
+{
+    "source":  "deadbydaylight.wiki.gg/wiki/Survivor_Perks (read 2026-10-17); seconds = [tier I, tier II, tier III]",
+    "perks":  [
+                  {
+                      "name":  "A Place For Us",
+                      "file":  "IconsPerks_aPlaceForUs.png",
+                      "character":  "Kwon"
+                  },
+                  {
+                      "name":  "Ace in the Hole",
+                      "file":  "IconPerks_aceInTheHole.png",
+                      "character":  "Ace"
+                  },
+                  {
+                      "name":  "Adrenaline",
+                      "file":  "IconPerks_adrenaline.png",
+                      "character":  "Meg"
+                  },
+                  {
+                      "name":  "Aftercare",
+                      "file":  "IconPerks_aftercare.png",
+                      "character":  "Jeff"
+                  },
+                  {
+                      "name":  "Alert",
+                      "file":  "IconPerks_alert.png",
+                      "character":  "Feng"
+                  },
+                  {
+                      "name":  "Any Means Necessary",
+                      "file":  "IconPerks_anyMeansNecessary.png",
+                      "character":  "Yui"
+                  },
+                  {
+                      "name":  "Apocalyptic Ingenuity",
+                      "file":  "IconPerks_apocalypticIngenuity.png",
+                      "character":  "Rick"
+                  },
+                  {
+                      "name":  "Appraisal",
+                      "file":  "IconPerks_appraisal.png",
+                      "character":  "Ã‰lodie"
+                  },
+                  {
+                      "name":  "Autodidact",
+                      "file":  "IconPerks_autodidact.png",
+                      "character":  "Adam"
+                  },
+                  {
+                      "name":  "Babysitter",
+                      "file":  "IconPerks_babysitter.png",
+                      "character":  "Steve"
+                  },
+                  {
+                      "name":  "Background Player",
+                      "file":  "IconPerks_backgroundPlayer.png",
+                      "character":  "Renato"
+                  },
+                  {
+                      "name":  "Bada Bada Boom",
+                      "file":  "IconsPerks_BadaBadaBoom.png",
+                      "character":  "Dustin"
+                  },
+                  {
+                      "name":  "Balanced Landing",
+                      "file":  "IconPerks_balancedLanding.png",
+                      "character":  "Nea"
+                  },
+                  {
+                      "name":  "Bardic Inspiration",
+                      "file":  "IconPerks_bardicInspiration.png",
+                      "character":  "Aestri"
+                  },
+                  {
+                      "name":  "Better Together",
+                      "file":  "IconPerks_betterTogether.png",
+                      "character":  "Nancy"
+                  },
+                  {
+                      "name":  "Better than New",
+                      "file":  "IconPerks_betterThanNew.png",
+                      "character":  "Rebecca"
+                  },
+                  {
+                      "name":  "Bite the Bullet",
+                      "file":  "IconPerks_biteTheBullet.png",
+                      "character":  "Leon"
+                  },
+                  {
+                      "name":  "Blast Mine",
+                      "file":  "IconPerks_blastMine.png",
+                      "character":  "Jill"
+                  },
+                  {
+                      "name":  "Blood Pact",
+                      "file":  "IconPerks_bloodPact.png",
+                      "character":  "Cheryl"
+                  },
+                  {
+                      "name":  "Blood Rush",
+                      "file":  "IconPerks_bloodRush.png",
+                      "character":  "Renato"
+                  },
+                  {
+                      "name":  "Boil Over",
+                      "file":  "IconPerks_boilOver.png",
+                      "character":  "Kate"
+                  },
+                  {
+                      "name":  "Bond",
+                      "file":  "IconPerks_bond.png",
+                      "character":  "Dwight"
+                  },
+                  {
+                      "name":  "Boon: Circle of Healing",
+                      "file":  "IconPerks_boonCircleOfHealing.png",
+                      "character":  "Mikaela"
+                  },
+                  {
+                      "name":  "Boon: Dark Theory",
+                      "file":  "IconPerks_boonDarkTheory.png",
+                      "character":  "Yoichi"
+                  },
+                  {
+                      "name":  "Boon: Exponential",
+                      "file":  "IconPerks_boonExponential.png",
+                      "character":  "Jonah"
+                  },
+                  {
+                      "name":  "Boon: Illumination",
+                      "file":  "IconPerks_boonIllumination.png",
+                      "character":  "Alan"
+                  },
+                  {
+                      "name":  "Boon: Shadow Step",
+                      "file":  "IconPerks_boonShadowStep.png",
+                      "character":  "Mikaela"
+                  },
+                  {
+                      "name":  "Boon: Steadfast",
+                      "file":  "T_UI_iconsPerks_BoonSteadfast.png",
+                      "character":  "Aurora"
+                  },
+                  {
+                      "name":  "Borrowed Time",
+                      "file":  "IconPerks_borrowedTime.png",
+                      "character":  "Bill"
+                  },
+                  {
+                      "name":  "Botany Knowledge",
+                      "file":  "IconPerks_botanyKnowledge.png",
+                      "character":  "Claudette"
+                  },
+                  {
+                      "name":  "Bound by Obsession",
+                      "file":  "IconPerks_objectOfObsession.png",
+                      "character":  "All"
+                  },
+                  {
+                      "name":  "Breakdown",
+                      "file":  "IconPerks_breakdown.png",
+                      "character":  "Jeff"
+                  },
+                  {
+                      "name":  "Breakout",
+                      "file":  "IconPerks_breakout.png",
+                      "character":  "Yui"
+                  },
+                  {
+                      "name":  "Buckle Up",
+                      "file":  "IconPerks_buckleUp.png",
+                      "character":  "Ash"
+                  },
+                  {
+                      "name":  "Built to Last",
+                      "file":  "IconPerks_builtToLast.png",
+                      "character":  "Felix"
+                  },
+                  {
+                      "name":  "Calm Spirit",
+                      "file":  "IconPerks_calmSpirit.png",
+                      "character":  "Jake"
+                  },
+                  {
+                      "name":  "Camaraderie",
+                      "file":  "IconPerks_camaraderie.png",
+                      "character":  "Steve"
+                  },
+                  {
+                      "name":  "Champion of Light",
+                      "file":  "IconPerks_championOfLight.png",
+                      "character":  "Alan"
+                  },
+                  {
+                      "name":  "Change of Plan",
+                      "file":  "IconsPerks_ChangeOfPlan.png",
+                      "character":  "Dustin"
+                  },
+                  {
+                      "name":  "Chemical Trap",
+                      "file":  "IconPerks_chemicalTrap.png",
+                      "character":  "Ellen"
+                  },
+                  {
+                      "name":  "Clairvoyance",
+                      "file":  "IconPerks_clairvoyance.png",
+                      "character":  "Mikaela"
+                  },
+                  {
+                      "name":  "Clean Break",
+                      "file":  "IconPerks_cleanBreak.png",
+                      "character":  "Taurie"
+                  },
+                  {
+                      "name":  "Come and Get Me!",
+                      "file":  "IconPerks_comeAndGetMe.png",
+                      "character":  "Rick"
+                  },
+                  {
+                      "name":  "Conviction",
+                      "file":  "IconPerks_conviction.png",
+                      "character":  "Michonne"
+                  },
+                  {
+                      "name":  "Corrective Action",
+                      "file":  "IconPerks_correctiveAction.png",
+                      "character":  "Jonah"
+                  },
+                  {
+                      "name":  "Counterforce",
+                      "file":  "IconPerks_counterforce.png",
+                      "character":  "Jill"
+                  },
+                  {
+                      "name":  "Cross-Examination",
+                      "file":  "T_UI_iconsPerks_CrossExamination.png",
+                      "character":  "Shane"
+                  },
+                  {
+                      "name":  "Cut Loose",
+                      "file":  "IconPerks_cutLoose.png",
+                      "character":  "Thalita"
+                  },
+                  {
+                      "name":  "Dance With Me",
+                      "file":  "IconPerks_danceWithMe.png",
+                      "character":  "Kate"
+                  },
+                  {
+                      "name":  "Dark Sense",
+                      "file":  "IconPerks_darkSense.png",
+                      "character":  "All"
+                  },
+                  {
+                      "name":  "Dead Hard",
+                      "file":  "IconPerks_deadHard.png",
+                      "character":  "David"
+                  },
+                  {
+                      "name":  "Deadline",
+                      "file":  "IconPerks_deadline.png",
+                      "character":  "Alan"
+                  },
+                  {
+                      "name":  "Deception",
+                      "file":  "IconPerks_deception.png",
+                      "character":  "Ã‰lodie"
+                  },
+                  {
+                      "name":  "Decisive Strike",
+                      "file":  "IconPerks_decisiveStrike.png",
+                      "character":  "Laurie"
+                  },
+                  {
+                      "name":  "Déjà Vu",
+                      "file":  "IconPerks_dejaVu.png",
+                      "character":  "All"
+                  },
+                  {
+                      "name":  "Deliverance",
+                      "file":  "IconPerks_deliverance.png",
+                      "character":  "Adam"
+                  },
+                  {
+                      "name":  "Desperate Measures",
+                      "file":  "IconPerks_desperateMeasures.png",
+                      "character":  "Felix"
+                  },
+                  {
+                      "name":  "Detective\u0027s Hunch",
+                      "file":  "IconPerks_detectivesHunch.png",
+                      "character":  "David"
+                  },
+                  {
+                      "name":  "Distortion",
+                      "file":  "IconPerks_distortion.png",
+                      "character":  "Jeff"
+                  },
+                  {
+                      "name":  "Diversion",
+                      "file":  "IconPerks_diversion.png",
+                      "character":  "Adam"
+                  },
+                  {
+                      "name":  "Do No Harm",
+                      "file":  "T_UI_iconsPerks_DoNoHarm.png",
+                      "character":  "Orela"
+                  },
+                  {
+                      "name":  "Down to the Last",
+                      "file":  "IconPerks_soleSurvivor_noLicense.png",
+                      "character":  "All"
+                  },
+                  {
+                      "name":  "Dramaturgy",
+                      "file":  "IconPerks_dramaturgy.png",
+                      "character":  "Nicolas"
+                  },
+                  {
+                      "name":  "Duty of Care",
+                      "file":  "T_UI_iconsPerks_DutyOfCare.png",
+                      "character":  "Orela"
+                  },
+                  {
+                      "name":  "Empathic Connection",
+                      "file":  "IconPerks_empathicConnection.png",
+                      "character":  "Yoichi"
+                  },
+                  {
+                      "name":  "Empathy",
+                      "file":  "IconPerks_empathy.png",
+                      "character":  "Claudette"
+                  },
+                  {
+                      "name":  "Extrasensory Perception",
+                      "file":  "IconsPerks_ExtrasensoryPerception.png",
+                      "character":  "Eleven"
+                  },
+                  {
+                      "name":  "Exultation",
+                      "file":  "IconPerks_Exultation.png",
+                      "character":  "Trevor"
+                  },
+                  {
+                      "name":  "Eyes of Belmont",
+                      "file":  "IconPerks_EyesOfBelmont.png",
+                      "character":  "Trevor"
+                  },
+                  {
+                      "name":  "Fast Track",
+                      "file":  "IconPerks_fastTrack.png",
+                      "character":  "Lee"
+                  },
+                  {
+                      "name":  "Finesse",
+                      "file":  "IconPerks_finesse.png",
+                      "character":  "Lara"
+                  },
+                  {
+                      "name":  "Five Moves Ahead",
+                      "file":  "IconsPerks_FiveMovesAhead.png",
+                      "character":  "Kwon"
+                  },
+                  {
+                      "name":  "Fixated",
+                      "file":  "IconPerks_fixated.png",
+                      "character":  "Nancy"
+                  },
+                  {
+                      "name":  "Flashbang",
+                      "file":  "IconPerks_flashbang.png",
+                      "character":  "Leon"
+                  },
+                  {
+                      "name":  "Flip-Flop",
+                      "file":  "IconPerks_flip-Flop.png",
+                      "character":  "Ash"
+                  },
+                  {
+                      "name":  "Flow State",
+                      "file":  "IconsPerks_FlowState.png",
+                      "character":  "Kwon"
+                  },
+                  {
+                      "name":  "Fogwise",
+                      "file":  "IconPerks_fogwise.png",
+                      "character":  "Vittorio"
+                  },
+                  {
+                      "name":  "For the People",
+                      "file":  "IconPerks_forThePeople.png",
+                      "character":  "Zarina"
+                  },
+                  {
+                      "name":  "Friendly Competition",
+                      "file":  "IconPerks_friendlyCompetition.png",
+                      "character":  "Thalita"
+                  },
+                  {
+                      "name":  "Fruits of Your Labor",
+                      "file":  "T_UI_iconsPerks_FruitsOfYourLabor.png",
+                      "character":  "Aurora"
+                  },
+                  {
+                      "name":  "Ghost Notes",
+                      "file":  "IconPerks_GhostNotes.png",
+                      "character":  "Vee"
+                  },
+                  {
+                      "name":  "Hardened",
+                      "file":  "IconPerks_hardened.png",
+                      "character":  "Lara"
+                  },
+                  {
+                      "name":  "Head On",
+                      "file":  "IconPerks_headOn.png",
+                      "character":  "Jane"
+                  },
+                  {
+                      "name":  "Hope",
+                      "file":  "IconPerks_hope.png",
+                      "character":  "All"
+                  },
+                  {
+                      "name":  "Hyperfocus",
+                      "file":  "IconPerks_hyperfocus.png",
+                      "character":  "Rebecca"
+                  },
+                  {
+                      "name":  "Inner Focus",
+                      "file":  "IconPerks_innerFocus.png",
+                      "character":  "Haddie"
+                  },
+                  {
+                      "name":  "Inner Strength",
+                      "file":  "IconPerks_innerStrength.png",
+                      "character":  "Nancy"
+                  },
+                  {
+                      "name":  "Invocation: Treacherous Crows",
+                      "file":  "IconPerks_invocationTreacherousCrows.png",
+                      "character":  "Taurie"
+                  },
+                  {
+                      "name":  "Invocation: Weaving Spiders",
+                      "file":  "IconPerks_invocationWeavingSpiders.png",
+                      "character":  "Sable"
+                  },
+                  {
+                      "name":  "Iron Will",
+                      "file":  "IconPerks_ironWill.png",
+                      "character":  "Jake"
+                  },
+                  {
+                      "name":  "Kindred",
+                      "file":  "IconPerks_kindred.png",
+                      "character":  "All"
+                  },
+                  {
+                      "name":  "Last Stand",
+                      "file":  "IconPerks_lastStand.png",
+                      "character":  "Michonne"
+                  },
+                  {
+                      "name":  "Leader",
+                      "file":  "IconPerks_leader.png",
+                      "character":  "Dwight"
+                  },
+                  {
+                      "name":  "Left Behind",
+                      "file":  "IconPerks_leftBehind.png",
+                      "character":  "Bill"
+                  },
+                  {
+                      "name":  "Lend a Hand",
+                      "file":  "T_UI_iconsPerks_LendaHand.png",
+                      "character":  "Shane"
+                  },
+                  {
+                      "name":  "Light-Footed",
+                      "file":  "IconPerks_light-Footed.png",
+                      "character":  "Ellen"
+                  },
+                  {
+                      "name":  "Lightweight",
+                      "file":  "IconPerks_lightweight.png",
+                      "character":  "All"
+                  },
+                  {
+                      "name":  "Lithe",
+                      "file":  "IconPerks_lithe.png",
+                      "character":  "Feng"
+                  },
+                  {
+                      "name":  "Low Profile",
+                      "file":  "IconPerks_lowProfile.png",
+                      "character":  "Ada"
+                  },
+                  {
+                      "name":  "Lucky Break",
+                      "file":  "IconPerks_luckyBreak.png",
+                      "character":  "Yui"
+                  },
+                  {
+                      "name":  "Lucky Star",
+                      "file":  "IconPerks_luckyStar.png",
+                      "character":  "Ellen"
+                  },
+                  {
+                      "name":  "Made for This",
+                      "file":  "IconPerks_madeForThis.png",
+                      "character":  "Gabriel"
+                  },
+                  {
+                      "name":  "Mettle of Man",
+                      "file":  "IconPerks_mettleOfMan.png",
+                      "character":  "Ash"
+                  },
+                  {
+                      "name":  "Mirrored Illusion",
+                      "file":  "IconPerks_mirroredIllusion.png",
+                      "character":  "Aestri"
+                  },
+                  {
+                      "name":  "Moment of Glory",
+                      "file":  "IconPerks_MomentOfGlory.png",
+                      "character":  "Trevor"
+                  },
+                  {
+                      "name":  "No Mither",
+                      "file":  "IconPerks_noMither.png",
+                      "character":  "David"
+                  },
+                  {
+                      "name":  "No One Left Behind",
+                      "file":  "IconPerks_noOneLeftBehind.png",
+                      "character":  "All"
+                  },
+                  {
+                      "name":  "Object of Obsession",
+                      "file":  "IconPerks_objectOfObsession.png",
+                      "character":  "Laurie"
+                  },
+                  {
+                      "name":  "Off the Record",
+                      "file":  "IconPerks_offTheRecord.png",
+                      "character":  "Zarina"
+                  },
+                  {
+                      "name":  "One-Two-Three-Four!",
+                      "file":  "IconPerks_OneTwoThreeFour.png",
+                      "character":  "Vee"
+                  },
+                  {
+                      "name":  "Open-Handed",
+                      "file":  "IconPerks_open-Handed.png",
+                      "character":  "Ace"
+                  },
+                  {
+                      "name":  "Overcome",
+                      "file":  "IconPerks_overcome.png",
+                      "character":  "Jonah"
+                  },
+                  {
+                      "name":  "Overzealous",
+                      "file":  "IconPerks_overzealous.png",
+                      "character":  "Haddie"
+                  },
+                  {
+                      "name":  "Parental Guidance",
+                      "file":  "IconPerks_parentalGuidance.png",
+                      "character":  "Yoichi"
+                  },
+                  {
+                      "name":  "Pharmacy",
+                      "file":  "IconPerks_pharmacy.png",
+                      "character":  "Quentin"
+                  },
+                  {
+                      "name":  "Plot Twist",
+                      "file":  "IconPerks_plotTwist.png",
+                      "character":  "Nicolas"
+                  },
+                  {
+                      "name":  "Plunderer\u0027s Instinct",
+                      "file":  "IconPerks_plunderersInstinct.png",
+                      "character":  "All"
+                  },
+                  {
+                      "name":  "Poised",
+                      "file":  "IconPerks_poised.png",
+                      "character":  "Jane"
+                  },
+                  {
+                      "name":  "Potential Energy",
+                      "file":  "IconPerks_potentialEnergy.png",
+                      "character":  "Vittorio"
+                  },
+                  {
+                      "name":  "Power Struggle",
+                      "file":  "IconPerks_powerStruggle.png",
+                      "character":  "Ã‰lodie"
+                  },
+                  {
+                      "name":  "Premonition",
+                      "file":  "IconPerks_premonition.png",
+                      "character":  "All"
+                  },
+                  {
+                      "name":  "Prove Thyself",
+                      "file":  "IconPerks_proveThyself.png",
+                      "character":  "Dwight"
+                  },
+                  {
+                      "name":  "Quick \u0026 Quiet",
+                      "file":  "IconPerks_quickAndQuiet.png",
+                      "character":  "Meg"
+                  },
+                  {
+                      "name":  "Quick Gambit",
+                      "file":  "IconPerks_quickGambit.png",
+                      "character":  "Vittorio"
+                  },
+                  {
+                      "name":  "Rapid Response",
+                      "file":  "T_UI_iconsPerks_RapidResponse.png",
+                      "character":  "Orela"
+                  },
+                  {
+                      "name":  "Reactive Healing",
+                      "file":  "IconPerks_reactiveHealing.png",
+                      "character":  "Ada"
+                  },
+                  {
+                      "name":  "Reassurance",
+                      "file":  "IconPerks_reassurance.png",
+                      "character":  "Rebecca"
+                  },
+                  {
+                      "name":  "Red Herring",
+                      "file":  "IconPerks_redHerring.png",
+                      "character":  "Zarina"
+                  },
+                  {
+                      "name":  "Repressed Alliance",
+                      "file":  "IconPerks_repressedAlliance.png",
+                      "character":  "Cheryl"
+                  },
+                  {
+                      "name":  "Residual Manifest",
+                      "file":  "IconPerks_residualManifest.png",
+                      "character":  "Haddie"
+                  },
+                  {
+                      "name":  "Resilience",
+                      "file":  "IconPerks_resilience.png",
+                      "character":  "All"
+                  },
+                  {
+                      "name":  "Resurgence",
+                      "file":  "IconPerks_resurgence.png",
+                      "character":  "Jill"
+                  },
+                  {
+                      "name":  "Road Life",
+                      "file":  "IconPerks_RoadLife.png",
+                      "character":  "Vee"
+                  },
+                  {
+                      "name":  "Rookie Spirit",
+                      "file":  "IconPerks_rookieSpirit.png",
+                      "character":  "Leon"
+                  },
+                  {
+                      "name":  "Saboteur",
+                      "file":  "IconPerks_saboteur.png",
+                      "character":  "Jake"
+                  },
+                  {
+                      "name":  "Salvation\u0027s Cry",
+                      "file":  "T_UI_iconsPerks_SalvationsCry.png",
+                      "character":  "Aurora"
+                  },
+                  {
+                      "name":  "Scavenger",
+                      "file":  "IconPerks_scavenger.png",
+                      "character":  "Gabriel"
+                  },
+                  {
+                      "name":  "Scene Partner",
+                      "file":  "IconPerks_scenePartner.png",
+                      "character":  "Nicolas"
+                  },
+                  {
+                      "name":  "Second Wind",
+                      "file":  "IconPerks_secondWind.png",
+                      "character":  "Steve"
+                  },
+                  {
+                      "name":  "Self-Care",
+                      "file":  "IconPerks_self-Care.png",
+                      "character":  "Claudette"
+                  },
+                  {
+                      "name":  "Self-Preservation",
+                      "file":  "IconPerks_self-Preservation.png",
+                      "character":  "Lee"
+                  },
+                  {
+                      "name":  "Shoulder the Burden",
+                      "file":  "IconPerks_shoulderTheBurden.png",
+                      "character":  "Taurie"
+                  },
+                  {
+                      "name":  "Slippery Meat",
+                      "file":  "IconPerks_slipperyMeat.png",
+                      "character":  "All"
+                  },
+                  {
+                      "name":  "Small Game",
+                      "file":  "IconPerks_smallGame.png",
+                      "character":  "All"
+                  },
+                  {
+                      "name":  "Smash Hit",
+                      "file":  "IconPerks_smashHit.png",
+                      "character":  "Lee"
+                  },
+                  {
+                      "name":  "Sole Survivor",
+                      "file":  "IconPerks_soleSurvivor.png",
+                      "character":  "Laurie"
+                  },
+                  {
+                      "name":  "Solidarity",
+                      "file":  "IconPerks_solidarity.png",
+                      "character":  "Jane"
+                  },
+                  {
+                      "name":  "Soul Guard",
+                      "file":  "IconPerks_soulGuard.png",
+                      "character":  "Cheryl"
+                  },
+                  {
+                      "name":  "Specialist",
+                      "file":  "IconPerks_specialist.png",
+                      "character":  "Lara"
+                  },
+                  {
+                      "name":  "Spine Chill",
+                      "file":  "IconPerks_spineChill.png",
+                      "character":  "All"
+                  },
+                  {
+                      "name":  "Sprint Burst",
+                      "file":  "IconPerks_sprintBurst.png",
+                      "character":  "Meg"
+                  },
+                  {
+                      "name":  "Stake Out",
+                      "file":  "IconPerks_stakeOut.png",
+                      "character":  "David"
+                  },
+                  {
+                      "name":  "Still Sight",
+                      "file":  "IconPerks_stillSight.png",
+                      "character":  "Aestri"
+                  },
+                  {
+                      "name":  "Streetwise",
+                      "file":  "IconPerks_streetwise.png",
+                      "character":  "Nea"
+                  },
+                  {
+                      "name":  "Strength in Shadows",
+                      "file":  "IconPerks_strengthInShadows.png",
+                      "character":  "Sable"
+                  },
+                  {
+                      "name":  "Teamwork: Collective Stealth",
+                      "file":  "IconPerks_teamworkCollectiveStealth.png",
+                      "character":  "Renato"
+                  },
+                  {
+                      "name":  "Teamwork: Full Circuit",
+                      "file":  "IconsPerks_TeamworkFullCircuit.png",
+                      "character":  "Dustin"
+                  },
+                  {
+                      "name":  "Teamwork: Power of Two",
+                      "file":  "IconPerks_teamworkPowerOfTwo.png",
+                      "character":  "Thalita"
+                  },
+                  {
+                      "name":  "Teamwork: Soft-Spoken",
+                      "file":  "IconsPerks_TeamworkSoftSpoken.png",
+                      "character":  "Eleven"
+                  },
+                  {
+                      "name":  "Teamwork: Throw Down",
+                      "file":  "IconPerks_teamworkThrowDown.png",
+                      "character":  "Michonne"
+                  },
+                  {
+                      "name":  "Teamwork: Toughen Up",
+                      "file":  "IconPerks_teamworkToughenUp.png",
+                      "character":  "Rick"
+                  },
+                  {
+                      "name":  "Technician",
+                      "file":  "IconPerks_technician.png",
+                      "character":  "Feng"
+                  },
+                  {
+                      "name":  "Tenacity",
+                      "file":  "IconPerks_tenacity.png",
+                      "character":  "David"
+                  },
+                  {
+                      "name":  "This Is Not Happening",
+                      "file":  "IconPerks_thisIsNotHappening.png",
+                      "character":  "All"
+                  },
+                  {
+                      "name":  "Troubleshooter",
+                      "file":  "IconPerks_troubleshooter.png",
+                      "character":  "Gabriel"
+                  },
+                  {
+                      "name":  "Unbreakable",
+                      "file":  "IconPerks_unbreakable.png",
+                      "character":  "Bill"
+                  },
+                  {
+                      "name":  "Up the Ante",
+                      "file":  "IconPerks_upTheAnte.png",
+                      "character":  "Ace"
+                  },
+                  {
+                      "name":  "Urban Evasion",
+                      "file":  "IconPerks_urbanEvasion.png",
+                      "character":  "Nea"
+                  },
+                  {
+                      "name":  "Vigil",
+                      "file":  "IconPerks_vigil.png",
+                      "character":  "Quentin"
+                  },
+                  {
+                      "name":  "Visionary",
+                      "file":  "IconPerks_visionary.png",
+                      "character":  "Felix"
+                  },
+                  {
+                      "name":  "Wake Up!",
+                      "file":  "IconPerks_wakeUp.png",
+                      "character":  "Quentin"
+                  },
+                  {
+                      "name":  "We See You",
+                      "file":  "IconsPerks_WeSeeYou.png",
+                      "character":  "Eleven"
+                  },
+                  {
+                      "name":  "We\u0027ll Make It",
+                      "file":  "IconPerks_wellMakeIt.png",
+                      "character":  "All"
+                  },
+                  {
+                      "name":  "We\u0027re Gonna Live Forever",
+                      "file":  "IconPerks_wereGonnaLiveForever.png",
+                      "character":  "David"
+                  },
+                  {
+                      "name":  "Wicked",
+                      "file":  "IconPerks_wicked.png",
+                      "character":  "Sable"
+                  },
+                  {
+                      "name":  "Wide Open Throttle",
+                      "file":  "T_UI_iconsPerks_WideOpenThrottle.png",
+                      "character":  "Shane"
+                  },
+                  {
+                      "name":  "Will to Live",
+                      "file":  "IconPerks_decisiveStrike.png",
+                      "character":  "All"
+                  },
+                  {
+                      "name":  "Windows of Opportunity",
+                      "file":  "IconPerks_windowsOfOpportunity.png",
+                      "character":  "Kate"
+                  },
+                  {
+                      "name":  "Wiretap",
+                      "file":  "IconPerks_wiretap.png",
+                      "character":  "Ada"
+                  }
+              ],
+    "timers":  [
+                   {
+                       "perk":  "Borrowed Time",
+                       "color":  "#E8C547",
+                       "note":  "Endurance on the Survivor you unhooked",
+                       "trigger":  "unhook_you",
+                       "seconds":  [
+                                       16,
+                                       18,
+                                       20
+                                   ]
+                   },
+                   {
+                       "perk":  "Babysitter",
+                       "color":  "#E8C547",
+                       "note":  "No scratch marks / blood for the unhooked Survivor",
+                       "trigger":  "unhook_you",
+                       "seconds":  [
+                                       20,
+                                       25,
+                                       30
+                                   ]
+                   },
+                   {
+                       "perk":  "We\u0027ll Make It",
+                       "color":  "#E8C547",
+                       "note":  "+100% healing speed",
+                       "trigger":  "unhook_you",
+                       "seconds":  [
+                                       70,
+                                       80,
+                                       90
+                                   ]
+                   },
+                   {
+                       "perk":  "Will to Live",
+                       "color":  "#E06C5A",
+                       "note":  "Decisive Strike window",
+                       "trigger":  "unhooked",
+                       "seconds":  [
+                                       40,
+                                       50,
+                                       60
+                                   ]
+                   },
+                   {
+                       "perk":  "Off the Record",
+                       "color":  "#6CB4E0",
+                       "note":  "Endurance, no aura / grunts",
+                       "trigger":  "unhooked",
+                       "seconds":  [
+                                       30,
+                                       35,
+                                       40
+                                   ]
+                   },
+                   {
+                       "perk":  "Second Wind",
+                       "color":  "#6CB4E0",
+                       "note":  "Auto-heal when it runs out (if primed)",
+                       "trigger":  "unhooked",
+                       "seconds":  [
+                                       28,
+                                       24,
+                                       20
+                                   ]
+                   },
+                   {
+                       "perk":  "Deliverance",
+                       "color":  "#9A9A9A",
+                       "note":  "Broken after a self-unhook",
+                       "trigger":  "unhooked",
+                       "seconds":  [
+                                       160,
+                                       140,
+                                       120
+                                   ]
+                   },
+                   {
+                       "perk":  "Shoulder the Burden",
+                       "color":  "#9A9A9A",
+                       "note":  "Broken",
+                       "trigger":  "unhooked",
+                       "seconds":  [
+                                       160,
+                                       140,
+                                       120
+                                   ]
+                   },
+                   {
+                       "perk":  "Sprint Burst",
+                       "color":  "#B48CF0",
+                       "note":  "Exhausted",
+                       "trigger":  "exhausted",
+                       "seconds":  [
+                                       60,
+                                       50,
+                                       40
+                                   ]
+                   },
+                   {
+                       "perk":  "Dead Hard",
+                       "color":  "#B48CF0",
+                       "note":  "Exhausted",
+                       "trigger":  "exhausted",
+                       "seconds":  [
+                                       60,
+                                       50,
+                                       40
+                                   ]
+                   },
+                   {
+                       "perk":  "Lithe",
+                       "color":  "#B48CF0",
+                       "note":  "Exhausted",
+                       "trigger":  "exhausted",
+                       "seconds":  [
+                                       60,
+                                       50,
+                                       40
+                                   ]
+                   },
+                   {
+                       "perk":  "Balanced Landing",
+                       "color":  "#B48CF0",
+                       "note":  "Exhausted",
+                       "trigger":  "exhausted",
+                       "seconds":  [
+                                       60,
+                                       50,
+                                       40
+                                   ]
+                   },
+                   {
+                       "perk":  "Overcome",
+                       "color":  "#B48CF0",
+                       "note":  "Exhausted",
+                       "trigger":  "exhausted",
+                       "seconds":  [
+                                       60,
+                                       50,
+                                       40
+                                   ]
+                   },
+                   {
+                       "perk":  "Head On",
+                       "color":  "#B48CF0",
+                       "note":  "Exhausted",
+                       "trigger":  "exhausted",
+                       "seconds":  [
+                                       60,
+                                       50,
+                                       40
+                                   ]
+                   },
+                   {
+                       "perk":  "Dramaturgy",
+                       "color":  "#B48CF0",
+                       "note":  "Exhausted",
+                       "trigger":  "exhausted",
+                       "seconds":  [
+                                       60,
+                                       50,
+                                       40
+                                   ]
+                   },
+                   {
+                       "perk":  "Adrenaline",
+                       "color":  "#B48CF0",
+                       "note":  "Exhausted",
+                       "trigger":  "exhausted",
+                       "seconds":  [
+                                       60,
+                                       50,
+                                       40
+                                   ]
+                   },
+                   {
+                       "perk":  "Smash Hit",
+                       "color":  "#B48CF0",
+                       "note":  "Exhausted",
+                       "trigger":  "exhausted",
+                       "seconds":  [
+                                       30,
+                                       25,
+                                       20
+                                   ]
+                   },
+                   {
+                       "perk":  "Background Player",
+                       "color":  "#B48CF0",
+                       "note":  "Exhausted",
+                       "trigger":  "exhausted",
+                       "seconds":  [
+                                       30,
+                                       25,
+                                       20
+                                   ]
+                   }
+               ],
+    "killer":  [
+                   {
+                       "trigger":  "match_start",
+                       "name":  "Lethal Pursuer",
+                       "note":  "Killer sees all auras at the start",
+                       "color":  "#FF5050",
+                       "file":  "IconPerks_lethalPursuer.png",
+                       "seconds":  [
+                                       7,
+                                       8,
+                                       9
+                                   ]
+                   }
+               ],
+    "basekit":  [
+                    {
+                        "name":  "Endurance (base)",
+                        "file":  "IconPerks_borrowedTime.png",
+                        "color":  "#9AD0F5",
+                        "seconds":  10,
+                        "triggers":  [
+                                         "unhook_you",
+                                         "unhooked"
+                                     ],
+                        "note":  "Every unhooked Survivor gets 10 s Endurance + Haste (patch 10.1.0), no perk needed. Borrowed Time replaces this with its longer timer."
+                    },
+                    {
+                        "name":  "Elusive (base)",
+                        "file":  "IconStatusEffects_elusive.png",
+                        "color":  "#B9E6A0",
+                        "seconds":  10,
+                        "triggers":  [
+                                         "unhook_you",
+                                         "unhooked"
+                                     ],
+                        "untilGates":  true,
+                        "keepWithBT":  true,
+                        "note":  "Unhook protection (patch 10.1.0): 10 s Elusive - no scratch marks, grunts or blood, aura hidden from the killer. Not given once every generator is done."
+                    }
+                ],
+    "generic":  {
+                    "unhook_you":  [
+                                       "Borrowed Time"
+                                   ],
+                    "unhooked":  [
+                                     "Will to Live",
+                                     "Off the Record"
+                                 ],
+                    "exhausted":  [
+                                      "Sprint Burst"
+                                  ]
+                }
+}

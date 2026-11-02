@@ -1,0 +1,418 @@
+[
+    {
+        "realm":  "Autohaven Wreckers",
+        "name":  "Azarov\u0027s Resting Place",
+        "path":  "Azarovs/Azarovs Resting Place.webp",
+        "file":  "Azarovs Resting Place.png",
+        "aliases":  null
+    },
+    {
+        "realm":  "Autohaven Wreckers",
+        "name":  "Blood Lodge",
+        "path":  "Azarovs/Blood Lodge.webp",
+        "file":  "Blood Lodge.png",
+        "aliases":  null
+    },
+    {
+        "realm":  "Autohaven Wreckers",
+        "name":  "Gas Heaven",
+        "path":  "Azarovs/Gas Heaven.webp",
+        "file":  "Gas Heaven.png",
+        "aliases":  null
+    },
+    {
+        "realm":  "Autohaven Wreckers",
+        "name":  "Wreckers\u0027 Yard",
+        "path":  "Azarovs/Wreckers.webp",
+        "file":  "Wreckers Yard.png",
+        "aliases":  [
+                        "Wreckers Yard",
+                        "Wrecker Yard"
+                    ]
+    },
+    {
+        "realm":  "Autohaven Wreckers",
+        "name":  "Wretched Shop",
+        "path":  "Azarovs/Wretched Shop.webp",
+        "file":  "Wretched Shop.png",
+        "aliases":  null
+    },
+    {
+        "realm":  "Springwood",
+        "name":  "Badham Preschool I",
+        "path":  "Badham/Preschool1.webp",
+        "file":  "Badham Preschool I.png",
+        "aliases":  null
+    },
+    {
+        "realm":  "Springwood",
+        "name":  "Badham Preschool II",
+        "path":  "Badham/Preschool2.webp",
+        "file":  "Badham Preschool II.png",
+        "aliases":  null
+    },
+    {
+        "realm":  "Springwood",
+        "name":  "Badham Preschool III",
+        "path":  "Badham/Preschool3.webp",
+        "file":  "Badham Preschool III.png",
+        "aliases":  null
+    },
+    {
+        "realm":  "Springwood",
+        "name":  "Badham Preschool IV",
+        "path":  "Badham/Preschool4.webp",
+        "file":  "Badham Preschool IV.png",
+        "aliases":  null
+    },
+    {
+        "realm":  "Springwood",
+        "name":  "Badham Preschool V",
+        "path":  "Badham/Preschool5.webp",
+        "file":  "Badham Preschool V.png",
+        "aliases":  null
+    },
+    {
+        "realm":  "Coldwind Farm",
+        "name":  "Fractured Cowshed",
+        "path":  "Coldwind/Fractured Cowshed.webp",
+        "file":  "Fractured Cowshed.png",
+        "aliases":  null
+    },
+    {
+        "realm":  "Coldwind Farm",
+        "name":  "Rancid Abattoir",
+        "path":  "Coldwind/Rancid Abbatoir.webp",
+        "file":  "Rancid Abattoir.png",
+        "aliases":  "Rancid Abbatoir"
+    },
+    {
+        "realm":  "Coldwind Farm",
+        "name":  "Rotten Fields",
+        "path":  "Coldwind/Rotten Fields.webp",
+        "file":  "Rotten Fields.png",
+        "aliases":  null
+    },
+    {
+        "realm":  "Coldwind Farm",
+        "name":  "The Thompson House",
+        "path":  "Coldwind/The Thompson House.webp",
+        "file":  "The Thompson House.png",
+        "aliases":  "Thompson House"
+    },
+    {
+        "realm":  "Coldwind Farm",
+        "name":  "Torment Creek",
+        "path":  "Coldwind/Torment Creek.webp",
+        "file":  "Torment Creek.png",
+        "aliases":  null
+    },
+    {
+        "realm":  "Crotus Prenn Asylum",
+        "name":  "Disturbed Ward",
+        "path":  "Crotus Pen/Disturbed Ward.webp",
+        "file":  "Disturbed Ward.png",
+        "aliases":  null
+    },
+    {
+        "realm":  "Crotus Prenn Asylum",
+        "name":  "Father Campbell\u0027s Chapel",
+        "path":  "Crotus Pen/Father Campbells Chapel.webp",
+        "file":  "Father Campbells Chapel.png",
+        "aliases":  null
+    },
+    {
+        "realm":  "Decimated Borgo",
+        "name":  "The Shattered Square",
+        "path":  "Borgo/Shattered Square.webp",
+        "file":  "The Shattered Square.png",
+        "aliases":  "Shattered Square"
+    },
+    {
+        "realm":  "Decimated Borgo",
+        "name":  "Forgotten Ruins",
+        "path":  "Borgo/Forgotten Ruins.webp",
+        "file":  "Forgotten Ruins.png",
+        "aliases":  null
+    },
+    {
+        "realm":  "Forsaken Boneyard",
+        "name":  "Eyrie of Crows",
+        "path":  "Boneyard/Eyrie of Crows.webp",
+        "file":  "Eyrie of Crows.png",
+        "aliases":  null
+    },
+    {
+        "realm":  "Forsaken Boneyard",
+        "name":  "Dead Sands",
+        "path":  "Boneyard/Dead Sands.webp",
+        "file":  "Dead Sands.png",
+        "aliases":  null
+    },
+    {
+        "realm":  "Hawkins National Laboratory",
+        "name":  "The Underground Complex",
+        "path":  "Other/Hawkins.webp",
+        "file":  "The Underground Complex.png",
+        "aliases":  [
+                        "Underground Complex",
+                        "Hawkins National Laboratory"
+                    ]
+    },
+    {
+        "realm":  "MacMillan Estate",
+        "name":  "Coal Tower",
+        "path":  "McMillan/Coal Tower.webp",
+        "file":  "Coal Tower.png",
+        "aliases":  null
+    },
+    {
+        "realm":  "MacMillan Estate",
+        "name":  "Coal Tower II",
+        "path":  "McMillan/Coal Tower II.webp",
+        "file":  "Coal Tower II.png",
+        "aliases":  null
+    },
+    {
+        "realm":  "MacMillan Estate",
+        "name":  "Groaning Storehouse",
+        "path":  "McMillan/Groaning Storehouse.webp",
+        "file":  "Groaning Storehouse.png",
+        "aliases":  null
+    },
+    {
+        "realm":  "MacMillan Estate",
+        "name":  "Groaning Storehouse II",
+        "path":  "McMillan/Groaning Storehouse II.webp",
+        "file":  "Groaning Storehouse II.png",
+        "aliases":  null
+    },
+    {
+        "realm":  "MacMillan Estate",
+        "name":  "Ironworks of Misery",
+        "path":  "McMillan/Ironworks Of Misery.webp",
+        "file":  "Ironworks of Misery.png",
+        "aliases":  null
+    },
+    {
+        "realm":  "MacMillan Estate",
+        "name":  "Ironworks of Misery II",
+        "path":  "McMillan/Ironworks Of Misery II.webp",
+        "file":  "Ironworks of Misery II.png",
+        "aliases":  null
+    },
+    {
+        "realm":  "MacMillan Estate",
+        "name":  "Shelter Woods",
+        "path":  "McMillan/Shelter Woods.webp",
+        "file":  "Shelter Woods.png",
+        "aliases":  null
+    },
+    {
+        "realm":  "MacMillan Estate",
+        "name":  "Shelter Woods II",
+        "path":  "McMillan/Shelter Woods II.webp",
+        "file":  "Shelter Woods II.png",
+        "aliases":  null
+    },
+    {
+        "realm":  "MacMillan Estate",
+        "name":  "Suffocation Pit",
+        "path":  "McMillan/Suffocation Pit.webp",
+        "file":  "Suffocation Pit.png",
+        "aliases":  null
+    },
+    {
+        "realm":  "MacMillan Estate",
+        "name":  "Suffocation Pit II",
+        "path":  "McMillan/Suffocation Pit II.webp",
+        "file":  "Suffocation Pit II.png",
+        "aliases":  null
+    },
+    {
+        "realm":  "Red Forest",
+        "name":  "Mother\u0027s Dwelling",
+        "path":  "Red Forest/Mothers Dwelling.webp",
+        "file":  "Mothers Dwelling.png",
+        "aliases":  null
+    },
+    {
+        "realm":  "Red Forest",
+        "name":  "Temple of Purgation",
+        "path":  "Red Forest/Temple of Purgation.webp",
+        "file":  "Temple of Purgation.png",
+        "aliases":  null
+    },
+    {
+        "realm":  "Backwater Swamp",
+        "name":  "Grim Pantry",
+        "path":  "Swamp/Grim Pantry.webp",
+        "file":  "Grim Pantry.png",
+        "aliases":  null
+    },
+    {
+        "realm":  "Backwater Swamp",
+        "name":  "The Pale Rose",
+        "path":  "Swamp/Pale Rose.webp",
+        "file":  "The Pale Rose.png",
+        "aliases":  "Pale Rose"
+    },
+    {
+        "realm":  "Yamaoka Estate",
+        "name":  "Family Residence",
+        "path":  "Yamaoka/Family Residence.webp",
+        "file":  "Family Residence.png",
+        "aliases":  null
+    },
+    {
+        "realm":  "Yamaoka Estate",
+        "name":  "Family Residence II",
+        "path":  "Yamaoka/Family Residence II.webp",
+        "file":  "Family Residence II.png",
+        "aliases":  null
+    },
+    {
+        "realm":  "Yamaoka Estate",
+        "name":  "Sanctum of Wrath",
+        "path":  "Yamaoka/Sanctum of Wrath.webp",
+        "file":  "Sanctum of Wrath.png",
+        "aliases":  null
+    },
+    {
+        "realm":  "Yamaoka Estate",
+        "name":  "Sanctum of Wrath II",
+        "path":  "Yamaoka/Sanctum of Wrath II.webp",
+        "file":  "Sanctum of Wrath II.png",
+        "aliases":  null
+    },
+    {
+        "realm":  "Raccoon City",
+        "name":  "Raccoon City Police Station East Wing",
+        "path":  "Raccoon City/Rpd East Wing.webp",
+        "file":  "Raccoon City Police Station East Wing.png",
+        "aliases":  null
+    },
+    {
+        "realm":  "Raccoon City",
+        "name":  "Raccoon City Police Station West Wing",
+        "path":  "Raccoon City/Rpd West Wing.webp",
+        "file":  "Raccoon City Police Station West Wing.png",
+        "aliases":  null
+    },
+    {
+        "realm":  "Grave of Glenvale",
+        "name":  "Dead Dawg Saloon",
+        "path":  "Other/Dead Dawg Saloon.webp",
+        "file":  "Dead Dawg Saloon.png",
+        "aliases":  "Grave of Glenvale"
+    },
+    {
+        "realm":  "Withered Isle",
+        "name":  "Garden of Joy",
+        "path":  "Other/Garden of Joy.webp",
+        "file":  "Garden of Joy.png",
+        "aliases":  null
+    },
+    {
+        "realm":  "Withered Isle",
+        "name":  "Greenville Square",
+        "path":  "Other/Greenville Square.webp",
+        "file":  "Greenville Square.png",
+        "aliases":  null
+    },
+    {
+        "realm":  "Withered Isle",
+        "name":  "Fallen Refuge",
+        "path":  "Other/Fallen Refuge.webp",
+        "file":  "Fallen Refuge.png",
+        "aliases":  null
+    },
+    {
+        "realm":  "Withered Isle",
+        "name":  "Freddy Fazbear\u0027s Pizza",
+        "path":  "Other/Freddy Fazbears Pizza.webp",
+        "file":  "Freddy Fazbears Pizza.png",
+        "aliases":  "Freddy Fazbears Pizzeria"
+    },
+    {
+        "realm":  "Gideon Meat Plant",
+        "name":  "The Game",
+        "path":  "Other/The Game.webp",
+        "file":  "The Game.png",
+        "aliases":  "Gideon Meat Plant",
+        "nameIsTooCommon":  true
+    },
+    {
+        "realm":  "Haddonfield",
+        "name":  "Lampkin Lane",
+        "path":  "Other/Haddonfield.webp",
+        "file":  "Lampkin Lane.png",
+        "aliases":  "Haddonfield"
+    },
+    {
+        "realm":  "Silent Hill",
+        "name":  "Midwich Elementary School",
+        "path":  "Other/Midwich.gif",
+        "file":  "Midwich Elementary School.png",
+        "aliases":  "Midwich Elementary"
+    },
+    {
+        "realm":  "Ormond",
+        "name":  "Mount Ormond Resort",
+        "path":  "Ormond/Ormond.webp",
+        "file":  "Mount Ormond Resort.png",
+        "aliases":  null
+    },
+    {
+        "realm":  "Ormond",
+        "name":  "Mount Ormond Resort II",
+        "path":  "Ormond/Ormond II.webp",
+        "file":  "Mount Ormond Resort II.png",
+        "aliases":  null
+    },
+    {
+        "realm":  "Ormond",
+        "name":  "Mount Ormond Resort III",
+        "path":  "Ormond/Ormond III.webp",
+        "file":  "Mount Ormond Resort III.png",
+        "aliases":  null
+    },
+    {
+        "realm":  "Ormond",
+        "name":  "Ormond Lake Mine",
+        "path":  "Ormond/Ormond Lake Mine.webp",
+        "file":  "Ormond Lake Mine.png",
+        "aliases":  null
+    },
+    {
+        "realm":  "Lery\u0027s Memorial Institute",
+        "name":  "Treatment Theatre",
+        "path":  "Other/Lerys.webp",
+        "file":  "Treatment Theatre.png",
+        "aliases":  [
+                        "Treatment Theater",
+                        "Lery\u0027s Memorial Institute"
+                    ]
+    },
+    {
+        "realm":  "Dvarka Deepwood",
+        "name":  "Toba Landing",
+        "path":  "Dvarka Deepwood/Toba Landing.webp",
+        "file":  "Toba Landing.png",
+        "aliases":  null
+    },
+    {
+        "realm":  "Dvarka Deepwood",
+        "name":  "Nostromo Wreckage",
+        "path":  "Dvarka Deepwood/Nostromo Wreckage.webp",
+        "file":  "Nostromo Wreckage.png",
+        "aliases":  null
+    },
+    {
+        "realm":  "Sleepless District",
+        "name":  "Trickster\u0027s Delusion",
+        "path":  "Sleepless District/Tricksters Delusion.webp",
+        "file":  "Tricksters Delusion.png",
+        "aliases":  "Sleepless District"
+    }
+]
