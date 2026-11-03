@@ -1,5 +1,5 @@
 @echo off
-if not exist "%~dp0AutoStart.ps1" (
+if not exist "%~dp0scripts\AutoStart.ps1" (
   echo.
   echo  This was started from INSIDE the zip, so the other files aren't next to it.
   echo.
@@ -9,5 +9,5 @@ if not exist "%~dp0AutoStart.ps1" (
   pause
   exit /b 1
 )
-powershell -NoProfile -ExecutionPolicy Bypass -File "%~dp0AutoStart.ps1" -On
+powershell -NoProfile -ExecutionPolicy Bypass -File "%~dp0scripts\AutoStart.ps1" -On
 pause

@@ -1,0 +1,2954 @@
+{
+    "source":  "deadbydaylight.wiki.gg/wiki/Survivor_Perks (read 2026-10-17); seconds = [tier I, tier II, tier III]",
+    "perks":  [
+                  {
+                      "name":  "A Place For Us",
+                      "file":  "IconsPerks_aPlaceForUs.png",
+                      "character":  "Kwon",
+                      "tags":  [
+                                   "altruism"
+                               ]
+                  },
+                  {
+                      "name":  "Ace in the Hole",
+                      "file":  "IconPerks_aceInTheHole.png",
+                      "character":  "Ace",
+                      "tags":  [
+                                   "items"
+                               ]
+                  },
+                  {
+                      "name":  "Adrenaline",
+                      "file":  "IconPerks_adrenaline.png",
+                      "character":  "Meg",
+                      "tags":  [
+                                   "exhaustion",
+                                   "endgame"
+                               ]
+                  },
+                  {
+                      "name":  "Aftercare",
+                      "file":  "IconPerks_aftercare.png",
+                      "character":  "Jeff",
+                      "tags":  [
+                                   "info"
+                               ]
+                  },
+                  {
+                      "name":  "Alert",
+                      "file":  "IconPerks_alert.png",
+                      "character":  "Feng",
+                      "tags":  [
+                                   "info"
+                               ]
+                  },
+                  {
+                      "name":  "Any Means Necessary",
+                      "file":  "IconPerks_anyMeansNecessary.png",
+                      "character":  "Yui",
+                      "tags":  [
+                                   "info"
+                               ]
+                  },
+                  {
+                      "name":  "Apocalyptic Ingenuity",
+                      "file":  "IconPerks_apocalypticIngenuity.png",
+                      "character":  "Rick",
+                      "tags":  [
+                                   "info"
+                               ]
+                  },
+                  {
+                      "name":  "Appraisal",
+                      "file":  "IconPerks_appraisal.png",
+                      "character":  "Élodie",
+                      "tags":  [
+                                   "items"
+                               ]
+                  },
+                  {
+                      "name":  "Autodidact",
+                      "file":  "IconPerks_autodidact.png",
+                      "character":  "Adam",
+                      "tags":  [
+                                   "altruism"
+                               ]
+                  },
+                  {
+                      "name":  "Babysitter",
+                      "file":  "IconPerks_babysitter.png",
+                      "character":  "Steve",
+                      "tags":  [
+                                   "antitunnel",
+                                   "altruism"
+                               ]
+                  },
+                  {
+                      "name":  "Background Player",
+                      "file":  "IconPerks_backgroundPlayer.png",
+                      "character":  "Renato",
+                      "tags":  [
+                                   "exhaustion"
+                               ]
+                  },
+                  {
+                      "name":  "Bada Bada Boom",
+                      "file":  "IconsPerks_BadaBadaBoom.png",
+                      "character":  "Dustin",
+                      "tags":  [
+                                   "items"
+                               ]
+                  },
+                  {
+                      "name":  "Balanced Landing",
+                      "file":  "IconPerks_balancedLanding.png",
+                      "character":  "Nea",
+                      "tags":  [
+                                   "exhaustion"
+                               ]
+                  },
+                  {
+                      "name":  "Bardic Inspiration",
+                      "file":  "IconPerks_bardicInspiration.png",
+                      "character":  "Aestri",
+                      "tags":  [
+
+                               ]
+                  },
+                  {
+                      "name":  "Better Together",
+                      "file":  "IconPerks_betterTogether.png",
+                      "character":  "Nancy",
+                      "tags":  [
+                                   "info"
+                               ]
+                  },
+                  {
+                      "name":  "Better than New",
+                      "file":  "IconPerks_betterThanNew.png",
+                      "character":  "Rebecca",
+                      "tags":  [
+                                   "altruism"
+                               ]
+                  },
+                  {
+                      "name":  "Bite the Bullet",
+                      "file":  "IconPerks_biteTheBullet.png",
+                      "character":  "Leon",
+                      "tags":  [
+                                   "altruism",
+                                   "stealth"
+                               ]
+                  },
+                  {
+                      "name":  "Blast Mine",
+                      "file":  "IconPerks_blastMine.png",
+                      "character":  "Jill",
+                      "tags":  [
+                                   "items"
+                               ]
+                  },
+                  {
+                      "name":  "Blood Pact",
+                      "file":  "IconPerks_bloodPact.png",
+                      "character":  "Cheryl",
+                      "tags":  [
+                                   "altruism"
+                               ]
+                  },
+                  {
+                      "name":  "Blood Rush",
+                      "file":  "IconPerks_bloodRush.png",
+                      "character":  "Renato",
+                      "tags":  [
+                                   "chase"
+                               ]
+                  },
+                  {
+                      "name":  "Boil Over",
+                      "file":  "IconPerks_boilOver.png",
+                      "character":  "Kate",
+                      "tags":  [
+                                   "antitunnel"
+                               ]
+                  },
+                  {
+                      "name":  "Bond",
+                      "file":  "IconPerks_bond.png",
+                      "character":  "Dwight",
+                      "tags":  [
+                                   "info"
+                               ]
+                  },
+                  {
+                      "name":  "Boon: Circle of Healing",
+                      "file":  "IconPerks_boonCircleOfHealing.png",
+                      "character":  "Mikaela",
+                      "tags":  [
+                                   "altruism",
+                                   "boon"
+                               ]
+                  },
+                  {
+                      "name":  "Boon: Dark Theory",
+                      "file":  "IconPerks_boonDarkTheory.png",
+                      "character":  "Yoichi",
+                      "tags":  [
+                                   "boon"
+                               ]
+                  },
+                  {
+                      "name":  "Boon: Exponential",
+                      "file":  "IconPerks_boonExponential.png",
+                      "character":  "Jonah",
+                      "tags":  [
+                                   "antislug",
+                                   "boon"
+                               ]
+                  },
+                  {
+                      "name":  "Boon: Illumination",
+                      "file":  "IconPerks_boonIllumination.png",
+                      "character":  "Alan",
+                      "tags":  [
+                                   "boon"
+                               ]
+                  },
+                  {
+                      "name":  "Boon: Shadow Step",
+                      "file":  "IconPerks_boonShadowStep.png",
+                      "character":  "Mikaela",
+                      "tags":  [
+                                   "boon"
+                               ]
+                  },
+                  {
+                      "name":  "Boon: Steadfast",
+                      "file":  "T_UI_iconsPerks_BoonSteadfast.png",
+                      "character":  "Aurora",
+                      "tags":  [
+                                   "boon"
+                               ]
+                  },
+                  {
+                      "name":  "Borrowed Time",
+                      "file":  "IconPerks_borrowedTime.png",
+                      "character":  "Bill",
+                      "tags":  [
+                                   "antitunnel",
+                                   "altruism"
+                               ]
+                  },
+                  {
+                      "name":  "Botany Knowledge",
+                      "file":  "IconPerks_botanyKnowledge.png",
+                      "character":  "Claudette",
+                      "tags":  [
+                                   "altruism"
+                               ]
+                  },
+                  {
+                      "name":  "Bound by Obsession",
+                      "file":  "IconPerks_objectOfObsession.png",
+                      "character":  "All",
+                      "tags":  [
+                                   "info"
+                               ]
+                  },
+                  {
+                      "name":  "Breakdown",
+                      "file":  "IconPerks_breakdown.png",
+                      "character":  "Jeff",
+                      "tags":  [
+                                   "antitunnel"
+                               ]
+                  },
+                  {
+                      "name":  "Breakout",
+                      "file":  "IconPerks_breakout.png",
+                      "character":  "Yui",
+                      "tags":  [
+                                   "altruism"
+                               ]
+                  },
+                  {
+                      "name":  "Buckle Up",
+                      "file":  "IconPerks_buckleUp.png",
+                      "character":  "Ash",
+                      "tags":  [
+                                   "altruism"
+                               ]
+                  },
+                  {
+                      "name":  "Built to Last",
+                      "file":  "IconPerks_builtToLast.png",
+                      "character":  "Felix",
+                      "tags":  [
+                                   "items"
+                               ]
+                  },
+                  {
+                      "name":  "Calm Spirit",
+                      "file":  "IconPerks_calmSpirit.png",
+                      "character":  "Jake",
+                      "tags":  [
+                                   "stealth"
+                               ]
+                  },
+                  {
+                      "name":  "Camaraderie",
+                      "file":  "IconPerks_camaraderie.png",
+                      "character":  "Steve",
+                      "tags":  [
+                                   "antitunnel"
+                               ]
+                  },
+                  {
+                      "name":  "Champion of Light",
+                      "file":  "IconPerks_championOfLight.png",
+                      "character":  "Alan",
+                      "tags":  [
+                                   "items"
+                               ]
+                  },
+                  {
+                      "name":  "Change of Plan",
+                      "file":  "IconsPerks_ChangeOfPlan.png",
+                      "character":  "Dustin",
+                      "tags":  [
+                                   "items"
+                               ]
+                  },
+                  {
+                      "name":  "Chemical Trap",
+                      "file":  "IconPerks_chemicalTrap.png",
+                      "character":  "Ellen",
+                      "tags":  [
+                                   "items"
+                               ]
+                  },
+                  {
+                      "name":  "Clairvoyance",
+                      "file":  "IconPerks_clairvoyance.png",
+                      "character":  "Mikaela",
+                      "tags":  [
+                                   "info",
+                                   "boon"
+                               ]
+                  },
+                  {
+                      "name":  "Clean Break",
+                      "file":  "IconPerks_cleanBreak.png",
+                      "character":  "Taurie",
+                      "tags":  [
+                                   "altruism"
+                               ]
+                  },
+                  {
+                      "name":  "Come and Get Me!",
+                      "file":  "IconPerks_comeAndGetMe.png",
+                      "character":  "Rick",
+                      "tags":  [
+                                   "altruism"
+                               ]
+                  },
+                  {
+                      "name":  "Conviction",
+                      "file":  "IconPerks_conviction.png",
+                      "character":  "Michonne",
+                      "tags":  [
+                                   "antislug"
+                               ]
+                  },
+                  {
+                      "name":  "Corrective Action",
+                      "file":  "IconPerks_correctiveAction.png",
+                      "character":  "Jonah",
+                      "tags":  [
+                                   "genrush"
+                               ]
+                  },
+                  {
+                      "name":  "Counterforce",
+                      "file":  "IconPerks_counterforce.png",
+                      "character":  "Jill",
+                      "tags":  [
+                                   "boon"
+                               ]
+                  },
+                  {
+                      "name":  "Cross-Examination",
+                      "file":  "T_UI_iconsPerks_CrossExamination.png",
+                      "character":  "Shane",
+                      "tags":  [
+                                   "info"
+                               ]
+                  },
+                  {
+                      "name":  "Cut Loose",
+                      "file":  "IconPerks_cutLoose.png",
+                      "character":  "Thalita",
+                      "tags":  [
+                                   "chase"
+                               ]
+                  },
+                  {
+                      "name":  "Dance With Me",
+                      "file":  "IconPerks_danceWithMe.png",
+                      "character":  "Kate",
+                      "tags":  [
+                                   "stealth"
+                               ]
+                  },
+                  {
+                      "name":  "Dark Sense",
+                      "file":  "IconPerks_darkSense.png",
+                      "character":  "All",
+                      "tags":  [
+                                   "info"
+                               ]
+                  },
+                  {
+                      "name":  "Dead Hard",
+                      "file":  "IconPerks_deadHard.png",
+                      "character":  "David King",
+                      "tags":  [
+                                   "exhaustion",
+                                   "antitunnel"
+                               ]
+                  },
+                  {
+                      "name":  "Deadline",
+                      "file":  "IconPerks_deadline.png",
+                      "character":  "Alan",
+                      "tags":  [
+                                   "genrush"
+                               ]
+                  },
+                  {
+                      "name":  "Deception",
+                      "file":  "IconPerks_deception.png",
+                      "character":  "Élodie",
+                      "tags":  [
+                                   "stealth"
+                               ]
+                  },
+                  {
+                      "name":  "Decisive Strike",
+                      "file":  "IconPerks_decisiveStrike.png",
+                      "character":  "Laurie",
+                      "tags":  [
+                                   "antitunnel"
+                               ]
+                  },
+                  {
+                      "name":  "Déjà Vu",
+                      "file":  "IconPerks_dejaVu.png",
+                      "character":  "All",
+                      "tags":  [
+                                   "info",
+                                   "genrush"
+                               ]
+                  },
+                  {
+                      "name":  "Deliverance",
+                      "file":  "IconPerks_deliverance.png",
+                      "character":  "Adam",
+                      "tags":  [
+                                   "antitunnel"
+                               ]
+                  },
+                  {
+                      "name":  "Desperate Measures",
+                      "file":  "IconPerks_desperateMeasures.png",
+                      "character":  "Felix",
+                      "tags":  [
+                                   "altruism"
+                               ]
+                  },
+                  {
+                      "name":  "Detective\u0027s Hunch",
+                      "file":  "IconPerks_detectivesHunch.png",
+                      "character":  "David Tapp",
+                      "tags":  [
+                                   "info"
+                               ]
+                  },
+                  {
+                      "name":  "Distortion",
+                      "file":  "IconPerks_distortion.png",
+                      "character":  "Jeff",
+                      "tags":  [
+                                   "stealth"
+                               ]
+                  },
+                  {
+                      "name":  "Diversion",
+                      "file":  "IconPerks_diversion.png",
+                      "character":  "Adam",
+                      "tags":  [
+                                   "stealth"
+                               ]
+                  },
+                  {
+                      "name":  "Do No Harm",
+                      "file":  "T_UI_iconsPerks_DoNoHarm.png",
+                      "character":  "Orela",
+                      "tags":  [
+                                   "altruism"
+                               ]
+                  },
+                  {
+                      "name":  "Down to the Last",
+                      "file":  "IconPerks_soleSurvivor_noLicense.png",
+                      "character":  "All",
+                      "tags":  [
+                                   "stealth"
+                               ]
+                  },
+                  {
+                      "name":  "Dramaturgy",
+                      "file":  "IconPerks_dramaturgy.png",
+                      "character":  "Nicolas",
+                      "tags":  [
+                                   "exhaustion"
+                               ]
+                  },
+                  {
+                      "name":  "Duty of Care",
+                      "file":  "T_UI_iconsPerks_DutyOfCare.png",
+                      "character":  "Orela",
+                      "tags":  [
+                                   "altruism"
+                               ]
+                  },
+                  {
+                      "name":  "Empathic Connection",
+                      "file":  "IconPerks_empathicConnection.png",
+                      "character":  "Yoichi",
+                      "tags":  [
+                                   "altruism"
+                               ]
+                  },
+                  {
+                      "name":  "Empathy",
+                      "file":  "IconPerks_empathy.png",
+                      "character":  "Claudette",
+                      "tags":  [
+                                   "info"
+                               ]
+                  },
+                  {
+                      "name":  "Extrasensory Perception",
+                      "file":  "IconsPerks_ExtrasensoryPerception.png",
+                      "character":  "Eleven",
+                      "tags":  [
+                                   "info"
+                               ]
+                  },
+                  {
+                      "name":  "Exultation",
+                      "file":  "IconPerks_Exultation.png",
+                      "character":  "Trevor",
+                      "tags":  [
+                                   "items"
+                               ]
+                  },
+                  {
+                      "name":  "Eyes of Belmont",
+                      "file":  "IconPerks_EyesOfBelmont.png",
+                      "character":  "Trevor",
+                      "tags":  [
+                                   "info"
+                               ]
+                  },
+                  {
+                      "name":  "Fast Track",
+                      "file":  "IconPerks_fastTrack.png",
+                      "character":  "Lee",
+                      "tags":  [
+                                   "genrush"
+                               ]
+                  },
+                  {
+                      "name":  "Finesse",
+                      "file":  "IconPerks_finesse.png",
+                      "character":  "Lara",
+                      "tags":  [
+                                   "chase"
+                               ]
+                  },
+                  {
+                      "name":  "Five Moves Ahead",
+                      "file":  "IconsPerks_FiveMovesAhead.png",
+                      "character":  "Kwon",
+                      "tags":  [
+                                   "chase"
+                               ]
+                  },
+                  {
+                      "name":  "Fixated",
+                      "file":  "IconPerks_fixated.png",
+                      "character":  "Nancy",
+                      "tags":  [
+                                   "stealth"
+                               ]
+                  },
+                  {
+                      "name":  "Flashbang",
+                      "file":  "IconPerks_flashbang.png",
+                      "character":  "Leon",
+                      "tags":  [
+                                   "items"
+                               ]
+                  },
+                  {
+                      "name":  "Flip-Flop",
+                      "file":  "IconPerks_flip-Flop.png",
+                      "character":  "Ash",
+                      "tags":  [
+                                   "antitunnel",
+                                   "antislug"
+                               ]
+                  },
+                  {
+                      "name":  "Flow State",
+                      "file":  "IconsPerks_FlowState.png",
+                      "character":  "Kwon",
+                      "tags":  [
+                                   "altruism"
+                               ]
+                  },
+                  {
+                      "name":  "Fogwise",
+                      "file":  "IconPerks_fogwise.png",
+                      "character":  "Vittorio",
+                      "tags":  [
+                                   "info",
+                                   "genrush"
+                               ]
+                  },
+                  {
+                      "name":  "For the People",
+                      "file":  "IconPerks_forThePeople.png",
+                      "character":  "Zarina",
+                      "tags":  [
+                                   "altruism"
+                               ]
+                  },
+                  {
+                      "name":  "Friendly Competition",
+                      "file":  "IconPerks_friendlyCompetition.png",
+                      "character":  "Thalita",
+                      "tags":  [
+                                   "genrush"
+                               ]
+                  },
+                  {
+                      "name":  "Fruits of Your Labor",
+                      "file":  "T_UI_iconsPerks_FruitsOfYourLabor.png",
+                      "character":  "Aurora",
+                      "tags":  [
+                                   "genrush"
+                               ]
+                  },
+                  {
+                      "name":  "Ghost Notes",
+                      "file":  "IconPerks_GhostNotes.png",
+                      "character":  "Vee",
+                      "tags":  [
+                                   "stealth"
+                               ]
+                  },
+                  {
+                      "name":  "Hardened",
+                      "file":  "IconPerks_hardened.png",
+                      "character":  "Lara",
+                      "tags":  [
+                                   "info"
+                               ]
+                  },
+                  {
+                      "name":  "Head On",
+                      "file":  "IconPerks_headOn.png",
+                      "character":  "Jane",
+                      "tags":  [
+                                   "exhaustion"
+                               ]
+                  },
+                  {
+                      "name":  "Hope",
+                      "file":  "IconPerks_hope.png",
+                      "character":  "All",
+                      "tags":  [
+                                   "endgame"
+                               ]
+                  },
+                  {
+                      "name":  "Hyperfocus",
+                      "file":  "IconPerks_hyperfocus.png",
+                      "character":  "Rebecca",
+                      "tags":  [
+                                   "genrush"
+                               ]
+                  },
+                  {
+                      "name":  "Inner Focus",
+                      "file":  "IconPerks_innerFocus.png",
+                      "character":  "Haddie",
+                      "tags":  [
+                                   "info"
+                               ]
+                  },
+                  {
+                      "name":  "Inner Strength",
+                      "file":  "IconPerks_innerStrength.png",
+                      "character":  "Nancy",
+                      "tags":  [
+                                   "altruism"
+                               ]
+                  },
+                  {
+                      "name":  "Invocation: Treacherous Crows",
+                      "file":  "IconPerks_invocationTreacherousCrows.png",
+                      "character":  "Taurie",
+                      "tags":  [
+
+                               ]
+                  },
+                  {
+                      "name":  "Invocation: Weaving Spiders",
+                      "file":  "IconPerks_invocationWeavingSpiders.png",
+                      "character":  "Sable",
+                      "tags":  [
+
+                               ]
+                  },
+                  {
+                      "name":  "Iron Will",
+                      "file":  "IconPerks_ironWill.png",
+                      "character":  "Jake",
+                      "tags":  [
+                                   "stealth"
+                               ]
+                  },
+                  {
+                      "name":  "Kindred",
+                      "file":  "IconPerks_kindred.png",
+                      "character":  "All",
+                      "tags":  [
+                                   "info"
+                               ]
+                  },
+                  {
+                      "name":  "Last Stand",
+                      "file":  "IconPerks_lastStand.png",
+                      "character":  "Michonne",
+                      "tags":  [
+                                   "chase"
+                               ]
+                  },
+                  {
+                      "name":  "Leader",
+                      "file":  "IconPerks_leader.png",
+                      "character":  "Dwight",
+                      "tags":  [
+                                   "altruism"
+                               ]
+                  },
+                  {
+                      "name":  "Left Behind",
+                      "file":  "IconPerks_leftBehind.png",
+                      "character":  "Bill",
+                      "tags":  [
+                                   "endgame"
+                               ]
+                  },
+                  {
+                      "name":  "Lend a Hand",
+                      "file":  "T_UI_iconsPerks_LendaHand.png",
+                      "character":  "Shane",
+                      "tags":  [
+                                   "altruism"
+                               ]
+                  },
+                  {
+                      "name":  "Light-Footed",
+                      "file":  "IconPerks_light-Footed.png",
+                      "character":  "Ellen",
+                      "tags":  [
+                                   "stealth"
+                               ]
+                  },
+                  {
+                      "name":  "Lightweight",
+                      "file":  "IconPerks_lightweight.png",
+                      "character":  "All",
+                      "tags":  [
+                                   "stealth"
+                               ]
+                  },
+                  {
+                      "name":  "Lithe",
+                      "file":  "IconPerks_lithe.png",
+                      "character":  "Feng",
+                      "tags":  [
+                                   "exhaustion"
+                               ]
+                  },
+                  {
+                      "name":  "Low Profile",
+                      "file":  "IconPerks_lowProfile.png",
+                      "character":  "Ada",
+                      "tags":  [
+                                   "stealth"
+                               ]
+                  },
+                  {
+                      "name":  "Lucky Break",
+                      "file":  "IconPerks_luckyBreak.png",
+                      "character":  "Yui",
+                      "tags":  [
+                                   "chase"
+                               ]
+                  },
+                  {
+                      "name":  "Lucky Star",
+                      "file":  "IconPerks_luckyStar.png",
+                      "character":  "Ellen",
+                      "tags":  [
+                                   "stealth"
+                               ]
+                  },
+                  {
+                      "name":  "Made for This",
+                      "file":  "IconPerks_madeForThis.png",
+                      "character":  "Gabriel",
+                      "tags":  [
+                                   "antitunnel"
+                               ]
+                  },
+                  {
+                      "name":  "Mettle of Man",
+                      "file":  "IconPerks_mettleOfMan.png",
+                      "character":  "Ash",
+                      "tags":  [
+                                   "antitunnel"
+                               ]
+                  },
+                  {
+                      "name":  "Mirrored Illusion",
+                      "file":  "IconPerks_mirroredIllusion.png",
+                      "character":  "Aestri",
+                      "tags":  [
+                                   "stealth"
+                               ]
+                  },
+                  {
+                      "name":  "Moment of Glory",
+                      "file":  "IconPerks_MomentOfGlory.png",
+                      "character":  "Trevor",
+                      "tags":  [
+                                   "items"
+                               ]
+                  },
+                  {
+                      "name":  "No Mither",
+                      "file":  "IconPerks_noMither.png",
+                      "character":  "David King",
+                      "tags":  [
+                                   "antislug"
+                               ]
+                  },
+                  {
+                      "name":  "No One Left Behind",
+                      "file":  "IconPerks_noOneLeftBehind.png",
+                      "character":  "All",
+                      "tags":  [
+                                   "endgame"
+                               ]
+                  },
+                  {
+                      "name":  "Object of Obsession",
+                      "file":  "IconPerks_objectOfObsession.png",
+                      "character":  "Laurie",
+                      "tags":  [
+                                   "info"
+                               ]
+                  },
+                  {
+                      "name":  "Off the Record",
+                      "file":  "IconPerks_offTheRecord.png",
+                      "character":  "Zarina",
+                      "tags":  [
+                                   "antitunnel",
+                                   "stealth"
+                               ]
+                  },
+                  {
+                      "name":  "One-Two-Three-Four!",
+                      "file":  "IconPerks_OneTwoThreeFour.png",
+                      "character":  "Vee",
+                      "tags":  [
+
+                               ]
+                  },
+                  {
+                      "name":  "Open-Handed",
+                      "file":  "IconPerks_open-Handed.png",
+                      "character":  "Ace",
+                      "tags":  [
+                                   "info"
+                               ]
+                  },
+                  {
+                      "name":  "Overcome",
+                      "file":  "IconPerks_overcome.png",
+                      "character":  "Jonah",
+                      "tags":  [
+                                   "exhaustion"
+                               ]
+                  },
+                  {
+                      "name":  "Overzealous",
+                      "file":  "IconPerks_overzealous.png",
+                      "character":  "Haddie",
+                      "tags":  [
+                                   "genrush"
+                               ]
+                  },
+                  {
+                      "name":  "Parental Guidance",
+                      "file":  "IconPerks_parentalGuidance.png",
+                      "character":  "Yoichi",
+                      "tags":  [
+                                   "stealth"
+                               ]
+                  },
+                  {
+                      "name":  "Pharmacy",
+                      "file":  "IconPerks_pharmacy.png",
+                      "character":  "Quentin",
+                      "tags":  [
+                                   "altruism"
+                               ]
+                  },
+                  {
+                      "name":  "Plot Twist",
+                      "file":  "IconPerks_plotTwist.png",
+                      "character":  "Nicolas",
+                      "tags":  [
+                                   "altruism"
+                               ]
+                  },
+                  {
+                      "name":  "Plunderer\u0027s Instinct",
+                      "file":  "IconPerks_plunderersInstinct.png",
+                      "character":  "All",
+                      "tags":  [
+                                   "info",
+                                   "items"
+                               ]
+                  },
+                  {
+                      "name":  "Poised",
+                      "file":  "IconPerks_poised.png",
+                      "character":  "Jane",
+                      "tags":  [
+                                   "stealth"
+                               ]
+                  },
+                  {
+                      "name":  "Potential Energy",
+                      "file":  "IconPerks_potentialEnergy.png",
+                      "character":  "Vittorio",
+                      "tags":  [
+                                   "genrush"
+                               ]
+                  },
+                  {
+                      "name":  "Power Struggle",
+                      "file":  "IconPerks_powerStruggle.png",
+                      "character":  "Élodie",
+                      "tags":  [
+                                   "antitunnel",
+                                   "antislug"
+                               ]
+                  },
+                  {
+                      "name":  "Premonition",
+                      "file":  "IconPerks_premonition.png",
+                      "character":  "All",
+                      "tags":  [
+                                   "info"
+                               ]
+                  },
+                  {
+                      "name":  "Prove Thyself",
+                      "file":  "IconPerks_proveThyself.png",
+                      "character":  "Dwight",
+                      "tags":  [
+                                   "genrush"
+                               ]
+                  },
+                  {
+                      "name":  "Quick \u0026 Quiet",
+                      "file":  "IconPerks_quickAndQuiet.png",
+                      "character":  "Meg",
+                      "tags":  [
+                                   "chase",
+                                   "stealth"
+                               ]
+                  },
+                  {
+                      "name":  "Quick Gambit",
+                      "file":  "IconPerks_quickGambit.png",
+                      "character":  "Vittorio",
+                      "tags":  [
+                                   "genrush"
+                               ]
+                  },
+                  {
+                      "name":  "Rapid Response",
+                      "file":  "T_UI_iconsPerks_RapidResponse.png",
+                      "character":  "Orela",
+                      "tags":  [
+                                   "info"
+                               ]
+                  },
+                  {
+                      "name":  "Reactive Healing",
+                      "file":  "IconPerks_reactiveHealing.png",
+                      "character":  "Ada",
+                      "tags":  [
+                                   "altruism"
+                               ]
+                  },
+                  {
+                      "name":  "Reassurance",
+                      "file":  "IconPerks_reassurance.png",
+                      "character":  "Rebecca",
+                      "tags":  [
+                                   "antitunnel",
+                                   "altruism"
+                               ]
+                  },
+                  {
+                      "name":  "Red Herring",
+                      "file":  "IconPerks_redHerring.png",
+                      "character":  "Zarina",
+                      "tags":  [
+                                   "stealth"
+                               ]
+                  },
+                  {
+                      "name":  "Repressed Alliance",
+                      "file":  "IconPerks_repressedAlliance.png",
+                      "character":  "Cheryl",
+                      "tags":  [
+                                   "genrush"
+                               ]
+                  },
+                  {
+                      "name":  "Residual Manifest",
+                      "file":  "IconPerks_residualManifest.png",
+                      "character":  "Haddie",
+                      "tags":  [
+                                   "items"
+                               ]
+                  },
+                  {
+                      "name":  "Resilience",
+                      "file":  "IconPerks_resilience.png",
+                      "character":  "All",
+                      "tags":  [
+                                   "genrush",
+                                   "chase"
+                               ]
+                  },
+                  {
+                      "name":  "Resurgence",
+                      "file":  "IconPerks_resurgence.png",
+                      "character":  "Jill",
+                      "tags":  [
+                                   "altruism"
+                               ]
+                  },
+                  {
+                      "name":  "Road Life",
+                      "file":  "IconPerks_RoadLife.png",
+                      "character":  "Vee",
+                      "tags":  [
+                                   "genrush"
+                               ]
+                  },
+                  {
+                      "name":  "Rookie Spirit",
+                      "file":  "IconPerks_rookieSpirit.png",
+                      "character":  "Leon",
+                      "tags":  [
+                                   "info"
+                               ]
+                  },
+                  {
+                      "name":  "Saboteur",
+                      "file":  "IconPerks_saboteur.png",
+                      "character":  "Jake",
+                      "tags":  [
+                                   "info"
+                               ]
+                  },
+                  {
+                      "name":  "Salvation\u0027s Cry",
+                      "file":  "T_UI_iconsPerks_SalvationsCry.png",
+                      "character":  "Aurora",
+                      "tags":  [
+                                   "info"
+                               ]
+                  },
+                  {
+                      "name":  "Scavenger",
+                      "file":  "IconPerks_scavenger.png",
+                      "character":  "Gabriel",
+                      "tags":  [
+                                   "items"
+                               ]
+                  },
+                  {
+                      "name":  "Scene Partner",
+                      "file":  "IconPerks_scenePartner.png",
+                      "character":  "Nicolas",
+                      "tags":  [
+
+                               ]
+                  },
+                  {
+                      "name":  "Second Wind",
+                      "file":  "IconPerks_secondWind.png",
+                      "character":  "Steve",
+                      "tags":  [
+                                   "antitunnel",
+                                   "altruism"
+                               ]
+                  },
+                  {
+                      "name":  "Self-Care",
+                      "file":  "IconPerks_self-Care.png",
+                      "character":  "Claudette",
+                      "tags":  [
+                                   "altruism"
+                               ]
+                  },
+                  {
+                      "name":  "Self-Preservation",
+                      "file":  "IconPerks_self-Preservation.png",
+                      "character":  "Lee",
+                      "tags":  [
+                                   "stealth"
+                               ]
+                  },
+                  {
+                      "name":  "Shoulder the Burden",
+                      "file":  "IconPerks_shoulderTheBurden.png",
+                      "character":  "Taurie",
+                      "tags":  [
+                                   "altruism"
+                               ]
+                  },
+                  {
+                      "name":  "Slippery Meat",
+                      "file":  "IconPerks_slipperyMeat.png",
+                      "character":  "All",
+                      "tags":  [
+                                   "antitunnel"
+                               ]
+                  },
+                  {
+                      "name":  "Small Game",
+                      "file":  "IconPerks_smallGame.png",
+                      "character":  "All",
+                      "tags":  [
+                                   "info",
+                                   "boon"
+                               ]
+                  },
+                  {
+                      "name":  "Smash Hit",
+                      "file":  "IconPerks_smashHit.png",
+                      "character":  "Lee",
+                      "tags":  [
+                                   "exhaustion"
+                               ]
+                  },
+                  {
+                      "name":  "Sole Survivor",
+                      "file":  "IconPerks_soleSurvivor.png",
+                      "character":  "Laurie",
+                      "tags":  [
+                                   "stealth"
+                               ]
+                  },
+                  {
+                      "name":  "Solidarity",
+                      "file":  "IconPerks_solidarity.png",
+                      "character":  "Jane",
+                      "tags":  [
+                                   "altruism"
+                               ]
+                  },
+                  {
+                      "name":  "Soul Guard",
+                      "file":  "IconPerks_soulGuard.png",
+                      "character":  "Cheryl",
+                      "tags":  [
+                                   "antitunnel",
+                                   "antislug"
+                               ]
+                  },
+                  {
+                      "name":  "Specialist",
+                      "file":  "IconPerks_specialist.png",
+                      "character":  "Lara",
+                      "tags":  [
+                                   "genrush"
+                               ]
+                  },
+                  {
+                      "name":  "Spine Chill",
+                      "file":  "IconPerks_spineChill.png",
+                      "character":  "All",
+                      "tags":  [
+                                   "info"
+                               ]
+                  },
+                  {
+                      "name":  "Sprint Burst",
+                      "file":  "IconPerks_sprintBurst.png",
+                      "character":  "Meg",
+                      "tags":  [
+                                   "exhaustion"
+                               ]
+                  },
+                  {
+                      "name":  "Stake Out",
+                      "file":  "IconPerks_stakeOut.png",
+                      "character":  "David Tapp",
+                      "tags":  [
+                                   "genrush"
+                               ]
+                  },
+                  {
+                      "name":  "Still Sight",
+                      "file":  "IconPerks_stillSight.png",
+                      "character":  "Aestri",
+                      "tags":  [
+                                   "info"
+                               ]
+                  },
+                  {
+                      "name":  "Streetwise",
+                      "file":  "IconPerks_streetwise.png",
+                      "character":  "Nea",
+                      "tags":  [
+                                   "items"
+                               ]
+                  },
+                  {
+                      "name":  "Strength in Shadows",
+                      "file":  "IconPerks_strengthInShadows.png",
+                      "character":  "Sable",
+                      "tags":  [
+                                   "altruism"
+                               ]
+                  },
+                  {
+                      "name":  "Teamwork: Collective Stealth",
+                      "file":  "IconPerks_teamworkCollectiveStealth.png",
+                      "character":  "Renato",
+                      "tags":  [
+                                   "stealth"
+                               ]
+                  },
+                  {
+                      "name":  "Teamwork: Full Circuit",
+                      "file":  "IconsPerks_TeamworkFullCircuit.png",
+                      "character":  "Dustin",
+                      "tags":  [
+                                   "genrush"
+                               ]
+                  },
+                  {
+                      "name":  "Teamwork: Power of Two",
+                      "file":  "IconPerks_teamworkPowerOfTwo.png",
+                      "character":  "Thalita",
+                      "tags":  [
+                                   "altruism"
+                               ]
+                  },
+                  {
+                      "name":  "Teamwork: Soft-Spoken",
+                      "file":  "IconsPerks_TeamworkSoftSpoken.png",
+                      "character":  "Eleven",
+                      "tags":  [
+                                   "stealth"
+                               ]
+                  },
+                  {
+                      "name":  "Teamwork: Throw Down",
+                      "file":  "IconPerks_teamworkThrowDown.png",
+                      "character":  "Michonne",
+                      "tags":  [
+                                   "altruism"
+                               ]
+                  },
+                  {
+                      "name":  "Teamwork: Toughen Up",
+                      "file":  "IconPerks_teamworkToughenUp.png",
+                      "character":  "Rick",
+                      "tags":  [
+                                   "altruism"
+                               ]
+                  },
+                  {
+                      "name":  "Technician",
+                      "file":  "IconPerks_technician.png",
+                      "character":  "Feng",
+                      "tags":  [
+                                   "genrush"
+                               ]
+                  },
+                  {
+                      "name":  "Tenacity",
+                      "file":  "IconPerks_tenacity.png",
+                      "character":  "David Tapp",
+                      "tags":  [
+                                   "antitunnel",
+                                   "antislug"
+                               ]
+                  },
+                  {
+                      "name":  "This Is Not Happening",
+                      "file":  "IconPerks_thisIsNotHappening.png",
+                      "character":  "All",
+                      "tags":  [
+                                   "genrush"
+                               ]
+                  },
+                  {
+                      "name":  "Troubleshooter",
+                      "file":  "IconPerks_troubleshooter.png",
+                      "character":  "Gabriel",
+                      "tags":  [
+                                   "info"
+                               ]
+                  },
+                  {
+                      "name":  "Unbreakable",
+                      "file":  "IconPerks_unbreakable.png",
+                      "character":  "Bill",
+                      "tags":  [
+                                   "antitunnel",
+                                   "antislug"
+                               ]
+                  },
+                  {
+                      "name":  "Up the Ante",
+                      "file":  "IconPerks_upTheAnte.png",
+                      "character":  "Ace",
+                      "tags":  [
+                                   "antitunnel"
+                               ]
+                  },
+                  {
+                      "name":  "Urban Evasion",
+                      "file":  "IconPerks_urbanEvasion.png",
+                      "character":  "Nea",
+                      "tags":  [
+                                   "stealth"
+                               ]
+                  },
+                  {
+                      "name":  "Vigil",
+                      "file":  "IconPerks_vigil.png",
+                      "character":  "Quentin",
+                      "tags":  [
+                                   "chase"
+                               ]
+                  },
+                  {
+                      "name":  "Visionary",
+                      "file":  "IconPerks_visionary.png",
+                      "character":  "Felix",
+                      "tags":  [
+                                   "info"
+                               ]
+                  },
+                  {
+                      "name":  "Wake Up!",
+                      "file":  "IconPerks_wakeUp.png",
+                      "character":  "Quentin",
+                      "tags":  [
+                                   "info",
+                                   "endgame"
+                               ]
+                  },
+                  {
+                      "name":  "We See You",
+                      "file":  "IconsPerks_WeSeeYou.png",
+                      "character":  "Eleven",
+                      "tags":  [
+                                   "info"
+                               ]
+                  },
+                  {
+                      "name":  "We\u0027ll Make It",
+                      "file":  "IconPerks_wellMakeIt.png",
+                      "character":  "All",
+                      "tags":  [
+                                   "altruism"
+                               ]
+                  },
+                  {
+                      "name":  "We\u0027re Gonna Live Forever",
+                      "file":  "IconPerks_wereGonnaLiveForever.png",
+                      "character":  "David King",
+                      "tags":  [
+                                   "altruism"
+                               ]
+                  },
+                  {
+                      "name":  "Wicked",
+                      "file":  "IconPerks_wicked.png",
+                      "character":  "Sable",
+                      "tags":  [
+                                   "info"
+                               ]
+                  },
+                  {
+                      "name":  "Wide Open Throttle",
+                      "file":  "T_UI_iconsPerks_WideOpenThrottle.png",
+                      "character":  "Shane",
+                      "tags":  [
+                                   "chase"
+                               ]
+                  },
+                  {
+                      "name":  "Will to Live",
+                      "file":  "IconPerks_decisiveStrike.png",
+                      "character":  "All",
+                      "tags":  [
+                                   "antitunnel"
+                               ]
+                  },
+                  {
+                      "name":  "Windows of Opportunity",
+                      "file":  "IconPerks_windowsOfOpportunity.png",
+                      "character":  "Kate",
+                      "tags":  [
+                                   "info",
+                                   "chase"
+                               ]
+                  },
+                  {
+                      "name":  "Wiretap",
+                      "file":  "IconPerks_wiretap.png",
+                      "character":  "Ada",
+                      "tags":  [
+                                   "items"
+                               ]
+                  }
+              ],
+    "timers":  [
+                   {
+                       "perk":  "Borrowed Time",
+                       "color":  "#E8C547",
+                       "note":  "Endurance on the Survivor you unhooked",
+                       "trigger":  "unhook_you",
+                       "seconds":  [
+                                       16,
+                                       18,
+                                       20
+                                   ]
+                   },
+                   {
+                       "perk":  "Babysitter",
+                       "color":  "#E8C547",
+                       "note":  "No scratch marks / blood for the unhooked Survivor",
+                       "trigger":  "unhook_you",
+                       "seconds":  [
+                                       20,
+                                       25,
+                                       30
+                                   ]
+                   },
+                   {
+                       "perk":  "We\u0027ll Make It",
+                       "color":  "#E8C547",
+                       "note":  "+100% healing speed",
+                       "trigger":  "unhook_you",
+                       "seconds":  [
+                                       70,
+                                       80,
+                                       90
+                                   ]
+                   },
+                   {
+                       "perk":  "Will to Live",
+                       "color":  "#E06C5A",
+                       "note":  "Decisive Strike window",
+                       "trigger":  "unhooked",
+                       "seconds":  [
+                                       40,
+                                       50,
+                                       60
+                                   ]
+                   },
+                   {
+                       "perk":  "Off the Record",
+                       "color":  "#6CB4E0",
+                       "note":  "Endurance, no aura / grunts",
+                       "trigger":  "unhooked",
+                       "seconds":  [
+                                       30,
+                                       35,
+                                       40
+                                   ]
+                   },
+                   {
+                       "perk":  "Second Wind",
+                       "color":  "#6CB4E0",
+                       "note":  "Auto-heal when it runs out (if primed)",
+                       "trigger":  "unhooked",
+                       "seconds":  [
+                                       28,
+                                       24,
+                                       20
+                                   ]
+                   },
+                   {
+                       "perk":  "Deliverance",
+                       "color":  "#9A9A9A",
+                       "note":  "Broken after a self-unhook",
+                       "trigger":  "unhooked",
+                       "seconds":  [
+                                       160,
+                                       140,
+                                       120
+                                   ]
+                   },
+                   {
+                       "perk":  "Shoulder the Burden",
+                       "color":  "#9A9A9A",
+                       "note":  "Broken",
+                       "trigger":  "unhooked",
+                       "seconds":  [
+                                       160,
+                                       140,
+                                       120
+                                   ]
+                   },
+                   {
+                       "perk":  "Sprint Burst",
+                       "color":  "#B48CF0",
+                       "note":  "Exhausted",
+                       "trigger":  "exhausted",
+                       "seconds":  [
+                                       60,
+                                       50,
+                                       40
+                                   ]
+                   },
+                   {
+                       "perk":  "Dead Hard",
+                       "color":  "#B48CF0",
+                       "note":  "Exhausted",
+                       "trigger":  "exhausted",
+                       "seconds":  [
+                                       60,
+                                       50,
+                                       40
+                                   ]
+                   },
+                   {
+                       "perk":  "Lithe",
+                       "color":  "#B48CF0",
+                       "note":  "Exhausted",
+                       "trigger":  "exhausted",
+                       "seconds":  [
+                                       60,
+                                       50,
+                                       40
+                                   ]
+                   },
+                   {
+                       "perk":  "Balanced Landing",
+                       "color":  "#B48CF0",
+                       "note":  "Exhausted",
+                       "trigger":  "exhausted",
+                       "seconds":  [
+                                       60,
+                                       50,
+                                       40
+                                   ]
+                   },
+                   {
+                       "perk":  "Overcome",
+                       "color":  "#B48CF0",
+                       "note":  "Exhausted",
+                       "trigger":  "exhausted",
+                       "seconds":  [
+                                       60,
+                                       50,
+                                       40
+                                   ]
+                   },
+                   {
+                       "perk":  "Head On",
+                       "color":  "#B48CF0",
+                       "note":  "Exhausted",
+                       "trigger":  "exhausted",
+                       "seconds":  [
+                                       60,
+                                       50,
+                                       40
+                                   ]
+                   },
+                   {
+                       "perk":  "Dramaturgy",
+                       "color":  "#B48CF0",
+                       "note":  "Exhausted",
+                       "trigger":  "exhausted",
+                       "seconds":  [
+                                       60,
+                                       50,
+                                       40
+                                   ]
+                   },
+                   {
+                       "perk":  "Adrenaline",
+                       "color":  "#B48CF0",
+                       "note":  "Exhausted",
+                       "trigger":  "exhausted",
+                       "seconds":  [
+                                       60,
+                                       50,
+                                       40
+                                   ]
+                   },
+                   {
+                       "perk":  "Smash Hit",
+                       "color":  "#B48CF0",
+                       "note":  "Exhausted",
+                       "trigger":  "exhausted",
+                       "seconds":  [
+                                       30,
+                                       25,
+                                       20
+                                   ]
+                   },
+                   {
+                       "perk":  "Background Player",
+                       "color":  "#B48CF0",
+                       "note":  "Exhausted",
+                       "trigger":  "exhausted",
+                       "seconds":  [
+                                       30,
+                                       25,
+                                       20
+                                   ]
+                   }
+               ],
+    "killer":  [
+                   {
+                       "trigger":  "match_start",
+                       "name":  "Lethal Pursuer",
+                       "note":  "Killer sees all auras at the start",
+                       "color":  "#FF5050",
+                       "file":  "IconPerks_lethalPursuer.png",
+                       "seconds":  [
+                                       7,
+                                       8,
+                                       9
+                                   ]
+                   }
+               ],
+    "basekit":  [
+                    {
+                        "name":  "Endurance (base)",
+                        "file":  "IconPerks_borrowedTime.png",
+                        "color":  "#9AD0F5",
+                        "seconds":  10,
+                        "triggers":  [
+                                         "unhook_you",
+                                         "unhooked"
+                                     ],
+                        "note":  "Every unhooked Survivor gets 10 s Endurance + Haste (patch 10.1.0), no perk needed. Borrowed Time replaces this with its longer timer."
+                    },
+                    {
+                        "name":  "Elusive (base)",
+                        "file":  "IconStatusEffects_elusive.png",
+                        "color":  "#B9E6A0",
+                        "seconds":  10,
+                        "triggers":  [
+                                         "unhook_you",
+                                         "unhooked"
+                                     ],
+                        "untilGates":  true,
+                        "keepWithBT":  true,
+                        "note":  "Unhook protection (patch 10.1.0): 10 s Elusive - no scratch marks, grunts or blood, aura hidden from the killer. Not given once every generator is done."
+                    }
+                ],
+    "generic":  {
+                    "unhook_you":  [
+                                       "Borrowed Time"
+                                   ],
+                    "unhooked":  [
+                                     "Will to Live",
+                                     "Off the Record"
+                                 ],
+                    "exhausted":  [
+                                      "Sprint Burst"
+                                  ]
+                },
+    "killerPerks":  [
+                        {
+                            "name":  "A Nurse\u0027s Calling",
+                            "file":  "IconPerks_aNursesCalling.png",
+                            "character":  "Nurse",
+                            "tags":  [
+                                         "tracking"
+                                     ]
+                        },
+                        {
+                            "name":  "Agitation",
+                            "file":  "IconPerks_agitation.png",
+                            "character":  "Trapper",
+                            "tags":  [
+
+                                     ]
+                        },
+                        {
+                            "name":  "Alien Instinct",
+                            "file":  "IconPerks_alienInstinct.png",
+                            "character":  "Xenomorph",
+                            "tags":  [
+                                         "tracking"
+                                     ]
+                        },
+                        {
+                            "name":  "All-Shaking Thunder",
+                            "file":  "IconPerks_allShakingThunder.png",
+                            "character":  "Houndmaster",
+                            "tags":  [
+                                         "antiloop"
+                                     ]
+                        },
+                        {
+                            "name":  "Awakened Awareness",
+                            "file":  "IconPerks_awakenedAwareness.png",
+                            "character":  "Mastermind",
+                            "tags":  [
+                                         "tracking"
+                                     ]
+                        },
+                        {
+                            "name":  "Bamboozle",
+                            "file":  "IconPerks_bamboozle.png",
+                            "character":  "Clown",
+                            "tags":  [
+                                         "antiloop"
+                                     ]
+                        },
+                        {
+                            "name":  "Barbecue \u0026 Chilli",
+                            "file":  "IconPerks_barbecueAndChilli.png",
+                            "character":  "Cannibal",
+                            "tags":  [
+                                         "tracking"
+                                     ]
+                        },
+                        {
+                            "name":  "Batteries Included",
+                            "file":  "IconPerks_batteriesIncluded.png",
+                            "character":  "Good Guy",
+                            "tags":  [
+                                         "antiloop"
+                                     ]
+                        },
+                        {
+                            "name":  "Beast of Prey",
+                            "file":  "IconPerks_beastOfPrey.png",
+                            "character":  "Huntress",
+                            "tags":  [
+                                         "stealth"
+                                     ]
+                        },
+                        {
+                            "name":  "Bitter Murmur",
+                            "file":  "IconPerks_bitterMurmur.png",
+                            "character":  "All",
+                            "tags":  [
+                                         "tracking",
+                                         "endgame"
+                                     ]
+                        },
+                        {
+                            "name":  "Blood Echo",
+                            "file":  "IconPerks_bloodEcho.png",
+                            "character":  "Oni",
+                            "tags":  [
+                                         "antiheal",
+                                         "antiexhaustion"
+                                     ]
+                        },
+                        {
+                            "name":  "Blood Warden",
+                            "file":  "IconPerks_bloodWarden.png",
+                            "character":  "Nightmare",
+                            "tags":  [
+                                         "tracking",
+                                         "endgame"
+                                     ]
+                        },
+                        {
+                            "name":  "Bloodhound",
+                            "file":  "IconPerks_bloodhound.png",
+                            "character":  "Wraith",
+                            "tags":  [
+                                         "tracking"
+                                     ]
+                        },
+                        {
+                            "name":  "Brutal Strength",
+                            "file":  "IconPerks_brutalStrength.png",
+                            "character":  "Trapper",
+                            "tags":  [
+                                         "antiloop"
+                                     ]
+                        },
+                        {
+                            "name":  "Call of Brine",
+                            "file":  "IconPerks_callOfBrine.png",
+                            "character":  "Onryō",
+                            "tags":  [
+                                         "slowdown"
+                                     ]
+                        },
+                        {
+                            "name":  "Celestial Witness",
+                            "file":  "T_UI_iconsPerks_CelestialWitness.png",
+                            "character":  "Judgment",
+                            "tags":  [
+                                         "obsession"
+                                     ]
+                        },
+                        {
+                            "name":  "Corrupt Intervention",
+                            "file":  "IconPerks_corruptIntervention.png",
+                            "character":  "Plague",
+                            "tags":  [
+                                         "slowdown"
+                                     ]
+                        },
+                        {
+                            "name":  "Coulrophobia",
+                            "file":  "IconPerks_coulrophobia.png",
+                            "character":  "Clown",
+                            "tags":  [
+                                         "antiheal"
+                                     ]
+                        },
+                        {
+                            "name":  "Coup de Grâce",
+                            "file":  "IconPerks_coupDeGrâce.png",
+                            "character":  "Twins",
+                            "tags":  [
+                                         "antiloop"
+                                     ]
+                        },
+                        {
+                            "name":  "Cruel Limits",
+                            "file":  "IconPerks_cruelLimits.png",
+                            "character":  "Demogorgon",
+                            "tags":  [
+                                         "tracking",
+                                         "antiloop"
+                                     ]
+                        },
+                        {
+                            "name":  "Cull the Weak",
+                            "file":  "IconPerks_dyingLight.png",
+                            "character":  "All",
+                            "tags":  [
+                                         "obsession"
+                                     ]
+                        },
+                        {
+                            "name":  "Dark Arrogance",
+                            "file":  "IconPerks_darkArrogance.png",
+                            "character":  "Lich",
+                            "tags":  [
+                                         "antiloop"
+                                     ]
+                        },
+                        {
+                            "name":  "Dark Devotion",
+                            "file":  "IconPerks_darkDevotion.png",
+                            "character":  "Plague",
+                            "tags":  [
+                                         "stealth"
+                                     ]
+                        },
+                        {
+                            "name":  "Darkness Revealed",
+                            "file":  "IconPerks_darknessRevealed.png",
+                            "character":  "Dredge",
+                            "tags":  [
+                                         "tracking"
+                                     ]
+                        },
+                        {
+                            "name":  "Dead Man\u0027s Switch",
+                            "file":  "IconPerks_deadMansSwitch.png",
+                            "character":  "Deathslinger",
+                            "tags":  [
+                                         "slowdown"
+                                     ]
+                        },
+                        {
+                            "name":  "Deadlock",
+                            "file":  "IconPerks_deadlock.png",
+                            "character":  "Cenobite",
+                            "tags":  [
+                                         "slowdown"
+                                     ]
+                        },
+                        {
+                            "name":  "Deathbound",
+                            "file":  "IconPerks_deathbound.png",
+                            "character":  "Executioner",
+                            "tags":  [
+                                         "antiheal"
+                                     ]
+                        },
+                        {
+                            "name":  "Deerstalker",
+                            "file":  "IconPerks_deerstalker.png",
+                            "character":  "All",
+                            "tags":  [
+                                         "tracking"
+                                     ]
+                        },
+                        {
+                            "name":  "Discordance",
+                            "file":  "IconPerks_discordance.png",
+                            "character":  "Legion",
+                            "tags":  [
+                                         "tracking"
+                                     ]
+                        },
+                        {
+                            "name":  "Dissolution",
+                            "file":  "IconPerks_dissolution.png",
+                            "character":  "Dredge",
+                            "tags":  [
+                                         "antiloop"
+                                     ]
+                        },
+                        {
+                            "name":  "Distressing",
+                            "file":  "IconPerks_distressing.png",
+                            "character":  "All",
+                            "tags":  [
+                                         "slowdown"
+                                     ]
+                        },
+                        {
+                            "name":  "Dominance",
+                            "file":  "IconPerks_Dominance.png",
+                            "character":  "Dark Lord",
+                            "tags":  [
+                                         "tracking",
+                                         "hex"
+                                     ]
+                        },
+                        {
+                            "name":  "Dragon\u0027s Grip",
+                            "file":  "IconPerks_dragonsGrip.png",
+                            "character":  "Blight",
+                            "tags":  [
+                                         "snowball"
+                                     ]
+                        },
+                        {
+                            "name":  "Dying Light",
+                            "file":  "IconPerks_dyingLight.png",
+                            "character":  "Shape",
+                            "tags":  [
+                                         "obsession"
+                                     ]
+                        },
+                        {
+                            "name":  "Enduring",
+                            "file":  "IconPerks_enduring.png",
+                            "character":  "Hillbilly",
+                            "tags":  [
+                                         "antiloop"
+                                     ]
+                        },
+                        {
+                            "name":  "Eruption",
+                            "file":  "IconPerks_eruption.png",
+                            "character":  "Nemesis",
+                            "tags":  [
+                                         "slowdown"
+                                     ]
+                        },
+                        {
+                            "name":  "Fire Up",
+                            "file":  "IconPerks_fireUp.png",
+                            "character":  "Nightmare",
+                            "tags":  [
+                                         "antiloop"
+                                     ]
+                        },
+                        {
+                            "name":  "Forced Hesitation",
+                            "file":  "IconPerks_forcedHesitation.png",
+                            "character":  "Singularity",
+                            "tags":  [
+                                         "snowball"
+                                     ]
+                        },
+                        {
+                            "name":  "Forced Penance",
+                            "file":  "IconPerks_forcedPenance.png",
+                            "character":  "Executioner",
+                            "tags":  [
+                                         "antiheal"
+                                     ]
+                        },
+                        {
+                            "name":  "Forever Entwined",
+                            "file":  "T_UI_iconPerks_ForeverEntwined.png",
+                            "character":  "Ghoul",
+                            "tags":  [
+
+                                     ]
+                        },
+                        {
+                            "name":  "Franklin\u0027s Demise",
+                            "file":  "IconPerks_franklinsDemise.png",
+                            "character":  "Cannibal",
+                            "tags":  [
+
+                                     ]
+                        },
+                        {
+                            "name":  "Friends \u0027til the End",
+                            "file":  "IconPerks_friendsTilTheEnd.png",
+                            "character":  "Good Guy",
+                            "tags":  [
+                                         "snowball"
+                                     ]
+                        },
+                        {
+                            "name":  "Furtive Chase",
+                            "file":  "IconPerks_furtiveChase.png",
+                            "character":  "Ghost Face",
+                            "tags":  [
+                                         "obsession",
+                                         "stealth"
+                                     ]
+                        },
+                        {
+                            "name":  "Game Afoot",
+                            "file":  "IconPerks_gameAfoot.png",
+                            "character":  "Skull Merchant",
+                            "tags":  [
+                                         "antiloop"
+                                     ]
+                        },
+                        {
+                            "name":  "Gearhead",
+                            "file":  "IconPerks_gearhead.png",
+                            "character":  "Deathslinger",
+                            "tags":  [
+                                         "tracking"
+                                     ]
+                        },
+                        {
+                            "name":  "Genetic Limits",
+                            "file":  "IconPerks_geneticLimits.png",
+                            "character":  "Singularity",
+                            "tags":  [
+                                         "antiexhaustion"
+                                     ]
+                        },
+                        {
+                            "name":  "Grim Embrace",
+                            "file":  "IconPerks_grimEmbrace.png",
+                            "character":  "Artist",
+                            "tags":  [
+                                         "slowdown",
+                                         "tracking"
+                                     ]
+                        },
+                        {
+                            "name":  "Haywire",
+                            "file":  "IconPerks_Haywire.png",
+                            "character":  "Animatronic",
+                            "tags":  [
+                                         "endgame"
+                                     ]
+                        },
+                        {
+                            "name":  "Help Wanted",
+                            "file":  "IconPerks_HelpWanted.png",
+                            "character":  "Animatronic",
+                            "tags":  [
+                                         "slowdown"
+                                     ]
+                        },
+                        {
+                            "name":  "Hex: Blood Favour",
+                            "file":  "IconPerks_hexBloodFavour.png",
+                            "character":  "Blight",
+                            "tags":  [
+                                         "antiloop",
+                                         "hex"
+                                     ]
+                        },
+                        {
+                            "name":  "Hex: Crowd Control",
+                            "file":  "IconPerks_hexCrowdControl.png",
+                            "character":  "Trickster",
+                            "tags":  [
+                                         "antiloop",
+                                         "hex"
+                                     ]
+                        },
+                        {
+                            "name":  "Hex: Devour Hope",
+                            "file":  "IconPerks_hexDevourHope.png",
+                            "character":  "Hag",
+                            "tags":  [
+                                         "snowball",
+                                         "hex"
+                                     ]
+                        },
+                        {
+                            "name":  "Hex: Face the Darkness",
+                            "file":  "IconPerks_hexFaceTheDarkness.png",
+                            "character":  "Knight",
+                            "tags":  [
+                                         "hex"
+                                     ]
+                        },
+                        {
+                            "name":  "Hex: Fortune\u0027s Fool",
+                            "file":  "IconPerks_hexPlaything.png",
+                            "character":  "All",
+                            "tags":  [
+                                         "hex"
+                                     ]
+                        },
+                        {
+                            "name":  "Hex: Haunted Ground",
+                            "file":  "IconPerks_hexHauntedGround.png",
+                            "character":  "Spirit",
+                            "tags":  [
+                                         "snowball",
+                                         "hex"
+                                     ]
+                        },
+                        {
+                            "name":  "Hex: Hive Mind",
+                            "file":  "IconsPerks_HexHiveMind.png",
+                            "character":  "First",
+                            "tags":  [
+                                         "hex"
+                                     ]
+                        },
+                        {
+                            "name":  "Hex: Huntress Lullaby",
+                            "file":  "IconPerks_hexHuntressLullaby.png",
+                            "character":  "Huntress",
+                            "tags":  [
+                                         "hex"
+                                     ]
+                        },
+                        {
+                            "name":  "Hex: No One Escapes Death",
+                            "file":  "IconPerks_hexNoOneEscapesDeath.png",
+                            "character":  "All",
+                            "tags":  [
+                                         "snowball",
+                                         "endgame",
+                                         "hex"
+                                     ]
+                        },
+                        {
+                            "name":  "Hex: Nothing but Misery",
+                            "file":  "T_UI_iconPerks_NothingButMisery.png",
+                            "character":  "Ghoul",
+                            "tags":  [
+                                         "hex"
+                                     ]
+                        },
+                        {
+                            "name":  "Hex: Overture of Doom",
+                            "file":  "IconPerks_HexOvertureOfDoom.png",
+                            "character":  "Krasue",
+                            "tags":  [
+                                         "stealth",
+                                         "hex"
+                                     ]
+                        },
+                        {
+                            "name":  "Hex: Pentimento",
+                            "file":  "IconPerks_hexPentimento.png",
+                            "character":  "Artist",
+                            "tags":  [
+                                         "tracking",
+                                         "antiheal",
+                                         "hex"
+                                     ]
+                        },
+                        {
+                            "name":  "Hex: Plaything",
+                            "file":  "IconPerks_hexPlaything.png",
+                            "character":  "Cenobite",
+                            "tags":  [
+                                         "hex"
+                                     ]
+                        },
+                        {
+                            "name":  "Hex: Retribution",
+                            "file":  "IconPerks_hexRetribution.png",
+                            "character":  "Deathslinger",
+                            "tags":  [
+                                         "tracking",
+                                         "hex"
+                                     ]
+                        },
+                        {
+                            "name":  "Hex: Ruin",
+                            "file":  "IconPerks_hexRuin.png",
+                            "character":  "Hag",
+                            "tags":  [
+                                         "slowdown",
+                                         "hex"
+                                     ]
+                        },
+                        {
+                            "name":  "Hex: Scared to Death",
+                            "file":  "T_UI_iconsPerks_ScaredToDeath.png",
+                            "character":  "Slasher",
+                            "tags":  [
+                                         "hex"
+                                     ]
+                        },
+                        {
+                            "name":  "Hex: The Third Seal",
+                            "file":  "IconPerks_hexTheThirdSeal.png",
+                            "character":  "Hag",
+                            "tags":  [
+                                         "hex"
+                                     ]
+                        },
+                        {
+                            "name":  "Hex: Thrill of the Hunt",
+                            "file":  "IconPerks_hexThrillOfTheHunt.png",
+                            "character":  "All",
+                            "tags":  [
+                                         "hex"
+                                     ]
+                        },
+                        {
+                            "name":  "Hex: Two Can Play",
+                            "file":  "IconPerks_hexTwoCanPlay.png",
+                            "character":  "Good Guy",
+                            "tags":  [
+                                         "hex"
+                                     ]
+                        },
+                        {
+                            "name":  "Hex: Under Your Thumb",
+                            "file":  "T_UI_iconsPerks_HexUnderYourThumb.png",
+                            "character":  "Judgment",
+                            "tags":  [
+                                         "hex"
+                                     ]
+                        },
+                        {
+                            "name":  "Hex: Undying",
+                            "file":  "IconPerks_hexUndying.png",
+                            "character":  "Blight",
+                            "tags":  [
+                                         "hex"
+                                     ]
+                        },
+                        {
+                            "name":  "Hex: Wretched Fate",
+                            "file":  "IconPerks_HexWretchedFate.png",
+                            "character":  "Dark Lord",
+                            "tags":  [
+                                         "hex"
+                                     ]
+                        },
+                        {
+                            "name":  "Hoarder",
+                            "file":  "IconPerks_hoarder.png",
+                            "character":  "Twins",
+                            "tags":  [
+                                         "tracking"
+                                     ]
+                        },
+                        {
+                            "name":  "Hubris",
+                            "file":  "IconPerks_hubris.png",
+                            "character":  "Knight",
+                            "tags":  [
+                                         "snowball"
+                                     ]
+                        },
+                        {
+                            "name":  "Human Greed",
+                            "file":  "IconPerks_HumanGreed.png",
+                            "character":  "Dark Lord",
+                            "tags":  [
+                                         "tracking"
+                                     ]
+                        },
+                        {
+                            "name":  "Hysteria",
+                            "file":  "IconPerks_hysteria.png",
+                            "character":  "Nemesis",
+                            "tags":  [
+                                         "stealth"
+                                     ]
+                        },
+                        {
+                            "name":  "I\u0027m All Ears",
+                            "file":  "IconPerks_imAllEars.png",
+                            "character":  "Ghost Face",
+                            "tags":  [
+                                         "tracking"
+                                     ]
+                        },
+                        {
+                            "name":  "Infectious Fright",
+                            "file":  "IconPerks_infectiousFright.png",
+                            "character":  "Plague",
+                            "tags":  [
+                                         "tracking"
+                                     ]
+                        },
+                        {
+                            "name":  "Insidious",
+                            "file":  "IconPerks_insidious.png",
+                            "character":  "All",
+                            "tags":  [
+                                         "stealth"
+                                     ]
+                        },
+                        {
+                            "name":  "Iron Grasp",
+                            "file":  "IconPerks_ironGrasp.png",
+                            "character":  "All",
+                            "tags":  [
+
+                                     ]
+                        },
+                        {
+                            "name":  "Iron Maiden",
+                            "file":  "IconPerks_ironMaiden.png",
+                            "character":  "Legion",
+                            "tags":  [
+                                         "snowball"
+                                     ]
+                        },
+                        {
+                            "name":  "Keep Them Waiting",
+                            "file":  "IconPerks_saveTheBestForLast_noLicense.png",
+                            "character":  "All",
+                            "tags":  [
+                                         "antiloop"
+                                     ]
+                        },
+                        {
+                            "name":  "Knock Out",
+                            "file":  "IconPerks_knockOut.png",
+                            "character":  "Cannibal",
+                            "tags":  [
+                                         "antiloop"
+                                     ]
+                        },
+                        {
+                            "name":  "Languid Touch",
+                            "file":  "IconPerks_languidTouch.png",
+                            "character":  "Lich",
+                            "tags":  [
+                                         "antiexhaustion"
+                                     ]
+                        },
+                        {
+                            "name":  "Lay Waste",
+                            "file":  "T_UI_iconsPerks_LayWaste.png",
+                            "character":  "Judgment",
+                            "tags":  [
+                                         "slowdown"
+                                     ]
+                        },
+                        {
+                            "name":  "Lethal Pursuer",
+                            "file":  "IconPerks_lethalPursuer.png",
+                            "character":  "Nemesis",
+                            "tags":  [
+                                         "tracking"
+                                     ]
+                        },
+                        {
+                            "name":  "Leverage",
+                            "file":  "IconPerks_leverage.png",
+                            "character":  "Skull Merchant",
+                            "tags":  [
+                                         "antiheal"
+                                     ]
+                        },
+                        {
+                            "name":  "Lightborn",
+                            "file":  "IconPerks_lightborn.png",
+                            "character":  "Hillbilly",
+                            "tags":  [
+                                         "tracking"
+                                     ]
+                        },
+                        {
+                            "name":  "Machine Learning",
+                            "file":  "IconPerks_machineLearning.png",
+                            "character":  "Singularity",
+                            "tags":  [
+                                         "stealth"
+                                     ]
+                        },
+                        {
+                            "name":  "Mad Grit",
+                            "file":  "IconPerks_madGrit.png",
+                            "character":  "Legion",
+                            "tags":  [
+
+                                     ]
+                        },
+                        {
+                            "name":  "Make Your Choice",
+                            "file":  "IconPerks_makeYourChoice.png",
+                            "character":  "Pig",
+                            "tags":  [
+                                         "snowball"
+                                     ]
+                        },
+                        {
+                            "name":  "Merciless Storm",
+                            "file":  "IconPerks_mercilessStorm.png",
+                            "character":  "Onryō",
+                            "tags":  [
+                                         "slowdown"
+                                     ]
+                        },
+                        {
+                            "name":  "Mindbreaker",
+                            "file":  "IconPerks_mindbreaker.png",
+                            "character":  "Demogorgon",
+                            "tags":  [
+                                         "antiexhaustion"
+                                     ]
+                        },
+                        {
+                            "name":  "Monitor \u0026 Abuse",
+                            "file":  "IconPerks_monitorAndAbuse.png",
+                            "character":  "Doctor",
+                            "tags":  [
+                                         "stealth"
+                                     ]
+                        },
+                        {
+                            "name":  "Nemesis",
+                            "file":  "IconPerks_nemesis.png",
+                            "character":  "Oni",
+                            "tags":  [
+                                         "obsession"
+                                     ]
+                        },
+                        {
+                            "name":  "No Holds Barred",
+                            "file":  "IconPerks_NoHoldsBarred.png",
+                            "character":  "All",
+                            "tags":  [
+                                         "slowdown"
+                                     ]
+                        },
+                        {
+                            "name":  "No Quarter",
+                            "file":  "IconPerks_noQuarter.png",
+                            "character":  "Houndmaster",
+                            "tags":  [
+                                         "antiheal"
+                                     ]
+                        },
+                        {
+                            "name":  "No Way Out",
+                            "file":  "IconPerks_noWayOut.png",
+                            "character":  "Trickster",
+                            "tags":  [
+                                         "endgame"
+                                     ]
+                        },
+                        {
+                            "name":  "None Are Free",
+                            "file":  "T_UI_iconPerks_NoneAreFree.png",
+                            "character":  "Ghoul",
+                            "tags":  [
+                                         "endgame"
+                                     ]
+                        },
+                        {
+                            "name":  "Nowhere to Hide",
+                            "file":  "IconPerks_nowhereToHide.png",
+                            "character":  "Knight",
+                            "tags":  [
+                                         "tracking"
+                                     ]
+                        },
+                        {
+                            "name":  "Oppression",
+                            "file":  "IconPerks_oppression.png",
+                            "character":  "Twins",
+                            "tags":  [
+                                         "slowdown"
+                                     ]
+                        },
+                        {
+                            "name":  "Overcharge",
+                            "file":  "IconPerks_overcharge.png",
+                            "character":  "Doctor",
+                            "tags":  [
+                                         "slowdown"
+                                     ]
+                        },
+                        {
+                            "name":  "Overwhelming Presence",
+                            "file":  "IconPerks_overwhelmingPresence.png",
+                            "character":  "Doctor",
+                            "tags":  [
+                                         "tracking"
+                                     ]
+                        },
+                        {
+                            "name":  "Phantom Fear",
+                            "file":  "IconPerks_PhantomFear.png",
+                            "character":  "Animatronic",
+                            "tags":  [
+                                         "tracking"
+                                     ]
+                        },
+                        {
+                            "name":  "Play with Your Food",
+                            "file":  "IconPerks_playWithYourFood.png",
+                            "character":  "Shape",
+                            "tags":  [
+                                         "antiloop",
+                                         "obsession"
+                                     ]
+                        },
+                        {
+                            "name":  "Pop Goes the Weasel",
+                            "file":  "IconPerks_popGoesTheWeasel.png",
+                            "character":  "Clown",
+                            "tags":  [
+                                         "slowdown"
+                                     ]
+                        },
+                        {
+                            "name":  "Predator",
+                            "file":  "IconPerks_predator.png",
+                            "character":  "Wraith",
+                            "tags":  [
+                                         "tracking"
+                                     ]
+                        },
+                        {
+                            "name":  "Rampage",
+                            "file":  "T_UI_iconsPerks_Rampage.png",
+                            "character":  "Slasher",
+                            "tags":  [
+                                         "antiloop"
+                                     ]
+                        },
+                        {
+                            "name":  "Rancor",
+                            "file":  "IconPerks_rancor.png",
+                            "character":  "Spirit",
+                            "tags":  [
+                                         "snowball",
+                                         "obsession",
+                                         "endgame"
+                                     ]
+                        },
+                        {
+                            "name":  "Rapid Brutality",
+                            "file":  "IconPerks_rapidBrutality.png",
+                            "character":  "Xenomorph",
+                            "tags":  [
+                                         "antiloop"
+                                     ]
+                        },
+                        {
+                            "name":  "Ravenous",
+                            "file":  "IconPerks_Ravenous.png",
+                            "character":  "Krasue",
+                            "tags":  [
+                                         "snowball"
+                                     ]
+                        },
+                        {
+                            "name":  "Remember Me",
+                            "file":  "IconPerks_rememberMe.png",
+                            "character":  "Nightmare",
+                            "tags":  [
+                                         "obsession",
+                                         "endgame"
+                                     ]
+                        },
+                        {
+                            "name":  "Save the Best for Last",
+                            "file":  "IconPerks_saveTheBestForLast.png",
+                            "character":  "Shape",
+                            "tags":  [
+                                         "antiloop"
+                                     ]
+                        },
+                        {
+                            "name":  "Scourge Hook: Floods of Rage",
+                            "file":  "IconPerks_scourgeHookFloodsOfRage.png",
+                            "character":  "Onryō",
+                            "tags":  [
+                                         "scourge"
+                                     ]
+                        },
+                        {
+                            "name":  "Scourge Hook: Gift of Pain",
+                            "file":  "IconPerks_scourgeHookGiftOfPain.png",
+                            "character":  "Cenobite",
+                            "tags":  [
+                                         "scourge"
+                                     ]
+                        },
+                        {
+                            "name":  "Scourge Hook: Hangman\u0027s Trick",
+                            "file":  "IconPerks_scourgeHookHangmansTrick.png",
+                            "character":  "Pig",
+                            "tags":  [
+                                         "scourge",
+                                         "tracking"
+                                     ]
+                        },
+                        {
+                            "name":  "Scourge Hook: Jagged Compass",
+                            "file":  "IconPerks_scourgeHookJaggedCompass.png",
+                            "character":  "Houndmaster",
+                            "tags":  [
+                                         "scourge"
+                                     ]
+                        },
+                        {
+                            "name":  "Scourge Hook: Monstrous Shrine",
+                            "file":  "IconPerks_scourgeHookMonstrousShrine.png",
+                            "character":  "All",
+                            "tags":  [
+                                         "scourge",
+                                         "slowdown"
+                                     ]
+                        },
+                        {
+                            "name":  "Scourge Hook: Pain Resonance",
+                            "file":  "IconPerks_scourgeHookPainResonance.png",
+                            "character":  "Artist",
+                            "tags":  [
+                                         "scourge",
+                                         "slowdown"
+                                     ]
+                        },
+                        {
+                            "name":  "Scourge Hook: Weeping Wounds",
+                            "file":  "IconPerks_scourgeHookWeepingWounds.png",
+                            "character":  "All",
+                            "tags":  [
+                                         "scourge",
+                                         "antiheal"
+                                     ]
+                        },
+                        {
+                            "name":  "Secret Project",
+                            "file":  "IconsPerks_SecretProject.png",
+                            "character":  "First",
+                            "tags":  [
+                                         "slowdown",
+                                         "stealth"
+                                     ]
+                        },
+                        {
+                            "name":  "See How They Run",
+                            "file":  "IconPerks_playWithYourFood.png",
+                            "character":  "All",
+                            "tags":  [
+                                         "antiloop",
+                                         "obsession"
+                                     ]
+                        },
+                        {
+                            "name":  "Septic Touch",
+                            "file":  "IconPerks_septicTouch.png",
+                            "character":  "Dredge",
+                            "tags":  [
+                                         "antiheal",
+                                         "antiexhaustion"
+                                     ]
+                        },
+                        {
+                            "name":  "Shadowborn",
+                            "file":  "IconPerks_shadowborn.png",
+                            "character":  "Wraith",
+                            "tags":  [
+                                         "antiloop"
+                                     ]
+                        },
+                        {
+                            "name":  "Shattered Hope",
+                            "file":  "IconPerks_shatteredHope.png",
+                            "character":  "All",
+                            "tags":  [
+                                         "hex"
+                                     ]
+                        },
+                        {
+                            "name":  "Silent Shadow",
+                            "file":  "T_UI_iconsPerks_SilentShadow.png",
+                            "character":  "Slasher",
+                            "tags":  [
+                                         "endgame",
+                                         "stealth"
+                                     ]
+                        },
+                        {
+                            "name":  "Sloppy Butcher",
+                            "file":  "IconPerks_sloppyButcher.png",
+                            "character":  "All",
+                            "tags":  [
+                                         "antiheal"
+                                     ]
+                        },
+                        {
+                            "name":  "Spies from the Shadows",
+                            "file":  "IconPerks_spiesFromTheShadows.png",
+                            "character":  "All",
+                            "tags":  [
+                                         "tracking"
+                                     ]
+                        },
+                        {
+                            "name":  "Spirit Fury",
+                            "file":  "IconPerks_spiritFury.png",
+                            "character":  "Spirit",
+                            "tags":  [
+                                         "antiloop"
+                                     ]
+                        },
+                        {
+                            "name":  "Starstruck",
+                            "file":  "IconPerks_starstruck.png",
+                            "character":  "Trickster",
+                            "tags":  [
+                                         "snowball"
+                                     ]
+                        },
+                        {
+                            "name":  "Stridor",
+                            "file":  "IconPerks_stridor.png",
+                            "character":  "Nurse",
+                            "tags":  [
+                                         "tracking"
+                                     ]
+                        },
+                        {
+                            "name":  "Superior Anatomy",
+                            "file":  "IconPerks_superiorAnatomy.png",
+                            "character":  "Mastermind",
+                            "tags":  [
+                                         "antiloop"
+                                     ]
+                        },
+                        {
+                            "name":  "Surge",
+                            "file":  "IconPerks_surge.png",
+                            "character":  "Demogorgon",
+                            "tags":  [
+                                         "slowdown"
+                                     ]
+                        },
+                        {
+                            "name":  "Surveillance",
+                            "file":  "IconPerks_surveillance.png",
+                            "character":  "Pig",
+                            "tags":  [
+                                         "tracking"
+                                     ]
+                        },
+                        {
+                            "name":  "THWACK!",
+                            "file":  "IconPerks_thwack.png",
+                            "character":  "Skull Merchant",
+                            "tags":  [
+                                         "antiloop"
+                                     ]
+                        },
+                        {
+                            "name":  "Terminus",
+                            "file":  "IconPerks_terminus.png",
+                            "character":  "Mastermind",
+                            "tags":  [
+                                         "antiheal",
+                                         "endgame"
+                                     ]
+                        },
+                        {
+                            "name":  "Territorial Imperative",
+                            "file":  "IconPerks_territorialImperative.png",
+                            "character":  "Huntress",
+                            "tags":  [
+                                         "tracking"
+                                     ]
+                        },
+                        {
+                            "name":  "Thanatophobia",
+                            "file":  "IconPerks_thanatophobia.png",
+                            "character":  "Nurse",
+                            "tags":  [
+                                         "slowdown"
+                                     ]
+                        },
+                        {
+                            "name":  "Thrilling Tremors",
+                            "file":  "IconPerks_thrillingTremors.png",
+                            "character":  "Ghost Face",
+                            "tags":  [
+                                         "slowdown"
+                                     ]
+                        },
+                        {
+                            "name":  "Tinkerer",
+                            "file":  "IconPerks_tinkerer.png",
+                            "character":  "Hillbilly",
+                            "tags":  [
+                                         "stealth"
+                                     ]
+                        },
+                        {
+                            "name":  "Trail of Torment",
+                            "file":  "IconPerks_trailOfTorment.png",
+                            "character":  "Executioner",
+                            "tags":  [
+                                         "stealth"
+                                     ]
+                        },
+                        {
+                            "name":  "Turn Back the Clock",
+                            "file":  "IconsPerks_TurnBackTheClock.png",
+                            "character":  "First",
+                            "tags":  [
+                                         "slowdown"
+                                     ]
+                        },
+                        {
+                            "name":  "Ultimate Weapon",
+                            "file":  "IconPerks_ultimateWeapon.png",
+                            "character":  "Xenomorph",
+                            "tags":  [
+                                         "tracking"
+                                     ]
+                        },
+                        {
+                            "name":  "Unbound",
+                            "file":  "IconPerks_unbound.png",
+                            "character":  "Unknown",
+                            "tags":  [
+                                         "antiloop"
+                                     ]
+                        },
+                        {
+                            "name":  "Undone",
+                            "file":  "IconPerks_undone.png",
+                            "character":  "Unknown",
+                            "tags":  [
+                                         "slowdown"
+                                     ]
+                        },
+                        {
+                            "name":  "Unforeseen",
+                            "file":  "IconPerks_unforeseen.png",
+                            "character":  "Unknown",
+                            "tags":  [
+                                         "stealth"
+                                     ]
+                        },
+                        {
+                            "name":  "Unnerving Presence",
+                            "file":  "IconPerks_unnervingPresence.png",
+                            "character":  "Trapper",
+                            "tags":  [
+                                         "slowdown"
+                                     ]
+                        },
+                        {
+                            "name":  "Unrelenting",
+                            "file":  "IconPerks_unrelenting.png",
+                            "character":  "All",
+                            "tags":  [
+                                         "antiloop"
+                                     ]
+                        },
+                        {
+                            "name":  "Wandering Eye",
+                            "file":  "IconPerks_WanderingEye.png",
+                            "character":  "Krasue",
+                            "tags":  [
+                                         "tracking"
+                                     ]
+                        },
+                        {
+                            "name":  "Weave Attunement",
+                            "file":  "IconPerks_weaveAttunement.png",
+                            "character":  "Lich",
+                            "tags":  [
+                                         "tracking"
+                                     ]
+                        },
+                        {
+                            "name":  "Whispers",
+                            "file":  "IconPerks_whispers.png",
+                            "character":  "All",
+                            "tags":  [
+                                         "tracking"
+                                     ]
+                        },
+                        {
+                            "name":  "Zanshin Tactics",
+                            "file":  "IconPerks_zanshinTactics.png",
+                            "character":  "Oni",
+                            "tags":  [
+                                         "tracking"
+                                     ]
+                        }
+                    ]
+}

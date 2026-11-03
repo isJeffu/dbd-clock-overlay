@@ -157,7 +157,8 @@ function Get-ScreenBitmap([System.Drawing.Rectangle]$blackout = [System.Drawing.
 # Is the loadout panel open? Reads only its "LOADOUT" title (top left, under
 # the character name; pinned to the LEFT edge, UiLayout.ps1) - tens of ms
 # instead of a full-screen read, so the perk roulette button can follow the
-# panel quickly. $from = a screenshot to read instead of the screen (tests).
+# panel quickly. Returns 'survivor' / 'killer', or $null when it isn't open.
+# $from = a screenshot to read instead of the screen (tests).
 function Test-LoadoutTitle([System.Drawing.Bitmap]$from, [string]$layout = 'auto', [double]$scale = 0) {
     $b = if ($from) { New-Object System.Drawing.Rectangle 0, 0, $from.Width, $from.Height } else { [System.Windows.Forms.Screen]::PrimaryScreen.Bounds }
     if ($scale -le 0) { $scale = (Get-DbdScales).Menu }   # DbD's Menu scale setting
@@ -176,7 +177,36 @@ function Test-LoadoutTitle([System.Drawing.Bitmap]$from, [string]$layout = 'auto
         }
     } finally { $g.Dispose() }
     try { $t = Read-BitmapText $big } finally { $big.Dispose() }
-    (' ' + (ConvertTo-MatchKey ($t -replace "`n", ' ')) + ' ').Contains(' LOADOUT ')
+    $key = ' ' + (ConvertTo-MatchKey ($t -replace "`n", ' ')) + ' '
+    if (-not $key.Contains(' LOADOUT ')) { return $null }
+    # Who you play: the first slot's label says ITEM (survivor) or POWER (killer),
+    # 1080p (300,165) 130x34. (Killer names don't always start with "THE" - a
+    # killer showed as "MINA", 3 Nov - so the name is only the fallback.)
+    $lab = New-Object System.Drawing.Rectangle ([int](Get-DbdX $ui 300 'left')), ([int](Get-DbdY $ui 165)), ([int](130 * $u)), ([int](34 * $u))
+    $big = New-Object System.Drawing.Bitmap 390, 102
+    $g = [System.Drawing.Graphics]::FromImage($big)
+    try {
+        $g.InterpolationMode = 'HighQualityBicubic'
+        if ($from) { $g.DrawImage($from, (New-Object System.Drawing.Rectangle 0, 0, 390, 102), $lab, 'Pixel') }
+        else {
+            $lab.X += $b.X; $lab.Y += $b.Y
+            $shot = New-Object System.Drawing.Bitmap $lab.Width, $lab.Height
+            $gs = [System.Drawing.Graphics]::FromImage($shot); $gs.CopyFromScreen($lab.Location, [System.Drawing.Point]::Empty, $lab.Size); $gs.Dispose()
+            $g.DrawImage($shot, 0, 0, 390, 102); $shot.Dispose()
+        }
+    } finally { $g.Dispose() }
+    try { $lt = ' ' + (ConvertTo-MatchKey ((Read-BitmapText $big) -replace "`n", ' ')) + ' ' } finally { $big.Dispose() }
+    if ($lt -match ' P?OWER ') { return 'killer' }
+    if ($lt.Contains(' ITEM ')) { return 'survivor' }
+    if ($key -match ' THE [A-Z]') { 'killer' } else { 'survivor' }
+}
+# The same question from a full-screen read: a killer's loadout has a POWER slot
+# where a survivor's has ITEM
+function Get-LoadoutRole([string]$text) {
+    $key = ' ' + (ConvertTo-MatchKey ($text -replace "`n", ' ')) + ' '
+    # (OCR sometimes drops the P: "OWER"; or misses the slot labels, but still reads
+    # the name over the title: "THE TERRIFIER 100 LOADOUT")
+    if (($key -match ' P?OWER ' -and -not $key.Contains(' ITEM ')) -or $key -match ' THE [A-Z]+( [A-Z]+)? (\d+ )?LOADOUT ') { 'killer' } else { 'survivor' }
 }
 
 function ConvertTo-MatchKey([string]$s) {

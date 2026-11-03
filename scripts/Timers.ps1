@@ -10,7 +10,7 @@
 # With no build picked, a generic set is used (perks.json "generic").
 # Icons come from the DbD wiki (Setup.ps1 downloads them into "icons").
 
-$perkDb = Get-Content (Join-Path $root 'perks.json') -Raw -Encoding UTF8 | ConvertFrom-Json
+$perkDb = Get-Content (Join-Path $root 'data\perks.json') -Raw -Encoding UTF8 | ConvertFrom-Json
 $timerGaps   = @(40, 190, 330)    # distance from the bottom of the screen: low, middle, high (Home cycles)
 $timerScales = @(1.0, 1.4, 1.8)   # timer size: normal, bigger, biggest (End cycles)
 

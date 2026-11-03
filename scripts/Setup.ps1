@@ -5,11 +5,13 @@
 
 # -Installer: run by Install.ps1, which prints its own "what next"
 # -MissingOnly: only fetch maps not downloaded yet (updates)
-param([switch]$Installer, [switch]$MissingOnly)
+# -Force: fetch the perk icons again too, even ones already there (Start menu
+#   > Redownload maps and icons); -Pause: wait for Enter at the end
+param([switch]$Installer, [switch]$MissingOnly, [switch]$Force, [switch]$Pause)
 Add-Type -AssemblyName PresentationCore, WindowsBase, System.Drawing
 $ErrorActionPreference = 'Stop'
-$root = $PSScriptRoot
-$maps = Get-Content (Join-Path $root 'maps.json') -Raw -Encoding UTF8 | ConvertFrom-Json
+$root = Split-Path $PSScriptRoot -Parent   # the install folder
+$maps = Get-Content (Join-Path $root 'data\maps.json') -Raw -Encoding UTF8 | ConvertFrom-Json
 $out = Join-Path $root 'maps'
 New-Item -ItemType Directory -Force $out | Out-Null
 $tmp = Join-Path ([IO.Path]::GetTempPath()) ('dbd-clock-maps-' + [guid]::NewGuid())
@@ -58,13 +60,16 @@ Remove-Item $tmp -Recurse -Force -ErrorAction SilentlyContinue
 # the timers use), from the Dead by Daylight wiki
 $iconDir = Join-Path $root 'icons'
 New-Item -ItemType Directory -Force $iconDir | Out-Null
-$db = Get-Content (Join-Path $root 'perks.json') -Raw -Encoding UTF8 | ConvertFrom-Json
-$iconFiles = @($db.perks | ForEach-Object { $_.file }) + @($db.killer | ForEach-Object { $_.file }) + @($db.basekit | ForEach-Object { $_.file }) + @('IconStatusEffects_exhausted.png')
+$db = Get-Content (Join-Path $root 'data\perks.json') -Raw -Encoding UTF8 | ConvertFrom-Json
+$iconFiles = @($db.perks | ForEach-Object { $_.file }) + @($db.killer | ForEach-Object { $_.file }) + @($db.basekit | ForEach-Object { $_.file }) + @('IconStatusEffects_exhausted.png') +
+    @($db.killerPerks | ForEach-Object { $_.file }) +  # killer perks: the roulette on a killer's loadout
+    @('Dbd-veryrare-enhanced.png')                     # the purple slot behind tier III perks: the roulette's reels
+$iconFiles = @($iconFiles | Select-Object -Unique)
 Write-Host "Downloading $($iconFiles.Count) perk icons..."
 $iconsOk = 0
 foreach ($icon in $iconFiles) {
     $dest = Join-Path $iconDir $icon
-    if (Test-Path $dest) { $iconsOk++; continue }
+    if ((Test-Path $dest) -and -not $Force) { $iconsOk++; continue }
     try { Invoke-WebRequest "https://deadbydaylight.wiki.gg/images/$icon" -OutFile $dest -UseBasicParsing; $iconsOk++ }
     catch { $failed += "icon ${icon}: $($_.Exception.Message)" }
 }
@@ -79,5 +84,6 @@ if ($failed) {
         Write-Host 'If it mentions a missing decoder, install "Webp Image Extensions" from the Microsoft Store and run this again.' -ForegroundColor Yellow
     }
 } elseif (-not $Installer) {
-    Write-Host 'All done - now run "2 - Start overlay".' -ForegroundColor Green
+    Write-Host 'All done. Restart the overlay to use them (or run "2 - Start overlay").' -ForegroundColor Green
 }
+if ($Pause) { [void](Read-Host 'Press Enter to close') }

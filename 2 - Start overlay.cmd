@@ -1,5 +1,5 @@
 @echo off
-if not exist "%~dp0ClockOverlay.ps1" (
+if not exist "%~dp0scripts\ClockOverlay.ps1" (
   echo.
   echo  This was started from INSIDE the zip, so the other files aren't next to it.
   echo.
@@ -9,4 +9,4 @@ if not exist "%~dp0ClockOverlay.ps1" (
   pause
   exit /b 1
 )
-start "" powershell -NoProfile -STA -WindowStyle Hidden -ExecutionPolicy Bypass -File "%~dp0ClockOverlay.ps1"
+start "" powershell -NoProfile -STA -WindowStyle Hidden -ExecutionPolicy Bypass -File "%~dp0scripts\ClockOverlay.ps1"

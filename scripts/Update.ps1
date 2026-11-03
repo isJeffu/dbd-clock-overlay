@@ -5,7 +5,7 @@
 # "update available"); installs nothing.
 param([switch]$Check)
 $repo = 'isJeffu/dbd-clock-overlay'
-$dest = $PSScriptRoot
+$dest = Split-Path $PSScriptRoot -Parent   # the install folder
 $ErrorActionPreference = 'Stop'
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 
@@ -43,7 +43,9 @@ try {
     Add-Type -AssemblyName System.IO.Compression.FileSystem
     [IO.Compression.ZipFile]::ExtractToDirectory($zip, $tmp)
     # the new version's own installer, in update mode, pointed at this folder
-    & (Join-Path $tmp 'DbD Clock Overlay\Install.ps1') -Dest $dest -Update
+    $inst = Join-Path $tmp 'DbD Clock Overlay\scripts\Install.ps1'
+    if (-not (Test-Path $inst)) { $inst = Join-Path $tmp 'DbD Clock Overlay\Install.ps1' }   # a package from before the scripts folder
+    & $inst -Dest $dest -Update
     Write-Host "Updated to v$latest." -ForegroundColor Green
 } catch {
     Write-Host "The update failed: $($_.Exception.Message)" -ForegroundColor Yellow

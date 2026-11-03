@@ -69,14 +69,14 @@ public static class OverlayNative {
 }
 "@
 
-$root = $PSScriptRoot
+$root = Split-Path $PSScriptRoot -Parent   # the install folder: settings, maps, icons, logs (scripts\, data\, assets\ below it)
 
 # Only one copy at a time (the auto-start watcher and a manual start can't double up)
 $createdNew = $false
 $instanceMutex = New-Object System.Threading.Mutex($true, 'Local\DbdClockOverlay', [ref]$createdNew)
 if (-not $createdNew) { exit }
 $settingsPath = Join-Path $root 'settings.json'
-$maps = Get-Content (Join-Path $root 'maps.json') -Raw -Encoding UTF8 | ConvertFrom-Json
+$maps = Get-Content (Join-Path $root 'data\maps.json') -Raw -Encoding UTF8 | ConvertFrom-Json
 $noMaps = -not (Get-ChildItem (Join-Path $root 'maps') -Filter *.png -ErrorAction SilentlyContinue)
 
 $opacities = @(0.35, 0.55, 0.75, 1.0)
@@ -111,6 +111,9 @@ function Save-Settings {
 }
 
 # ---------- Overlay windows: the map (moves with F7) and the status pill (always top right) ----------
+# roulette-debug.flag in this folder: the overlay shows up in screenshots and the
+# roulette logs what it does to roulette-debug.txt (finding out why icons vanish)
+$rlDebug = Test-Path (Join-Path $root 'roulette-debug.flag')
 function New-OverlayWindow([string]$title) {
     $w = New-Object System.Windows.Window
     $w.WindowStyle = 'None'
@@ -128,16 +131,16 @@ function New-OverlayWindow([string]$title) {
         # Click-through, no taskbar/alt-tab entry, never takes focus
         [void][OverlayNative]::SetWindowLong($h, -20, ($ex -bor 0x20 -bor 0x80000 -bor 0x80 -bor 0x08000000))
         # Keep it out of screenshots, so OCR never reads our own text
-        [void][OverlayNative]::SetWindowDisplayAffinity($h, 0x11)
+        if (-not $script:rlDebug) { [void][OverlayNative]::SetWindowDisplayAffinity($h, 0x11) }   # (roulette-debug.flag: visible to screenshots)
     })
     $w
 }
 $window = New-OverlayWindow 'DbD Clock Overlay'
 $pillWindow = New-OverlayWindow 'DbD Clock Overlay status'
-. (Join-Path $root 'Timers.ps1')
-. (Join-Path $root 'Compass.ps1')
-. (Join-Path $root 'UiLayout.ps1')
-. (Join-Path $root 'Roulette.ps1')
+. (Join-Path $root 'scripts\Timers.ps1')
+. (Join-Path $root 'scripts\Compass.ps1')
+. (Join-Path $root 'scripts\UiLayout.ps1')
+. (Join-Path $root 'scripts\Roulette.ps1')
 
 $image = New-Object System.Windows.Controls.Image
 $image.Stretch = 'Uniform'
@@ -171,7 +174,7 @@ $killerPanel = New-Object System.Windows.Controls.StackPanel
 $killerCard.Child = $killerPanel
 $killerWindow.Content = $killerCard
 $killers = @()
-try { $killers = @((Get-Content (Join-Path $root 'killers.json') -Raw -Encoding UTF8 | ConvertFrom-Json) | ForEach-Object { $_ }) } catch {}
+try { $killers = @((Get-Content (Join-Path $root 'data\killers.json') -Raw -Encoding UTF8 | ConvertFrom-Json) | ForEach-Object { $_ }) } catch {}
 $killerShown = @(); $killerUntil = $null
 
 # Endgame Collapse countdown: sits just right of the game's collapse bar (top of
@@ -272,9 +275,9 @@ $mapGrid = New-Object System.Windows.Controls.Grid
 [void]$mapGrid.Children.Add($labelCanvas)
 $window.Content = $mapGrid
 $landmarks = $null
-try { $landmarks = Get-Content (Join-Path $root 'landmarks.json') -Raw -Encoding UTF8 | ConvertFrom-Json } catch {}
+try { $landmarks = Get-Content (Join-Path $root 'data\landmarks.json') -Raw -Encoding UTF8 | ConvertFrom-Json } catch {}
 $crops = $null; $mapCrop = $null
-try { $crops = Get-Content (Join-Path $root 'crops.json') -Raw -Encoding UTF8 | ConvertFrom-Json } catch {}
+try { $crops = Get-Content (Join-Path $root 'data\crops.json') -Raw -Encoding UTF8 | ConvertFrom-Json } catch {}
 
 function Update-MapLabels {
     $labelCanvas.Children.Clear()
@@ -443,7 +446,7 @@ function Show-Picker {
 }
 
 # ---------- Background map detection ----------
-$sync = [hashtable]::Synchronized(@{ Enabled = $state.AutoDetect; Paused = $false; Quit = $false; Blackout = $null; Detected = $null; Seq = 0; MenuStreak = 0; ScanNow = $false; HaveMap = $false; RescueSeq = 0; UnhookedSeq = 0; UnhookedSource = @(); CarriedSeq = 0; DeadSeq = 0; EscMenu = $false; EffectSeq = 0; EffectText = ''; ChaseEndSeq = 0; AutoPerks = $state.AutoPerks; PerkSeq = 0; DetectedPerks = @(); PerkScores = @(); LobbyScanned = $false; KillerSeq = 0; KillerTitle = ''; CollapseSeq = 0; CollapseFrac = 0.0; CollapseOrange = $false; CollapseAt = $null; LobbyAt = $null; LoadoutNow = $false; LoadoutAt = $null; UiLayout = $state.UiLayout })
+$sync = [hashtable]::Synchronized(@{ Enabled = $state.AutoDetect; Paused = $false; Quit = $false; Blackout = $null; Detected = $null; Seq = 0; MenuStreak = 0; ScanNow = $false; HaveMap = $false; RescueSeq = 0; UnhookedSeq = 0; UnhookedSource = @(); CarriedSeq = 0; DeadSeq = 0; EscMenu = $false; EffectSeq = 0; EffectText = ''; ChaseEndSeq = 0; AutoPerks = $state.AutoPerks; PerkSeq = 0; DetectedPerks = @(); PerkScores = @(); LobbyScanned = $false; KillerSeq = 0; KillerTitle = ''; CollapseSeq = 0; CollapseFrac = 0.0; CollapseOrange = $false; CollapseAt = $null; LobbyAt = $null; LoadoutNow = $false; LoadoutAt = $null; KillerLoadout = $false; LoadoutMiss = 0; UiLayout = $state.UiLayout })
 $runspace = [runspacefactory]::CreateRunspace()
 $runspace.ApartmentState = 'MTA'
 $runspace.Open()
@@ -454,15 +457,15 @@ $runspace.SessionStateProxy.SetVariable('logPath', (Join-Path $root 'ocr-log.txt
 $detector = [powershell]::Create()
 $detector.Runspace = $runspace
 [void]$detector.AddScript({
-    . (Join-Path $root 'OcrLib.ps1')
-    . (Join-Path $root 'UiLayout.ps1')
-    . (Join-Path $root 'PerkMatch.ps1')
-    $perkJson = Get-Content (Join-Path $root 'perks.json') -Raw -Encoding UTF8 | ConvertFrom-Json
+    . (Join-Path $root 'scripts\OcrLib.ps1')
+    . (Join-Path $root 'scripts\UiLayout.ps1')
+    . (Join-Path $root 'scripts\PerkMatch.ps1')
+    $perkJson = Get-Content (Join-Path $root 'data\perks.json') -Raw -Encoding UTF8 | ConvertFrom-Json
     $perkList = $perkJson.perks
     $timerPerkNames = @($perkJson.timers | ForEach-Object { $_.perk } | Select-Object -Unique)
     # Killer titles for the cheat card (accents are dropped, so ONRYO with a macron still matches)
     $killerKeys = @()
-    try { $killerKeys = @((Get-Content (Join-Path $root 'killers.json') -Raw -Encoding UTF8 | ConvertFrom-Json) | ForEach-Object { @{ Title = $_.title; Key = ' ' + (ConvertTo-MatchKey $_.title) + ' ' } }) } catch {}
+    try { $killerKeys = @((Get-Content (Join-Path $root 'data\killers.json') -Raw -Encoding UTF8 | ConvertFrom-Json) | ForEach-Object { @{ Title = $_.title; Key = ' ' + (ConvertTo-MatchKey $_.title) + ' ' } }) } catch {}
     $lastKiller = $null
     $prevEffects = @()
     $iconDir = Join-Path $root 'icons'
@@ -513,8 +516,16 @@ $detector.Runspace = $runspace
                 # loadout panel on screen right now (the perk roulette only shows then)
                 # (a full-screen read now and then misses the word - the quick title
                 # check gets the last say, so the button doesn't blink off mid-spin)
-                $sync.LoadoutNow = ($menuHits -contains 'LOADOUT') -or ($sync.DbdInFront -and -not $testShot -and $menuHits.Count -and (Test-LoadoutTitle -layout $sync.UiLayout))
-                if ($sync.LoadoutNow) { $sync.LoadoutAt = Get-Date }
+                # With the game in front, the panel's own title spot decides (~10 ms): the
+                # word LOADOUT is also a tab label on the character screen, where a
+                # full read would wrongly say "loadout open"
+                $quick = if ($sync.DbdInFront -and -not $testShot -and $menuHits.Count) { Test-LoadoutTitle -layout $sync.UiLayout } else { $null }
+                $seen = if ($sync.DbdInFront -and -not $testShot -and $menuHits.Count) { [bool]$quick } else { $menuHits -contains 'LOADOUT' }
+                # one misread mustn't stop a spin: "closed" only after 2 misses in a row
+                if ($seen) { $sync.LoadoutMiss = 0; $sync.LoadoutNow = $true } elseif (++$sync.LoadoutMiss -ge 2) { $sync.LoadoutNow = $false }
+                # whose loadout (killer / survivor perk pool): only from a read that saw it - a
+                # misread's fallback guess flipped a killer to survivor and wiped the roll
+                if ($seen) { $sync.LoadoutAt = Get-Date; $sync.KillerLoadout = $(if ($quick) { $quick -eq 'killer' } else { (Get-LoadoutRole $text) -eq 'killer' }) }
                 if ($text -match 'OPEN ESCAPE') { $sync.GatesPowered = $true }      # gate switch prompt = all gens done
                 # Endgame Collapse bar: how full it is (pixels only, a few ms)
                 $cb = Get-CollapseBar $bmp $sync.UiLayout
@@ -652,10 +663,12 @@ $detector.Runspace = $runspace
                 $nextQuick = (Get-Date).AddMilliseconds(200)
                 try {
                     $front = Test-DbdInFront
-                    $lo = $front -and (Test-LoadoutTitle -layout $sync.UiLayout)
+                    $role = if ($front) { Test-LoadoutTitle -layout $sync.UiLayout } else { $null }
+                    $lo = [bool]$role
                     $sync.DbdInFront = $front
-                    if ($lo) { $sync.LoadoutAt = Get-Date }
-                    $sync.LoadoutNow = $lo; $sync.LastScan = Get-Date
+                    if ($lo) { $sync.LoadoutAt = Get-Date; $sync.KillerLoadout = ($role -eq 'killer'); $sync.LoadoutMiss = 0; $sync.LoadoutNow = $true }
+                    elseif (-not $front -or ++$sync.LoadoutMiss -ge 2) { $sync.LoadoutNow = $false }   # 2 misses in a row = closed
+                    $sync.LastScan = Get-Date
                 } catch {}
             }
             Start-Sleep -Milliseconds 50
@@ -680,19 +693,65 @@ if ($localVersion -and -not ($env:DBD_OVERLAY_SPIN -or $env:DBD_OVERLAY_DEMO -or
         $updTask = $updClient.DownloadStringTaskAsync('https://api.github.com/repos/isJeffu/dbd-clock-overlay/releases/latest')
     } catch { $updTask = $null }
 }
+# A newer version: a clickable notice at the top, up whenever DbD is in front on
+# its menus (lobby / loadout) - never in a match - until they update (user, 3
+# Nov: "have it appear always until they update"). Clicking runs the updater,
+# which installs, fetches anything missing (maps, icons) and restarts the overlay.
+$updWin = New-Object System.Windows.Window
+$updWin.WindowStyle = 'None'; $updWin.AllowsTransparency = $true; $updWin.Background = [System.Windows.Media.Brushes]::Transparent
+$updWin.Topmost = $true; $updWin.ShowInTaskbar = $false; $updWin.ShowActivated = $false
+$updWin.SizeToContent = 'WidthAndHeight'; $updWin.Title = 'DbD Clock Overlay update'
+$updWin.Add_SourceInitialized({
+    param($s, $e)
+    $h = (New-Object System.Windows.Interop.WindowInteropHelper $s).Handle
+    [void][OverlayNative]::SetWindowLong($h, -20, ([OverlayNative]::GetWindowLong($h, -20) -bor 0x80 -bor 0x08000000))   # tool window, no-activate, NOT click-through
+    if (-not $script:rlDebug) { [void][OverlayNative]::SetWindowDisplayAffinity($h, 0x11) }
+})
+$updBox = New-Object System.Windows.Controls.Border
+$updBox.Cursor = [System.Windows.Input.Cursors]::Hand
+Set-RouletteBoxLook $updBox (New-Object System.Windows.Media.SolidColorBrush ([System.Windows.Media.Color]::FromArgb(240, 10, 10, 11)))
+$updGrid = New-Object System.Windows.Controls.Grid
+$updFrame = New-RouletteFrame 3 $rlBtnScale; [void]$updGrid.Children.Add($updFrame)
+$updText = New-Object System.Windows.Controls.TextBlock
+$updText.FontFamily = $rlFont; $updText.FontWeight = 'Bold'; $updText.FontSize = 20 * $rlBtnScale * $rlU
+$updText.Foreground = New-Object System.Windows.Media.SolidColorBrush ([System.Windows.Media.Color]::FromRgb(235, 235, 235))
+$updText.Margin = New-Object System.Windows.Thickness (16 * $rlU), 0, (16 * $rlU), 0; $updText.VerticalAlignment = 'Center'
+$updBox.Height = $rlBtnH * $rlU   # the same scaled-down SEARCH box as SPIN / THEME
+[void]$updGrid.Children.Add($updText)
+$updBox.Child = $updGrid; $updWin.Content = $updBox
+$updBox.Add_MouseEnter({ param($s, $e) Set-RouletteGlow $e $updBox; $updFrame.Tag.Fill = $rlBtnGlow })
+$updBox.Add_MouseMove({ param($s, $e) Set-RouletteGlow $e $updBox })
+$updBox.Add_MouseLeave({ $updFrame.Tag.Fill = $null })
+$updBox.Add_MouseLeftButtonUp({
+    if ($script:updStarted) { return }
+    $script:updStarted = $true; $updText.Text = 'UPDATING - SEE THE UPDATE WINDOW'
+    $ps = Join-Path $env:SystemRoot 'System32\WindowsPowerShell\v1.0\powershell.exe'
+    Start-Process $ps -ArgumentList '-NoProfile', '-ExecutionPolicy', 'Bypass', '-File', "`"$(Join-Path $root 'scripts\Update.ps1')`""
+})
+$updAvail = $null; $updStarted = $false
+# test: update-test.flag in this folder shows the notice as if v9.9.9 were out
+if (Test-Path (Join-Path $root 'update-test.flag')) { $updAvail = '9.9.9'; $updText.Text = 'UPDATE v9.9.9 AVAILABLE - CLICK TO UPDATE' }
 function Update-UpdateNote {
     if ($script:updTask -and $script:updTask.IsCompleted) {
         $t = $script:updTask; $script:updTask = $null
         if ($t.Status -eq 'RanToCompletion') {
             try {
                 $tag = (($t.Result | ConvertFrom-Json).tag_name).TrimStart('v')
-                if ([version]$tag -gt $localVersion) { $script:updNote = "Update v$tag available: Start menu > DbD Clock Overlay > Update" }
+                if ([version]$tag -gt $localVersion) { $script:updAvail = $tag; $updText.Text = "UPDATE v$tag AVAILABLE - CLICK TO UPDATE" }
             } catch {}
         }
     }
-    if ($script:updNote -and $sync.LobbyAt -and ((Get-Date) - $sync.LobbyAt).TotalSeconds -lt 5) {
-        Show-Hint $script:updNote 10; $script:updNote = $null   # once per start
-    }
+    if (-not $script:updAvail) { return }
+    $inMatch = $sync.HaveMap -or ($sync.LastHud -and ((Get-Date) - $sync.LastHud).TotalSeconds -lt 10)
+    $inMenus = $sync.LoadoutNow -or ($sync.LobbyAt -and ((Get-Date) - $sync.LobbyAt).TotalSeconds -lt 8)
+    $show = $sync.DbdInFront -and $inMenus -and -not $inMatch
+    if ($show -and -not $updWin.IsVisible) {
+        $updWin.Show(); $updWin.UpdateLayout()
+        # top middle: empty on the lobby and loadout screens (the top right has the
+        # currency row and your portrait)
+        $updWin.Left = $rlUi.CX - $updWin.ActualWidth / 2 + $rlOff
+        $updWin.Top = 8 * $rlU + $rlY0
+    } elseif (-not $show -and $updWin.IsVisible) { $updWin.Hide() }
 }
 
 # ---------- Tray icon ----------
@@ -704,6 +763,12 @@ $menu = New-Object System.Windows.Forms.ContextMenuStrip
 [void]$menu.Items.Add('Pick your perks (PageUp)', $null, { Show-PerkPicker })
 [void]$menu.Items.Add('Show / hide (F8)', $null, { Invoke-Hotkey 4 })
 [void]$menu.Items.Add('Screenshot with overlay (PrintScreen)', $null, { Invoke-Hotkey 13 })
+# fetch the callout maps + perk icons again in a window of its own (user, 3 Nov:
+# a click on the overlay rather than hunting for the Start menu entry)
+[void]$menu.Items.Add('Redownload maps and icons', $null, {
+    $ps = Join-Path $env:SystemRoot 'System32\WindowsPowerShell\v1.0\powershell.exe'
+    Start-Process $ps -ArgumentList '-NoProfile', '-ExecutionPolicy', 'Bypass', '-File', "`"$(Join-Path $root 'scripts\Setup.ps1')`"", '-Force', '-Pause'
+})
 [void]$menu.Items.Add('Quit (Pause)', $null, { $window.Close() })
 $tray.ContextMenuStrip = $menu
 $tray.Visible = $true
@@ -1027,7 +1092,7 @@ $window.Add_Closed({
     $timer.Stop(); $keyTimer.Stop(); $dbdTimer.Stop()
     $sync.Quit = $true
     if ($script:picker) { $script:picker.Close() }
-    $pillWindow.Close(); $killerWindow.Close(); $collapseWindow.Close(); $rlWindow.Close(); $rlBtnWindow.Close(); $timerWindow.Close(); $compassWindow.Close(); $timerTick.Stop()
+    $pillWindow.Close(); $killerWindow.Close(); $collapseWindow.Close(); $rlListWin.Close(); $rlTipWin.Close(); $updWin.Close(); foreach ($r in $rlReelsUi) { $r.Win.Close() }; $rlBtnWindow.Close(); $timerWindow.Close(); $compassWindow.Close(); $timerTick.Stop()
     $tray.Visible = $false; $tray.Dispose()
     try { [void]$detectorHandle.AsyncWaitHandle.WaitOne(4000); $detector.Dispose(); $runspace.Close() } catch {}
     [System.Windows.Threading.Dispatcher]::CurrentDispatcher.InvokeShutdown()

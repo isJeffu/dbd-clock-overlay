@@ -7,7 +7,13 @@ same numbers. 12 = top-middle of the map, numbers go round clockwise.
 
 Callout maps: Hens333 (hens333.com/callouts), images made by Lethia.
 Perk icons: Dead by Daylight wiki (deadbydaylight.wiki.gg), game art by Behaviour.
-Font: Roboto by Christian Robertson (fonts folder), Apache License 2.0 -
+Perk descriptions (roulette tooltips, data\perk-text.json): Dead by Daylight
+wiki, CC BY-SA 4.0 (creativecommons.org/licenses/by-sa/4.0); game text by Behaviour.
+Roulette look: the box frame, perk slot and tier pips (assets\textures\dbd-box.png,
+dbd-slot.png, dbd-pips.png) are cut from Dead by Daylight's own loadout screen - both
+Behaviour Interactive's art, used under their fan-content guidelines (free,
+non-commercial). They are not covered by the GPL.
+Font: Roboto by Christian Robertson (assets\fonts folder), Apache License 2.0 -
 https://www.apache.org/licenses/LICENSE-2.0
 
 Copyright (C) 2026 isJeffu. This program is free software: you can share and
@@ -91,7 +97,7 @@ overlay never uses them as modifiers):
             chase ends (the "CHASED" / "ESCAPED" score pop-up), or press F5 again.
 
 MAP LABELS
-  Symmetric maps get extra labels drawn on the callout image (landmarks.json):
+  Symmetric maps get extra labels drawn on the callout image (data\landmarks.json):
   Midwich shows every room on both floors (stairs only at the 11 and 4-5
   corners, exits at 12 and 6 on the ground floor, library / chem lab on the
   12 side upstairs). Wreckers' Yard has no fixed landmark except the shack, so
@@ -156,7 +162,7 @@ The keys only work while Dead by Daylight is the window in front.
 Don't press F11 in DbD - the game uses it to switch out of borderless.
 It remembers your position, size and see-through choices.
 Timers clear themselves when the match ends. Perk lengths for all three tiers
-live in perks.json - edit them there if a patch changes them.
+live in data\perks.json - edit them there if a patch changes them.
 
 Status label colours: green = working, amber = map not detected or auto-detect off,
 red = something's wrong (it says what).
@@ -170,6 +176,11 @@ version and installs it in place - your settings, maps and auto-start stay.
 When the overlay starts it also asks GitHub once whether there's a newer
 version and, if so, says "Update ... available" on its label in the lobby.
 That's a plain web request; nothing about you or your games is sent.
+
+Maps or perk icons missing, or a perk showing the wrong picture? Right-click
+the overlay's tray icon > "Redownload maps and icons" (or Start menu > DbD
+Clock Overlay > "Redownload maps and icons") fetches them all again - about a
+minute - then restart the overlay.
 
 REMOVING IT
 -----------

@@ -4,7 +4,7 @@
 # Test switches: -LinkDir <folder> (where Install.ps1 put the shortcuts),
 # -Yes (don't ask), -KeepAutoStart (leave the Startup folder alone)
 param([string]$LinkDir, [switch]$Yes, [switch]$KeepAutoStart)
-$dest = $PSScriptRoot
+$dest = Split-Path $PSScriptRoot -Parent   # the install folder
 
 Write-Host ''
 Write-Host '  DbD Clock Overlay - uninstall' -ForegroundColor Cyan
@@ -14,7 +14,7 @@ if (-not $Yes) {
     while ($true) { $a = Read-Host 'Remove DbD Clock Overlay? (Y/N)'; if ($a -match '^\s*n') { exit }; if ($a -match '^\s*y') { break } }
 }
 
-if (-not $KeepAutoStart) { & (Join-Path $dest 'AutoStart.ps1') -Off }
+if (-not $KeepAutoStart) { & (Join-Path $PSScriptRoot 'AutoStart.ps1') -Off }
 # close this install's overlay (and anything else running from this folder)
 Get-CimInstance Win32_Process -Filter "Name = 'powershell.exe'" |
     Where-Object { $_.CommandLine -and $_.CommandLine.ToLowerInvariant().Contains($dest.ToLowerInvariant()) -and $_.ProcessId -ne $PID } |
