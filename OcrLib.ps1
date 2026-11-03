@@ -158,9 +158,10 @@ function Get-ScreenBitmap([System.Drawing.Rectangle]$blackout = [System.Drawing.
 # the character name; pinned to the LEFT edge, UiLayout.ps1) - tens of ms
 # instead of a full-screen read, so the perk roulette button can follow the
 # panel quickly. $from = a screenshot to read instead of the screen (tests).
-function Test-LoadoutTitle([System.Drawing.Bitmap]$from, [string]$layout = 'auto') {
+function Test-LoadoutTitle([System.Drawing.Bitmap]$from, [string]$layout = 'auto', [double]$scale = 0) {
     $b = if ($from) { New-Object System.Drawing.Rectangle 0, 0, $from.Width, $from.Height } else { [System.Windows.Forms.Screen]::PrimaryScreen.Bounds }
-    $ui = Get-DbdUi $b.Width $b.Height $layout; $u = $ui.U
+    if ($scale -le 0) { $scale = (Get-DbdScales).Menu }   # DbD's Menu scale setting
+    $ui = Get-DbdUi $b.Width $b.Height $layout $scale; $u = $ui.U
     $src = New-Object System.Drawing.Rectangle ($b.X + [int](Get-DbdX $ui 360 'left')), ($b.Y + [int](Get-DbdY $ui 50)), ([int](170 * $u)), ([int](58 * $u))
     # resampled to 3x its 1080p size: OCR reads text ~40 px tall best
     $big = New-Object System.Drawing.Bitmap 510, 174
@@ -260,8 +261,9 @@ function Get-ScoreEvents([string]$text) {
 # or $null when no bar is there. Pixels only, no OCR.
 # In 1080p design pixels the track is x 367-1548 (pinned to the MIDDLE of the
 # screen, UiLayout.ps1), rows 37 and 41 - so it's found on ultrawide too.
-function Get-CollapseBar([System.Drawing.Bitmap]$bmp, [string]$layout = 'auto') {
-    $ui = Get-DbdUi $bmp.Width $bmp.Height $layout
+function Get-CollapseBar([System.Drawing.Bitmap]$bmp, [string]$layout = 'auto', [double]$scale = 0) {
+    if ($scale -le 0) { $scale = (Get-DbdScales).Hud }   # the bar is HUD: DbD's HUD scale setting
+    $ui = Get-DbdUi $bmp.Width $bmp.Height $layout $scale
     $x0 = [Math]::Max(0, [int](Get-DbdX $ui 367.1 'center')); $x1 = [Math]::Min($bmp.Width - 1, [int](Get-DbdX $ui 1547.5 'center'))
     $ya = [int](Get-DbdY $ui 37.04); $yb = [int](Get-DbdY $ui 41.04)
     $step = [Math]::Max(1, [int](1.5 * $ui.U))
@@ -279,7 +281,8 @@ function Get-CollapseBar([System.Drawing.Bitmap]$bmp, [string]$layout = 'auto') 
     }
     $s = $cls.ToString(); $n = $s.Length
     # The fill starts at the left end; a few odd samples inside it are allowed
-    $m = [regex]::Match($s, '^(?:F|[.?]{1,4}(?=F))*')
+    # (a lone dark-red 'r' inside the fill is a blended pixel, not the trail - seen at 85% HUD scale)
+    $m = [regex]::Match($s, '^(?:F|[.?r]{1,4}(?=F))*')
     $fillEnd = $m.Length
     $fill = $s.Substring(0, $fillEnd); $rest = $s.Substring($fillEnd)
     # skip the bright marker at the fill's edge, the rest must be dark track

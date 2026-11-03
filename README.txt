@@ -184,8 +184,10 @@ SCREEN SETUP
   right, collapse bar in the middle). Animations run at your monitor's
   refresh rate (60 / 144 / 240 Hz...).
 - Play DbD on your MAIN monitor, in Windowed Fullscreen.
-- Keep DbD's own UI / HUD scale at 100%: perk reading, the SPIN button and
-  the collapse countdown look at fixed spots on the screen.
+- DbD's own Menu / HUD scale (Settings > Graphics, 70-100%) is read from the
+  game's settings file automatically, so the SPIN button, perk reading and
+  the collapse countdown follow it. Changed it while the overlay runs? Close
+  and start the overlay again so the SPIN button resizes too.
 - Ultrawide and things look off (SPIN button not on your perks, wrong perks
   read, no collapse countdown)? Close the overlay, open settings.json, set
   "UiLayout": "16:9" (for DbD showing its menus in a 16:9 box in the middle)

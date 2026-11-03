@@ -230,7 +230,7 @@ function Update-Collapse {
         $collapse.Shown = $true
         $collapseWindow.Show(); $collapseWindow.UpdateLayout()
         # just right of the bar's end (design px 1559, row 39, pinned to the middle like the bar)
-        $ui = Get-DbdUi ([System.Windows.SystemParameters]::PrimaryScreenWidth) ([System.Windows.SystemParameters]::PrimaryScreenHeight) $state.UiLayout
+        $ui = Get-DbdUi ([System.Windows.SystemParameters]::PrimaryScreenWidth) ([System.Windows.SystemParameters]::PrimaryScreenHeight) $state.UiLayout (Get-DbdScales).Hud   # the bar is HUD: HUD scale
         $collapseWindow.Left = Get-DbdX $ui 1559 'center'
         $collapseWindow.Top = [Math]::Max(0, (Get-DbdY $ui 39) - $collapseWindow.ActualHeight / 2)
         Update-CompassLayout   # the compass moves down so it doesn't cover the bar
@@ -561,7 +561,7 @@ $detector.Runspace = $runspace
                 # In the lobby (READY button showing): read the 4 perk diamonds once
                 if ($sync.AutoPerks -and -not $sync.LobbyScanned -and ($menuHits -contains 'READY')) {
                     try {
-                        $ui = Get-DbdUi $bmp.Width $bmp.Height $sync.UiLayout
+                        $ui = Get-DbdUi $bmp.Width $bmp.Height $sync.UiLayout (Get-DbdScales).Menu
                         $centers = $perkSlots | ForEach-Object { @{ X = [int](Get-DbdX $ui $_.X 'right'); Y = [int](Get-DbdY $ui $_.Y) } }
                         $found = Find-PerksInBitmap $bmp $centers $iconDir $perkList ([int]($perkHalf * $ui.U))
                         # keep a slot only when it's a clear match

@@ -127,7 +127,7 @@ function Invoke-RouletteSound([string]$which) {
 # ---- Scale: 1080p pixels -> WPF units on this screen. The loadout panel is
 # pinned to the LEFT edge (UiLayout.ps1), so everything here is placed from
 # the DbD UI's left / top ($rlX0, $rlY0 - 0 on 16:9 and ultrawide) ----
-$rlUi = Get-DbdUi ([System.Windows.SystemParameters]::PrimaryScreenWidth) ([System.Windows.SystemParameters]::PrimaryScreenHeight) $(if ($state) { $state.UiLayout } else { 'auto' })
+$rlUi = Get-DbdUi ([System.Windows.SystemParameters]::PrimaryScreenWidth) ([System.Windows.SystemParameters]::PrimaryScreenHeight) $(if ($state) { $state.UiLayout } else { 'auto' }) (Get-DbdScales).Menu   # DbD's Menu scale (read at start)
 $rlU = $rlUi.U; $rlX0 = $rlUi.Left; $rlY0 = $rlUi.Top
 $rlOff = if ($env:DBD_OVERLAY_OFFSCREEN) { -20000 } else { 0 }   # tests: keep it off your screen
 
