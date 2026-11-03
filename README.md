@@ -31,3 +31,13 @@ Prefer unzipping by hand? Use `DbD-Clock-Overlay.zip` from the release
 - Font: Roboto by Christian Robertson, Apache License 2.0.
 
 Not affiliated with Behaviour Interactive.
+
+## License
+
+Copyright (C) 2026 isJeffu. Released under the
+[GNU General Public License v3.0](LICENSE.txt): you may use, change and share
+it, and shared changes must stay under the GPL. It comes with no warranty.
+
+The license covers this repository's own code and files only. The callout maps
+and perk icons the installer downloads belong to their owners and are not part
+of this project. Roboto (in `fonts/`) is under the Apache License 2.0.

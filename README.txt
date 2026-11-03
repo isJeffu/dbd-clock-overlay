@@ -9,6 +9,11 @@ Callout maps: Hens333 (hens333.com/callouts), images made by Lethia.
 Perk icons: Dead by Daylight wiki (deadbydaylight.wiki.gg), game art by Behaviour.
 Font: Roboto by Christian Robertson (fonts folder), Apache License 2.0 -
 https://www.apache.org/licenses/LICENSE-2.0
+
+Copyright (C) 2026 isJeffu. This program is free software: you can share and
+change it under the GNU General Public License v3 (LICENSE.txt). It comes
+with NO WARRANTY. The licence covers the overlay's own code and files - not
+the callout maps or perk icons it downloads, which belong to their owners.
 They are NOT included in this zip - step 1 downloads them from those sites.
 Please don't re-share the images themselves.
 
