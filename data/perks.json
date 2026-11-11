@@ -1,4 +1,4 @@
-{
+﻿{
     "source":  "deadbydaylight.wiki.gg/wiki/Survivor_Perks (read 2026-10-17); seconds = [tier I, tier II, tier III]",
     "perks":  [
                   {
@@ -248,14 +248,6 @@
                                ]
                   },
                   {
-                      "name":  "Bound by Obsession",
-                      "file":  "IconPerks_objectOfObsession.png",
-                      "character":  "All",
-                      "tags":  [
-                                   "info"
-                               ]
-                  },
-                  {
                       "name":  "Breakdown",
                       "file":  "IconPerks_breakdown.png",
                       "character":  "Jeff",
@@ -439,7 +431,8 @@
                       "character":  "Laurie",
                       "tags":  [
                                    "antitunnel"
-                               ]
+                               ],
+                      "aka":  "Will to Live"
                   },
                   {
                       "name":  "Déjà Vu",
@@ -496,14 +489,6 @@
                       "character":  "Orela",
                       "tags":  [
                                    "altruism"
-                               ]
-                  },
-                  {
-                      "name":  "Down to the Last",
-                      "file":  "IconPerks_soleSurvivor_noLicense.png",
-                      "character":  "All",
-                      "tags":  [
-                                   "stealth"
                                ]
                   },
                   {
@@ -874,7 +859,8 @@
                       "character":  "Laurie",
                       "tags":  [
                                    "info"
-                               ]
+                               ],
+                      "aka":  "Bound by Obsession"
                   },
                   {
                       "name":  "Off the Record",
@@ -1186,7 +1172,8 @@
                       "character":  "Laurie",
                       "tags":  [
                                    "stealth"
-                               ]
+                               ],
+                      "aka":  "Down to the Last"
                   },
                   {
                       "name":  "Solidarity",
@@ -1433,14 +1420,6 @@
                                ]
                   },
                   {
-                      "name":  "Will to Live",
-                      "file":  "IconPerks_decisiveStrike.png",
-                      "character":  "All",
-                      "tags":  [
-                                   "antitunnel"
-                               ]
-                  },
-                  {
                       "name":  "Windows of Opportunity",
                       "file":  "IconPerks_windowsOfOpportunity.png",
                       "character":  "Kate",
@@ -1493,7 +1472,7 @@
                                    ]
                    },
                    {
-                       "perk":  "Will to Live",
+                       "perk":  "Decisive Strike",
                        "color":  "#E06C5A",
                        "note":  "Decisive Strike window",
                        "trigger":  "unhooked",
@@ -1703,7 +1682,7 @@
                                        "Borrowed Time"
                                    ],
                     "unhooked":  [
-                                     "Will to Live",
+                                     "Decisive Strike",
                                      "Off the Record"
                                  ],
                     "exhausted":  [
@@ -1876,14 +1855,6 @@
                                      ]
                         },
                         {
-                            "name":  "Cull the Weak",
-                            "file":  "IconPerks_dyingLight.png",
-                            "character":  "All",
-                            "tags":  [
-                                         "obsession"
-                                     ]
-                        },
-                        {
                             "name":  "Dark Arrogance",
                             "file":  "IconPerks_darkArrogance.png",
                             "character":  "Lich",
@@ -1986,7 +1957,8 @@
                             "character":  "Shape",
                             "tags":  [
                                          "obsession"
-                                     ]
+                                     ],
+                            "aka":  "Cull the Weak"
                         },
                         {
                             "name":  "Enduring",
@@ -2370,14 +2342,6 @@
                                      ]
                         },
                         {
-                            "name":  "Keep Them Waiting",
-                            "file":  "IconPerks_saveTheBestForLast_noLicense.png",
-                            "character":  "All",
-                            "tags":  [
-                                         "antiloop"
-                                     ]
-                        },
-                        {
                             "name":  "Knock Out",
                             "file":  "IconPerks_knockOut.png",
                             "character":  "Cannibal",
@@ -2560,7 +2524,8 @@
                             "tags":  [
                                          "antiloop",
                                          "obsession"
-                                     ]
+                                     ],
+                            "aka":  "See How They Run"
                         },
                         {
                             "name":  "Pop Goes the Weasel",
@@ -2627,7 +2592,8 @@
                             "character":  "Shape",
                             "tags":  [
                                          "antiloop"
-                                     ]
+                                     ],
+                            "aka":  "Keep Them Waiting"
                         },
                         {
                             "name":  "Scourge Hook: Floods of Rage",
@@ -2696,15 +2662,6 @@
                             "tags":  [
                                          "slowdown",
                                          "stealth"
-                                     ]
-                        },
-                        {
-                            "name":  "See How They Run",
-                            "file":  "IconPerks_playWithYourFood.png",
-                            "character":  "All",
-                            "tags":  [
-                                         "antiloop",
-                                         "obsession"
                                      ]
                         },
                         {

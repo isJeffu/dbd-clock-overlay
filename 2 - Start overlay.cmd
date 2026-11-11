@@ -9,4 +9,4 @@ if not exist "%~dp0scripts\ClockOverlay.ps1" (
   pause
   exit /b 1
 )
-start "" powershell -NoProfile -STA -WindowStyle Hidden -ExecutionPolicy Bypass -File "%~dp0scripts\ClockOverlay.ps1"
+start "" "%SystemRoot%\System32\conhost.exe" --headless powershell -NoProfile -STA -WindowStyle Hidden -ExecutionPolicy Bypass -File "%~dp0scripts\ClockOverlay.ps1"

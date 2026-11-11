@@ -66,6 +66,14 @@ public static class OverlayNative {
     [DllImport("user32.dll")] public static extern short GetAsyncKeyState(int vk);
     [DllImport("user32.dll")] public static extern IntPtr GetForegroundWindow();
     [DllImport("user32.dll")] public static extern uint GetWindowThreadProcessId(IntPtr h, out uint pid);
+    [DllImport("user32.dll")] public static extern bool IsWindowVisible(IntPtr h);
+    [DllImport("user32.dll")] public static extern bool GetWindowRect(IntPtr h, out RECT r);
+    public struct RECT { public int L, T, R, B; }
+    [DllImport("user32.dll")] public static extern bool ClipCursor(ref RECT r);
+    [DllImport("user32.dll", EntryPoint = "ClipCursor")] public static extern bool FreeCursor(IntPtr none);
+    [StructLayout(LayoutKind.Sequential)] public struct CURSORINFO { public int cbSize, flags; public IntPtr hCursor; public int x, y; }
+    [DllImport("user32.dll")] static extern bool GetCursorInfo(ref CURSORINFO ci);
+    public static bool CursorShowing() { var ci = new CURSORINFO(); ci.cbSize = Marshal.SizeOf(ci); return !GetCursorInfo(ref ci) || (ci.flags & 1) != 0; }
 }
 "@
 
@@ -82,7 +90,7 @@ $noMaps = -not (Get-ChildItem (Join-Path $root 'maps') -Filter *.png -ErrorActio
 $opacities = @(0.35, 0.55, 0.75, 1.0)
 $heights   = @(260, 340, 440, 560)          # map height in screen units
 $corners   = @('TopLeft', 'TopRight', 'BottomLeft', 'BottomRight', 'Left', 'Right')
-$state = @{ Opacity = 2; Size = 1; Corner = 0; TimerPos = 0; TimerSize = 1; AutoDetect = $true; Visible = $true; Map = $null; Perks = @(); PerkTiers = [pscustomobject]@{}; AssumeLethal = $false; AutoPerks = $true; CountsPer360 = $null; CompassOn = $false; CalibSens = $null; TimersOn = $false; UiLayout = 'auto' }   # compass (trial) + timers (pre-10.2 perk values) start off; F1 / settings.json turn them on
+$state = @{ Opacity = 2; Size = 1; Corner = 0; TimerPos = 0; TimerSize = 1; AutoDetect = $true; Visible = $true; Map = $null; Perks = @(); PerkTiers = [pscustomobject]@{}; AssumeLethal = $false; AutoPerks = $true; CountsPer360 = $null; CompassOn = $false; CalibSens = $null; TimersOn = $false; UiLayout = 'auto'; RouletteOn = $true; CollapseOn = $true; ShowOnStream = $false; RollPerks = $true; RollGear = $false; RollOffering = $false; RollCharacter = $false; RollEvent = $false }   # compass (trial) + timers (pre-10.2 perk values) start off; F1 / settings.json turn them on
 if (Test-Path $settingsPath) {
     try {
         $saved = Get-Content $settingsPath -Raw | ConvertFrom-Json
@@ -101,12 +109,18 @@ if (Test-Path $settingsPath) {
         # Perk / unhook / exhaustion / chase timers (the collapse countdown is separate)
         if ($null -ne $saved.TimersOn) { $state.TimersOn = [bool]$saved.TimersOn }
         if ($saved.CalibSens -gt 0) { $state.CalibSens = [int]$saved.CalibSens }
+        # tray menu > Settings (4 Nov): perk roulette + endgame collapse countdown on/off
+        if ($null -ne $saved.RouletteOn) { $state.RouletteOn = [bool]$saved.RouletteOn }
+        if ($null -ne $saved.CollapseOn) { $state.CollapseOn = [bool]$saved.CollapseOn }
+        if ($null -ne $saved.ShowOnStream) { $state.ShowOnStream = [bool]$saved.ShowOnStream }
+        # what one SPIN rolls (tray > Settings > Roulette rolls, user 4 Nov): perks on, the rest off
+        foreach ($k in 'RollPerks', 'RollGear', 'RollOffering', 'RollCharacter', 'RollEvent') { if ($null -ne $saved.$k) { $state[$k] = [bool]$saved.$k } }
         # where DbD's menus sit on non-16:9 screens (see UiLayout.ps1)
         if ($saved.UiLayout -in 'auto', '16:9') { $state.UiLayout = [string]$saved.UiLayout }
     } catch {}
 }
 function Save-Settings {
-    @{ Opacity = $state.Opacity; Size = $state.Size; Corner = $state.Corner; TimerPos = $state.TimerPos; TimerSize = $state.TimerSize; AutoDetect = $state.AutoDetect; Perks = @($state.Perks); PerkTiers = $state.PerkTiers; AssumeLethal = $state.AssumeLethal; AutoPerks = $state.AutoPerks; CountsPer360 = $state.CountsPer360; CompassOn = $state.CompassOn; CalibSens = $state.CalibSens; TimersOn = $state.TimersOn; UiLayout = $state.UiLayout } |
+    @{ Opacity = $state.Opacity; Size = $state.Size; Corner = $state.Corner; TimerPos = $state.TimerPos; TimerSize = $state.TimerSize; AutoDetect = $state.AutoDetect; Perks = @($state.Perks); PerkTiers = $state.PerkTiers; AssumeLethal = $state.AssumeLethal; AutoPerks = $state.AutoPerks; CountsPer360 = $state.CountsPer360; CompassOn = $state.CompassOn; CalibSens = $state.CalibSens; TimersOn = $state.TimersOn; UiLayout = $state.UiLayout; RouletteOn = $state.RouletteOn; CollapseOn = $state.CollapseOn; ShowOnStream = $state.ShowOnStream; RollPerks = $state.RollPerks; RollGear = $state.RollGear; RollOffering = $state.RollOffering; RollCharacter = $state.RollCharacter; RollEvent = $state.RollEvent } |
         ConvertTo-Json | Set-Content $settingsPath -Encoding utf8
 }
 
@@ -114,6 +128,28 @@ function Save-Settings {
 # roulette-debug.flag in this folder: the overlay shows up in screenshots and the
 # roulette logs what it does to roulette-debug.txt (finding out why icons vanish)
 $rlDebug = Test-Path (Join-Path $root 'roulette-debug.flag')
+# Hidden from screen captures by default, so the map reader never reads our own
+# text. Tray > Settings > "Show on screen share / OBS" (user, 4 Nov) turns that
+# off: then Discord / OBS see the overlay, and the reader blacks out our windows
+# itself instead (Update-OverlayBlackouts).
+$ovHandles = New-Object System.Collections.ArrayList
+function Set-OverlayCaptureOne([IntPtr]$h) {
+    [void][OverlayNative]::SetWindowDisplayAffinity($h, $(if ($script:rlDebug -or $state.ShowOnStream) { 0 } else { 0x11 }))
+}
+function Register-OverlayCapture([IntPtr]$h) { [void]$ovHandles.Add($h); Set-OverlayCaptureOne $h }
+function Update-OverlayCapture { foreach ($h in $ovHandles) { Set-OverlayCaptureOne $h }; Update-OverlayBlackouts }
+$ovBlackAt = [datetime]::MinValue
+function Update-OverlayBlackouts {
+    # where our visible windows are, in screen pixels (only needed when they're capturable)
+    if (-not $state.ShowOnStream) { $sync.Blackouts = $null; return }
+    $list = @()
+    foreach ($h in $ovHandles) {
+        if (-not [OverlayNative]::IsWindowVisible($h)) { continue }
+        $r = New-Object OverlayNative+RECT
+        if ([OverlayNative]::GetWindowRect($h, [ref]$r) -and $r.R -gt $r.L) { $list += ,@($r.L, $r.T, ($r.R - $r.L), ($r.B - $r.T)) }
+    }
+    $sync.Blackouts = $list
+}
 function New-OverlayWindow([string]$title) {
     $w = New-Object System.Windows.Window
     $w.WindowStyle = 'None'
@@ -130,8 +166,8 @@ function New-OverlayWindow([string]$title) {
         $ex = [OverlayNative]::GetWindowLong($h, -20)
         # Click-through, no taskbar/alt-tab entry, never takes focus
         [void][OverlayNative]::SetWindowLong($h, -20, ($ex -bor 0x20 -bor 0x80000 -bor 0x80 -bor 0x08000000))
-        # Keep it out of screenshots, so OCR never reads our own text
-        if (-not $script:rlDebug) { [void][OverlayNative]::SetWindowDisplayAffinity($h, 0x11) }   # (roulette-debug.flag: visible to screenshots)
+        # Keep it out of screenshots, so OCR never reads our own text (unless shown on stream)
+        Register-OverlayCapture $h
     })
     $w
 }
@@ -141,6 +177,7 @@ $pillWindow = New-OverlayWindow 'DbD Clock Overlay status'
 . (Join-Path $root 'scripts\Compass.ps1')
 . (Join-Path $root 'scripts\UiLayout.ps1')
 . (Join-Path $root 'scripts\Roulette.ps1')
+. (Join-Path $root 'scripts\RouletteGear.ps1')   # extra rolls: item / add-ons / offering / character (tray > Settings > Roulette rolls)
 
 $image = New-Object System.Windows.Controls.Image
 $image.Stretch = 'Uniform'
@@ -212,7 +249,7 @@ function Update-Collapse {
         $r0 = $reads[0]; $rN = $reads[$reads.Count - 1]; $sp = ($rN.T - $r0.T).TotalSeconds
         if ($sp -ge 6) { $rate = ($r0.F - $rN.F) / $sp; $real = $rate -ge 0.35 * $collapseNormal -and $rate -le 1.4 * $collapseNormal }
     }
-    $show = $real -and $reads.Count -ge 2 -and $sync.MenuStreak -lt 2 -and ((Get-Date) - $reads[$reads.Count - 1].T).TotalSeconds -lt 8
+    $show = $state.CollapseOn -and $real -and $reads.Count -ge 2 -and $sync.MenuStreak -lt 2 -and ((Get-Date) - $reads[$reads.Count - 1].T).TotalSeconds -lt 8
     if (-not $show) {
         if ($collapse.Shown) { $collapse.Shown = $false; $collapseWindow.Hide(); Update-CompassLayout }
         if ($reads.Count -and ((Get-Date) - $reads[$reads.Count - 1].T).TotalSeconds -ge 8) { $reads.Clear() }
@@ -231,6 +268,8 @@ function Update-Collapse {
     $collapseText.Foreground = if ($sync.CollapseOrange) { [System.Windows.Media.Brushes]::Orange } else { [System.Windows.Media.Brushes]::White }
     if (-not $collapse.Shown) {
         $collapse.Shown = $true
+        # capture.flag: note when (and with what) the countdown first appeared
+        if (Test-Path (Join-Path $root 'capture.flag')) { try { Add-Content (Join-Path $root 'Screenshots\capture-log.txt') ("{0:MMdd-HHmmss}`ttimer shown: {1} (bar {2:0.000}, gates={3})" -f (Get-Date), $collapseText.Text, $b.F, $sync.GatesPowered) -Encoding utf8 } catch {} }
         $collapseWindow.Show(); $collapseWindow.UpdateLayout()
         # just right of the bar's end (design px 1559, row 39, pinned to the middle like the bar)
         $ui = Get-DbdUi ([System.Windows.SystemParameters]::PrimaryScreenWidth) ([System.Windows.SystemParameters]::PrimaryScreenHeight) $state.UiLayout (Get-DbdScales).Hud   # the bar is HUD: HUD scale
@@ -360,7 +399,9 @@ function Update-Layout {
     $window.UpdateLayout()
     $w = $window.ActualWidth; $h = $window.ActualHeight; $m = 16
     switch ($corners[$state.Corner]) {
-        'TopLeft'     { $x = $m;           $y = $m }
+        'TopLeft'     {   # in line with DbD's player list below it (1080p design px 33, 26; follows HUD scale)
+            $ui = Get-DbdUi $sw $sh $state.UiLayout (Get-DbdScales).Hud
+            $x = Get-DbdX $ui 33 'left'; $y = Get-DbdY $ui 26 }
         'TopRight'    { $x = $sw - $w - $m; $y = $m }
         'BottomLeft'  { $x = $m;           $y = $sh - $h - $m }
         'BottomRight' { $x = $sw - $w - $m; $y = $sh - $h - $m }
@@ -481,15 +522,40 @@ $detector.Runspace = $runspace
     # Put a file called save-start-frames.flag next to this script to also save
     # those first frames to Screenshots\start (for tuning the detection).
     $darkSeen = [datetime]::MinValue; $startFrames = 0; $burst = $false; $lastFrameSave = [datetime]::MinValue
-    $saveStart = Test-Path (Join-Path $root 'save-start-frames.flag')
+    # capture.flag = all the frame saving below at once, plus lobby / loadout /
+    # end-screen / in-match frames, for the offline test bench (dev\replay-test.ps1).
+    # Everything goes to Screenshots\ (git-ignored, local only - teammates' names).
+    $capture = Test-Path (Join-Path $root 'capture.flag')
+    $saveStart = $capture -or (Test-Path (Join-Path $root 'save-start-frames.flag'))
     $startDir = Join-Path $root 'Screenshots\start'
     # Endgame frames (to locate the Endgame Collapse bar): with save-endgame-frames.flag
     # present, once the gate switch prompt ("OPEN ESCAPE") shows, save the top strip of
     # the screen every 4 s for up to 4 min. Local only.
-    $saveEnd = Test-Path (Join-Path $root 'save-endgame-frames.flag')
+    $saveEnd = $capture -or (Test-Path (Join-Path $root 'save-endgame-frames.flag'))
     $endDir = Join-Path $root 'Screenshots\endgame'
     $gatesSeen = [datetime]::MinValue; $lastEndSave = [datetime]::MinValue; $endFrames = 0
     $scanLog = Join-Path $root 'scan-log.txt'
+    $capLog = Join-Path $root 'Screenshots\capture-log.txt'
+    $capCount = @{}; $capLast = @{}
+    # Saves one frame of a kind (at most $max per run, $gap seconds apart) as a
+    # good-quality JPEG, and logs what the overlay read from it live.
+    function Save-CaptureFrame($bmp, [string]$kind, [int]$max, [double]$gap, [string]$note) {
+        if (-not $capture) { return }
+        if ([int]$capCount[$kind] -ge $max) { return }
+        if ($capLast[$kind] -and ((Get-Date) - $capLast[$kind]).TotalSeconds -lt $gap) { return }
+        $dir = Join-Path $root "Screenshots\$kind"
+        New-Item -ItemType Directory -Force $dir | Out-Null
+        $name = '{0:MMdd-HHmmss}.jpg' -f (Get-Date)
+        $enc = [System.Drawing.Imaging.ImageCodecInfo]::GetImageEncoders() | Where-Object { $_.MimeType -eq 'image/jpeg' }
+        $ep = New-Object System.Drawing.Imaging.EncoderParameters 1
+        $ep.Param[0] = New-Object System.Drawing.Imaging.EncoderParameter ([System.Drawing.Imaging.Encoder]::Quality), ([long]92)
+        $bmp.Save((Join-Path $dir $name), $enc, $ep)
+        $capCount[$kind] = [int]$capCount[$kind] + 1; $capLast[$kind] = Get-Date
+        Add-Content $capLog ("{0}\{1}`t{2}" -f $kind, $name, $note) -Encoding utf8
+        Set-DevNote "$kind - $note"
+    }
+    # capture.flag: every saved frame also flashes what was read on the status pill
+    function Set-DevNote([string]$t) { if ($capture) { $sync.DevNote = $t; $sync.DevSeq = [int]$sync.DevSeq + 1 } }
     while (-not $sync.Quit) {
         $burst = $false; $brightness = -1; $textLen = -1; $menuHits = @()
         # Test hook: DBD_OVERLAY_TESTSHOT=<png> reads that file instead of the screen
@@ -505,6 +571,15 @@ $detector.Runspace = $runspace
                 $rect = if ($r) { New-Object System.Drawing.Rectangle $r[0], $r[1], $r[2], $r[3] } else { [System.Drawing.Rectangle]::Empty }
                 $bmp = if ($testShot) { [System.Drawing.Bitmap]::FromFile($testShot) } elseif ($sync.DbdInFront) { Get-ScreenBitmap $rect } else { Get-DbdWindowBitmap $rect }
                 if (-not $bmp) { throw 'game window capture not available' }
+                # "Show on screen share / OBS": our windows are in the screenshot now -
+                # paint them out so we never read our own map name / perk text
+                $bo = $sync.Blackouts
+                if ($bo -and $sync.DbdInFront -and -not $testShot) {
+                    $bg = [System.Drawing.Graphics]::FromImage($bmp)
+                    $sb0 = [System.Windows.Forms.Screen]::PrimaryScreen.Bounds
+                    foreach ($q in $bo) { $bg.FillRectangle([System.Drawing.Brushes]::Black, $q[0] - $sb0.X, $q[1] - $sb0.Y, $q[2], $q[3]) }
+                    $bg.Dispose()
+                }
                 $text = Read-BitmapText $bmp
                 $textLen = $text.Length
                 $menuHits = Get-MenuWordHits $text
@@ -520,6 +595,7 @@ $detector.Runspace = $runspace
                 # word LOADOUT is also a tab label on the character screen, where a
                 # full read would wrongly say "loadout open"
                 $quick = if ($sync.DbdInFront -and -not $testShot -and $menuHits.Count) { Test-LoadoutTitle -layout $sync.UiLayout } else { $null }
+                if ($quick) { $sync.LoadoutName = $script:LastLoadoutName }   # whose loadout (killer add-on rolls)
                 $seen = if ($sync.DbdInFront -and -not $testShot -and $menuHits.Count) { [bool]$quick } else { $menuHits -contains 'LOADOUT' }
                 # one misread mustn't stop a spin: "closed" only after 2 misses in a row
                 if ($seen) { $sync.LoadoutMiss = 0; $sync.LoadoutNow = $true } elseif (++$sync.LoadoutMiss -ge 2) { $sync.LoadoutNow = $false }
@@ -533,12 +609,19 @@ $detector.Runspace = $runspace
                 if ($saveEnd) {
                     if ($text -match 'OPEN ESCAPE') { if (((Get-Date) - $gatesSeen).TotalMinutes -gt 6) { $endFrames = 0 }; $gatesSeen = Get-Date }
                     if ($text -match 'MATCH RESULT|SCOREBOARD') { $gatesSeen = [datetime]::MinValue }
-                    if (((Get-Date) - $gatesSeen).TotalSeconds -lt 240 -and $endFrames -lt 70 -and ((Get-Date) - $lastEndSave).TotalSeconds -ge 4) {
+                    # (capture.flag: also whenever a bar is read, gates seen or not)
+                    if ((((Get-Date) - $gatesSeen).TotalSeconds -lt 240 -or ($capture -and $cb)) -and $endFrames -lt 70 -and ((Get-Date) - $lastEndSave).TotalSeconds -ge 4) {
                         New-Item -ItemType Directory -Force $endDir | Out-Null
                         $eh = [int]($bmp.Height * 0.22)
                         $strip = $bmp.Clone((New-Object System.Drawing.Rectangle 0, 0, $bmp.Width, $eh), $bmp.PixelFormat)
-                        $strip.Save((Join-Path $endDir ('{0:MMdd-HHmmss}.png' -f (Get-Date))), [System.Drawing.Imaging.ImageFormat]::Png)
+                        $endName = '{0:MMdd-HHmmss}.png' -f (Get-Date)
+                        $strip.Save((Join-Path $endDir $endName), [System.Drawing.Imaging.ImageFormat]::Png)
                         $strip.Dispose(); $endFrames++; $lastEndSave = Get-Date
+                        if ($capture) {
+                            $barTxt = if ($cb) { '{0:0}% full' -f ($cb.Frac * 100) } else { 'none' }
+                            Add-Content $capLog ("endgame\{0}`tscreen={1}x{2} bar={3} gates={4}" -f $endName, $bmp.Width, $bmp.Height, $(if ($cb) { '{0:0.000}' -f $cb.Frac } else { 'none' }), $sync.GatesPowered) -Encoding utf8
+                            Set-DevNote "collapse bar - $barTxt"
+                        }
                     }
                 }
                 # Average brightness: the loading screen is (nearly) black, and the
@@ -563,10 +646,21 @@ $detector.Runspace = $runspace
                     $cropText = Read-BitmapText $crop
                     $crop.Dispose()
                     if ($cropText) { $text = $text + "`n" + $cropText }
+                    # bright busy maps: try the white-pixels-only read of the title
+                    if (-not (Find-MapInText $text $maps)) {
+                        $titleText = Read-MapTitleText $bmp
+                        if ($titleText) { $text = $text + "`n" + $titleText }
+                    }
                     if ($saveStart -and $startFrames -lt 40 -and ((Get-Date) - $lastFrameSave).TotalMilliseconds -ge 1000) {
                         New-Item -ItemType Directory -Force $startDir | Out-Null
-                        $bmp.Save((Join-Path $startDir ('{0:HH-mm-ss}.jpg' -f (Get-Date))), [System.Drawing.Imaging.ImageFormat]::Jpeg)
+                        $startName = '{0:HH-mm-ss}.jpg' -f (Get-Date)
+                        $bmp.Save((Join-Path $startDir $startName), [System.Drawing.Imaging.ImageFormat]::Jpeg)
                         $startFrames++; $lastFrameSave = Get-Date
+                        if ($capture) {
+                            $sm = Find-MapInText $text $maps; $smTxt = if ($sm) { $sm.name } else { 'none' }
+                            Add-Content $capLog ("start\{0}`tmap={1}" -f $startName, $smTxt) -Encoding utf8
+                            if ($sm) { Set-DevNote "map - $smTxt" }
+                        }
                     }
                 }
                 # In the lobby (READY button showing): read the 4 perk diamonds once
@@ -581,6 +675,17 @@ $detector.Runspace = $runspace
                         if ($names.Count -ge 2) { $sync.DetectedPerks = $names; $sync.PerkSeq++ }
                         $sync.LobbyScanned = $true
                     } catch { $sync.PerkError = "perk scan: $($_.Exception.Message)" }
+                    Save-CaptureFrame $bmp 'lobby' 10 60 ("perks=" + ($sync.PerkScores -join ', '))
+                }
+                # capture.flag: loadout panel, end screen, and plain in-match frames
+                # (the "nothing to find here" cases the tests need too)
+                if ($capture) {
+                    if ($seen) { Save-CaptureFrame $bmp 'loadout' 10 45 ("role=" + $(if ($sync.KillerLoadout) { 'killer' } else { 'survivor' })) }
+                    elseif ($text -match 'MATCH RESULT') { Save-CaptureFrame $bmp 'result' 10 120 ("menu=" + ($menuHits -join ',')) }
+                    elseif ($menuHits.Count -lt 2 -and -not $burst -and -not $isLoading) {
+                        $mm = Find-MapInText $text $maps
+                        Save-CaptureFrame $bmp 'match' 20 90 ("map=" + $(if ($mm) { $mm.name } else { 'none' }) + " hud=" + ((Get-HudWordHits $text) -join ','))
+                    }
                 }
                 $bmp.Dispose()
                 if ($menuHits.Count -ge 2) {
@@ -664,6 +769,7 @@ $detector.Runspace = $runspace
                 try {
                     $front = Test-DbdInFront
                     $role = if ($front) { Test-LoadoutTitle -layout $sync.UiLayout } else { $null }
+                    if ($role) { $sync.LoadoutName = $script:LastLoadoutName }
                     $lo = [bool]$role
                     $sync.DbdInFront = $front
                     if ($lo) { $sync.LoadoutAt = Get-Date; $sync.KillerLoadout = ($role -eq 'killer'); $sync.LoadoutMiss = 0; $sync.LoadoutNow = $true }
@@ -705,7 +811,7 @@ $updWin.Add_SourceInitialized({
     param($s, $e)
     $h = (New-Object System.Windows.Interop.WindowInteropHelper $s).Handle
     [void][OverlayNative]::SetWindowLong($h, -20, ([OverlayNative]::GetWindowLong($h, -20) -bor 0x80 -bor 0x08000000))   # tool window, no-activate, NOT click-through
-    if (-not $script:rlDebug) { [void][OverlayNative]::SetWindowDisplayAffinity($h, 0x11) }
+    Register-OverlayCapture $h
 })
 $updBox = New-Object System.Windows.Controls.Border
 $updBox.Cursor = [System.Windows.Input.Cursors]::Hand
@@ -763,6 +869,74 @@ $menu = New-Object System.Windows.Forms.ContextMenuStrip
 [void]$menu.Items.Add('Pick your perks (PageUp)', $null, { Show-PerkPicker })
 [void]$menu.Items.Add('Show / hide (F8)', $null, { Invoke-Hotkey 4 })
 [void]$menu.Items.Add('Screenshot with overlay (PrintScreen)', $null, { Invoke-Hotkey 13 })
+# Settings submenu (user, 4 Nov): every on/off and the map look without editing
+# settings.json. One shared click handler; each item's Tag says what it does
+# (no .GetNewClosure() in handlers - it can't see this script's functions).
+$setMenu = New-Object System.Windows.Forms.ToolStripMenuItem 'Settings'
+$setToggles = [ordered]@{
+    AutoDetect = 'Find the map automatically'
+    AutoPerks  = 'Read my perks in the lobby'
+    RouletteOn = 'Perk roulette (loadout screen)'
+    CollapseOn = 'Endgame collapse countdown'
+    TimersOn   = 'Perk timers'
+    CompassOn  = 'Compass'
+    ShowOnStream = 'Show on screen share / OBS'
+}
+$setClick = {
+    param($s, $e)
+    $t = $s.Tag
+    switch ($t.K) {
+        'AutoDetect' { Invoke-Hotkey 2 }   # same as its key: also starts / stops the reader
+        'AutoPerks'  { $state.AutoPerks = -not $state.AutoPerks; $sync.AutoPerks = $state.AutoPerks; Save-Settings }
+        'CompassOn'  { Invoke-CompassKey 'toggle' }
+        'TimersOn'   { $state.TimersOn = -not $state.TimersOn; if (-not $state.TimersOn) { Reset-Timers }; Save-Settings }
+        'ShowOnStream' { $state.ShowOnStream = -not $state.ShowOnStream; Update-OverlayCapture; Save-Settings }
+        'Opacity'    { $state.Opacity = $t.V; Update-Layout; Save-Settings }
+        'Size'       { $state.Size = $t.V; Update-Layout; Save-Settings }
+        'Corner'     { $state.Corner = $t.V; Update-Layout; Save-Settings }
+        default      { $state[$t.K] = -not $state[$t.K]; Save-Settings   # RouletteOn, CollapseOn, Roll*: read live
+                       if ($t.K -in 'RollGear', 'RollOffering' -and $state[$t.K]) { Start-GearIconFetch } }   # their icons, fetched once in the background
+    }
+}
+foreach ($k in $setToggles.Keys) {
+    $it = New-Object System.Windows.Forms.ToolStripMenuItem $setToggles[$k]
+    $it.Tag = @{ K = $k }; $it.Add_Click($setClick); [void]$setMenu.DropDownItems.Add($it)
+}
+# What one SPIN rolls (user, 4 Nov: "toggle in your settings menu which features
+# you wanna roll for"). Perks on by default, the rest off.
+$rollMenu = New-Object System.Windows.Forms.ToolStripMenuItem 'Roulette rolls'
+foreach ($rk in @(@('RollPerks', 'Perks'), @('RollGear', 'Item + add-ons (killer: add-ons)'), @('RollOffering', 'Offering'), @('RollCharacter', 'Character to play'), @('RollEvent', 'Include event items / offerings'))) {
+    $it = New-Object System.Windows.Forms.ToolStripMenuItem $rk[1]
+    $it.CheckOnClick = $true   # the tick flips at once (the menu stays open)
+    $it.Tag = @{ K = $rk[0] }; $it.Add_Click($setClick); [void]$rollMenu.DropDownItems.Add($it)
+}
+$rollMenu.DropDown.Add_Opening({ foreach ($it in $rollMenu.DropDownItems) { $it.Checked = [bool]$state[$it.Tag.K] } })
+# keep the menu open while ticking several
+$rollMenu.DropDown.Add_Closing({ param($s, $e) if ($e.CloseReason -eq 'ItemClicked') { $e.Cancel = $true } })
+[void]$setMenu.DropDownItems.Add($rollMenu)
+[void]$setMenu.DropDownItems.Add((New-Object System.Windows.Forms.ToolStripSeparator))
+$setPick = @(
+    @{ K = 'Size';    Label = 'Map size';     Names = @('Small', 'Medium', 'Large', 'Huge') },
+    @{ K = 'Opacity'; Label = 'Map see-through'; Names = @('Very see-through', 'See-through', 'Slightly see-through', 'Solid') },
+    @{ K = 'Corner';  Label = 'Map position'; Names = @('Top left', 'Top right', 'Bottom left', 'Bottom right', 'Left middle', 'Right middle') }
+)
+foreach ($p in $setPick) {
+    $sub = New-Object System.Windows.Forms.ToolStripMenuItem $p.Label
+    for ($i = 0; $i -lt $p.Names.Count; $i++) {
+        $it = New-Object System.Windows.Forms.ToolStripMenuItem $p.Names[$i]
+        $it.Tag = @{ K = $p.K; V = $i }; $it.Add_Click($setClick); [void]$sub.DropDownItems.Add($it)
+    }
+    [void]$setMenu.DropDownItems.Add($sub)
+}
+# ticks follow the real state each time it opens (keys can change things too)
+$setMenu.Add_DropDownOpening({
+    foreach ($it in $setMenu.DropDownItems) {
+        if ($it -isnot [System.Windows.Forms.ToolStripMenuItem]) { continue }
+        if ($it.Tag) { $it.Checked = [bool]$state[$it.Tag.K]; continue }
+        foreach ($c in $it.DropDownItems) { $c.Checked = ($state[$c.Tag.K] -eq $c.Tag.V) }
+    }
+})
+[void]$menu.Items.Add($setMenu)
 # fetch the callout maps + perk icons again in a window of its own (user, 3 Nov:
 # a click on the overlay rather than hunting for the Start menu entry)
 [void]$menu.Items.Add('Redownload maps and icons', $null, {
@@ -828,9 +1002,7 @@ function Save-OverlayScreenshot {
             $path = Join-Path $dir ("DbD overlay {0:yyyy-MM-dd HH-mm-ss}.png" -f (Get-Date))
             $bmp.Save($path, [System.Drawing.Imaging.ImageFormat]::Png); $bmp.Dispose()
         } finally {
-            foreach ($w in $window, $pillWindow, $timerWindow, $killerWindow, $collapseWindow) {
-                [void][OverlayNative]::SetWindowDisplayAffinity((New-Object System.Windows.Interop.WindowInteropHelper $w).Handle, 0x11)
-            }
+            Update-OverlayCapture   # back to hidden (or left visible with "show on stream")
             $sync.Paused = $false
         }
         Show-Hint 'Screenshot saved in the Screenshots folder' 4
@@ -910,8 +1082,25 @@ function Test-DbdFront {
     $fgPid -eq $script:dbdPid
 }
 
+# Mouse lock: Windowed Fullscreen lets the (hidden) cursor drift onto another
+# monitor mid-match, and a click there pauses the game. While DbD is in front
+# and its cursor is hidden (you're steering the camera), keep the cursor on the
+# game's screen. Menus, TAB and Esc show the cursor, so it's free there.
+# Windows drops the lock on any focus change, so it is re-applied every tick.
+$mouseLocked = $false
+function Update-MouseLock([bool]$front) {
+    $want = $front -and -not [OverlayNative]::CursorShowing()
+    if ($want) {
+        $r = New-Object OverlayNative+RECT
+        if ([OverlayNative]::GetWindowRect([OverlayNative]::GetForegroundWindow(), [ref]$r) -and ($r.R - $r.L) -gt 200) {
+            [void][OverlayNative]::ClipCursor([ref]$r); $script:mouseLocked = $true
+        }
+    } elseif ($script:mouseLocked) { [void][OverlayNative]::FreeCursor([IntPtr]::Zero); $script:mouseLocked = $false }
+}
+
 function Invoke-KeyPolling {
     $front = Test-DbdFront
+    if ($state.MouseLock -ne $false) { Update-MouseLock $front } elseif ($script:mouseLocked) { Update-MouseLock $false }
     # compass: mouse moves on other windows, or on the TAB / Esc screens (cursor, not camera), don't count
     [RawMouse]::Enabled = $front -and -not $script:tabWasDown -and -not $sync.EscMenu
     foreach ($vk in ($keyMap | ForEach-Object { $_.Vk } | Select-Object -Unique)) {
@@ -969,6 +1158,7 @@ $dbdTimer.Add_Tick({
 
 $keyTimer.Add_Tick({
     Update-Roulette   # every 50 ms: the SPIN button follows the loadout panel quickly
+    if ($state.ShowOnStream -and ((Get-Date) - $script:ovBlackAt).TotalMilliseconds -ge 200) { $script:ovBlackAt = Get-Date; Update-OverlayBlackouts }
     $down = ([OverlayNative]::GetAsyncKeyState(0x09) -band 0x8000) -ne 0
     if ($down -and -not $script:tabWasDown) { $sync.ScanNow = $true }
     $script:tabWasDown = $down
@@ -999,6 +1189,11 @@ $timer.Add_Tick({
     }
 
     # Perks read from the lobby diamonds - they become your build for the timers
+    # capture.flag (dev mode): flash what each saved frame read
+    if ([int]$sync.DevSeq -ne [int]$script:lastDevSeq) {
+        $script:lastDevSeq = [int]$sync.DevSeq
+        Show-Hint ('DEV: ' + $sync.DevNote) 5
+    }
     if ($sync.PerkSeq -ne $script:lastPerkSeq) {
         $script:lastPerkSeq = $sync.PerkSeq
         $state.Perks = @($sync.DetectedPerks); Save-Settings
@@ -1090,6 +1285,7 @@ $timer.Add_Tick({
 
 $window.Add_Closed({
     $timer.Stop(); $keyTimer.Stop(); $dbdTimer.Stop()
+    if ($script:mouseLocked) { [void][OverlayNative]::FreeCursor([IntPtr]::Zero) }
     $sync.Quit = $true
     if ($script:picker) { $script:picker.Close() }
     $pillWindow.Close(); $killerWindow.Close(); $collapseWindow.Close(); $rlListWin.Close(); $rlTipWin.Close(); $updWin.Close(); foreach ($r in $rlReelsUi) { $r.Win.Close() }; $rlBtnWindow.Close(); $timerWindow.Close(); $compassWindow.Close(); $timerTick.Stop()

@@ -243,8 +243,11 @@ function Get-RouletteSlotCentre([int]$i) { @(($rlSlotX[$i] + $rlShiftX), ($rlSlo
 # during the slide and lagged - user, 2 Nov). Each reel has its own small
 # window that is MOVED during the slide; the list panel + names sit in a
 # window of their own that only redraws while fading. All click-through. ----
-# The list window covers this area (1080p pixels):
-$rlListAreaX = $rlListX - 6; $rlListAreaY = $rlListY - 6; $rlListAreaW = $rlListW + 12; $rlListAreaH = $rlListH + 12
+# The list window covers this area (1080p pixels) - plus room on the left for
+# the extra rolls' column (item / add-ons / offering / character, RouletteGear.ps1)
+$rlGearW = 230
+$rlPerksInResult = $true   # the shown result has perks (off when only extras were rolled)
+$rlListAreaX = $rlListX - 6 - $rlGearW; $rlListAreaY = $rlListY - 6; $rlListAreaW = $rlListW + 12 + $rlGearW; $rlListAreaH = $rlListH + 12
 $rlListWin = New-OverlayWindow 'DbD Clock Overlay roulette list'
 $rlListWin.SizeToContent = 'Manual'
 $rlListWin.Width = $rlListAreaW * $rlU; $rlListWin.Height = $rlListAreaH * $rlU
@@ -316,7 +319,7 @@ $rlPadlocks = @(0..3 | ForEach-Object {
 $rlHistPath = Join-Path $root 'roulette-history.json'
 $rlHistory = New-Object System.Collections.ArrayList
 # (no @() round ConvertFrom-Json: in PowerShell 5.1 that makes the whole array ONE item)
-try { if (Test-Path $rlHistPath) { $saved = Get-Content $rlHistPath -Raw -Encoding UTF8 | ConvertFrom-Json; foreach ($h in $saved) { [void]$rlHistory.Add(@{ Role = [string]$h.Role; Names = @($h.Names); Char = [string]$h.Char }) } } } catch {}
+try { if (Test-Path $rlHistPath) { $saved = Get-Content $rlHistPath -Raw -Encoding UTF8 | ConvertFrom-Json; foreach ($h in $saved) { [void]$rlHistory.Add(@{ Role = [string]$h.Role; Names = @($h.Names | Where-Object { $null -ne $_ }); Char = [string]$h.Char; Gear = $h.Gear }) } } } catch {}
 $rlHistIdx = 0
 # roulette-debug.flag (set in ClockOverlay.ps1): a line per event, with the screen-read state
 function Write-RouletteLog([string]$what) {
@@ -325,9 +328,11 @@ function Write-RouletteLog([string]$what) {
 }
 function Get-RouletteHistory { @($rlHistory | Where-Object { $_.Role -eq $script:rlRole }) }
 function Add-RouletteHistory {
-    $names = @($rlReelsUi | ForEach-Object { $_.Last.name })
-    $char = @($rlReelsUi | Where-Object { $_.Last.Empty } | ForEach-Object { $_.Last.character }) | Select-Object -First 1   # an Adept roll's character
-    $rlHistory.Insert(0, @{ Role = $script:rlRole; Names = $names; Char = [string]$char })
+    # (no perks in this roll - only extras were rolled: no perk names)
+    $names = if ($script:rlPerksInResult) { @($rlReelsUi | ForEach-Object { $_.Last.name }) } else { @() }
+    $char = if ($script:rlPerksInResult) { @($rlReelsUi | Where-Object { $_.Last.Empty } | ForEach-Object { $_.Last.character }) | Select-Object -First 1 }   # an Adept roll's character
+    $gearSnap = if (Get-Command Get-GearSnapshot -ErrorAction SilentlyContinue) { Get-GearSnapshot } else { $null }   # item / add-ons / offering / character
+    $rlHistory.Insert(0, @{ Role = $script:rlRole; Names = $names; Char = [string]$char; Gear = $gearSnap })
     # keep 10 per side
     $keep = New-Object System.Collections.ArrayList; $count = @{}
     foreach ($h in $rlHistory) { $count[$h.Role] = 1 + [int]$count[$h.Role]; if ($count[$h.Role] -le 10) { [void]$keep.Add($h) } }
@@ -354,6 +359,8 @@ function Show-RouletteHistory([int]$idx) {
     if ($script:rlHistIdx -eq 0 -and $idx -gt 0) { $script:rlCurLocks = @($rlReelsUi | ForEach-Object { [bool]$_.Locked }) }   # leaving the current roll
     $script:rlHistIdx = $idx
     for ($i = 0; $i -lt 4; $i++) { $rlReelsUi[$i].Last = $perks[$i]; $rlReelsUi[$i].Locked = ($idx -eq 0 -and $script:rlCurLocks[$i]) }
+    $script:rlPerksInResult = $true
+    if (Get-Command Set-GearFromSnapshot -ErrorAction SilentlyContinue) { Set-GearFromSnapshot $list[$idx].Gear }   # that roll's item / add-ons / offering
     $script:rlHasResult = $true
     Show-RouletteResult
 }
@@ -685,6 +692,7 @@ function Set-RouletteNames {
     $rlEquipNote.Measure([System.Windows.Size]::new([double]::PositiveInfinity, [double]::PositiveInfinity))
     [System.Windows.Controls.Canvas]::SetLeft($rlEquipNote, ($rlListX + $rlListW / 2 - $rlListAreaX) * $rlU - $rlEquipNote.DesiredSize.Width / 2)
     [System.Windows.Controls.Canvas]::SetTop($rlEquipNote, ($rlListY + $rlListH - $rlListPad - $rlFootH / 2 - $rlListAreaY) * $rlU - $rlEquipNote.DesiredSize.Height / 2)
+    if (Get-Command Set-GearLayout -ErrorAction SilentlyContinue) { Set-GearLayout }   # box size + the extras column
 }
 
 # ---- Tooltip: hovering a result row shows that perk's description (just the
@@ -712,6 +720,10 @@ function New-RouletteTipText([double]$size, [string]$weight, [byte]$grey, [doubl
 }
 $rlTipDesc = New-RouletteTipText 13 'Normal' 215 0
 $rlTipDesc.LineHeight = 18 * $rlU
+# Licensed perks (Halloween: Laurie / Michael) show under another name when you
+# don't own that chapter - a grey note under the text (user, 4 Nov). perks.json "aka".
+$rlTipNote = New-RouletteTipText 12 'Normal' 150 0
+$rlTipNote.FontStyle = 'Italic'; $rlTipNote.Margin = New-Object System.Windows.Thickness 0, (8 * $rlU), 0, 0
 # The description coloured the way DbD's own tooltips are (user, 3 Nov): tier
 # values like 20/25/30 in the tier colours (green / blue / purple), other values
 # with a unit in DbD's yellow, status effects (Elusive, Haste ...) bold.
@@ -749,12 +761,14 @@ function Show-RouletteTip([int]$i) {
     if (-not $desc) { Hide-RouletteTip; return }
     $script:rlTipRow = $i
     Set-RouletteTipText $rlTipDesc $desc
+    if ($perk.aka) { $rlTipNote.Text = "Non-licensed name: $($perk.aka)"; $rlTipNote.Visibility = 'Visible' } else { $rlTipNote.Visibility = 'Collapsed' }
     $rlTipBox.Measure([System.Windows.Size]::new([double]::PositiveInfinity, [double]::PositiveInfinity))
     $h = $rlTipBox.DesiredSize.Height / $rlU   # 1080p px
     # right edge 10 px left of the box; top level with the row, kept on screen
     $c = Get-RouletteRowCentre $i
     $top = [Math]::Max(10, [Math]::Min($c[1] - $rlRowH / 2, 1070 + $rlListDY - $h))
-    $rlTipWin.Left = ($rlListX - 10 - $rlTipW) * $rlU + $rlX0 + $rlOff; $rlTipWin.Top = $top * $rlU + $rlY0
+    $gx = if (Get-Command Get-GearLeftExtra -ErrorAction SilentlyContinue) { Get-GearLeftExtra } else { 0 }   # left of the extras column, when shown
+    $rlTipWin.Left = ($rlListX - $gx - 10 - $rlTipW) * $rlU + $rlX0 + $rlOff; $rlTipWin.Top = $top * $rlU + $rlY0
     if (-not $rlTipWin.IsVisible) { $rlTipWin.Show() }
 }
 # which row the mouse is over (the name / diamond part, not the padlock column)
@@ -784,7 +798,8 @@ $rlBtnWindow.Add_SourceInitialized({
     $h = (New-Object System.Windows.Interop.WindowInteropHelper $s).Handle
     $ex = [OverlayNative]::GetWindowLong($h, -20)
     [void][OverlayNative]::SetWindowLong($h, -20, ($ex -bor 0x80 -bor 0x08000000))   # tool window, no-activate, NOT click-through
-    if (-not $script:rlDebug) { [void][OverlayNative]::SetWindowDisplayAffinity($h, 0x11) }
+    if (Get-Command Register-OverlayCapture -ErrorAction SilentlyContinue) { Register-OverlayCapture $h }   # (the overlay: honours "show on stream")
+    elseif (-not $script:rlDebug) { [void][OverlayNative]::SetWindowDisplayAffinity($h, 0x11) }   # (test scripts)
 })
 $rlButton = New-Object System.Windows.Controls.Border
 # SPIN + THEME sit top right, just under the Auric Cells / Iridescent Shards /
@@ -996,9 +1011,13 @@ function Show-RouletteFade($els, [int]$delayMs) {
     }
 }
 # everything that fades in with the names: names, padlocks, history header
-function Get-RouletteNames { @($rlReelsUi | ForEach-Object { $_.Name }) + @($rlPadlocks) + @($rlHistBtn, $rlHistPrev, $rlHistText, $rlHistNext, $rlHistClear, $rlEquipNote) }
+function Get-RouletteNames {
+    $g = if (Get-Command Get-GearElements -ErrorAction SilentlyContinue) { @(Get-GearElements) } else { @() }   # the extra rolls' column
+    @($rlReelsUi | ForEach-Object { $_.Name }) + @($rlPadlocks) + @($rlHistBtn, $rlHistPrev, $rlHistText, $rlHistNext, $rlHistClear, $rlEquipNote) + $g
+}
 function Hide-RouletteList {
     Hide-RouletteTip
+    if (Get-Command Hide-GearReels -ErrorAction SilentlyContinue) { Hide-GearReels -Now }
     foreach ($el in @($rlListPanel) + (Get-RouletteNames)) {
         $el.BeginAnimation([System.Windows.UIElement]::OpacityProperty, $null); $el.Opacity = 0
     }
@@ -1013,6 +1032,7 @@ function Reset-RouletteReelAnims($r) {
 function Show-RouletteResult {
     Write-RouletteLog ('result shown: ' + (($rlReelsUi | ForEach-Object { if ($_.Last.Empty) { '(empty)' } else { $_.Last.name } }) -join ', '))
     for ($i = 0; $i -lt 4; $i++) {
+        if (-not $script:rlPerksInResult) { break }   # extras-only roll: no perk rows
         $r = $rlReelsUi[$i]
         Reset-RouletteReelAnims $r
         $r.Strip.Children.Clear(); [void]$r.Strip.Children.Add((New-RouletteIcon $r.Last))
@@ -1072,6 +1092,7 @@ $rlListTimer.Interval = [TimeSpan]::FromMilliseconds(650)
 $rlListTimer.Add_Tick({
     $this.Stop()
     if (-not $script:rlSpinning) { return }
+    if (Get-Command Hide-GearReels -ErrorAction SilentlyContinue) { Hide-GearReels }   # the extras fade off their slots into the box
     foreach ($r in $rlReelsUi) {
         Reset-RouletteReelAnims $r   # the pop / rim flash are over by now
         # just the landed icon (the spin's long strip looks the same from here) ...
@@ -1138,9 +1159,11 @@ function Start-PerkSpin {
     # killer loadout = killer perks (user, 3 Nov: "it's doing surv perks");
     # DBD_OVERLAY_SPIN=killer tests that pool
     $script:rlRole = Get-RouletteRole
+    # tray > Settings > Roulette rolls: perks switched off = only the extras (RouletteGear.ps1)
+    if ($state -and $state.RollPerks -eq $false) { if (Get-Command Start-GearOnlySpin -ErrorAction SilentlyContinue) { Start-GearOnlySpin }; return }
     $pool = if ($script:rlRole -eq 'killer') { @($perkDb.killerPerks) } else { @($perkDb.perks) }
     if ($pool.Count -lt 4) { return }
-    $script:rlSpinning = $true; $script:rlHasResult = $false; Close-RouletteThemeList
+    $script:rlSpinning = $true; $script:rlHasResult = $false; $script:rlPerksInResult = $true; Close-RouletteThemeList
     Stop-RouletteSlide
     $rlBtnRow.Opacity = 0.55   # dimmed while spinning
     $rlListTimer.Stop()
@@ -1185,6 +1208,7 @@ function Start-PerkSpin {
         $anim.Add_Completed($rlOnReelDone)
         $r.Move.BeginAnimation([System.Windows.Media.TranslateTransform]::YProperty, $anim)
     }
+    if (Get-Command Start-GearSpin -ErrorAction SilentlyContinue) { Start-GearSpin }   # item / add-ons / offering / character, if switched on
     $rlTickTimer.Start()
 }
 
@@ -1234,16 +1258,18 @@ function Update-Roulette {
         foreach ($r in $rlReelsUi) { $r.Last = $null; $r.Locked = $false }
         if ($script:rlShown) { Hide-RouletteList; foreach ($r in $rlReelsUi) { $r.Cell.Visibility = 'Hidden' } }
         $script:rlRole = Get-RouletteRole; $script:rlHistIdx = 0
+        if (Get-Command Clear-Gear -ErrorAction SilentlyContinue) { Clear-Gear }; $script:rlPerksInResult = $true   # the extras were for the other side too
     }
     if ($inMatch -and ($script:rlHasResult -or $rlReelsUi[0].Last)) {
         Write-RouletteLog 'match started: result cleared'
         $script:rlHasResult = $false
+        if (Get-Command Clear-Gear -ErrorAction SilentlyContinue) { Clear-Gear }; $script:rlPerksInResult = $true
         foreach ($r in $rlReelsUi) { $r.Last = $null; $r.Locked = $false }
     }
     # the latest screen read must show the loadout panel (reads come every ~2 s;
     # a stale "yes" from a stopped scanner doesn't count)
     $fresh = $sync.LastScan -and ((Get-Date) - $sync.LastScan).TotalSeconds -lt 4
-    $show = $env:DBD_OVERLAY_SPIN -or ($sync.LoadoutNow -and $fresh -and $sync.DbdInFront)
+    $show = $env:DBD_OVERLAY_SPIN -or ($state.RouletteOn -ne $false -and $sync.LoadoutNow -and $fresh -and $sync.DbdInFront)   # (tray menu > Settings can switch it off)
     if ($show -ne $script:rlShown) { Write-RouletteLog ($(if ($show) { 'SHOW' } else { 'HIDE' }) + " (loadout $([bool]$sync.LoadoutNow), read $([bool]$fresh), DbD in front $([bool]$sync.DbdInFront), spinning $script:rlSpinning, result $script:rlHasResult)") }
     if ($show -and -not $script:rlShown) {
         $script:rlShown = $true
@@ -1257,6 +1283,7 @@ function Update-Roulette {
             foreach ($r in $rlReelsUi) { $r.Win.Owner = $rlListWin }
             $rlTipWin.Owner = $rlListWin
             $rlBtnWindow.Owner = $rlListWin   # SPIN / THEME too: the theme drop-down opens over the results box (user, 3 Nov)
+            if ($gearReels) { foreach ($g in $gearReels.Values) { $g.Win.Owner = $rlListWin } }   # the item / add-on / offering reels too
             $script:rlOwned = $true
         }
         foreach ($r in $rlReelsUi) { $r.Win.Show() }; $rlBtnWindow.Show()
@@ -1269,6 +1296,7 @@ function Update-Roulette {
             $script:rlSpinning = $false
             $rlTickTimer.Stop(); $rlListTimer.Stop(); Stop-RouletteSlide
             foreach ($r in $rlReelsUi) { $r.Last = $null; $r.Locked = $false }   # an unfinished spin doesn't count
+            if (Get-Command Clear-Gear -ErrorAction SilentlyContinue) { $script:gearOnlyRun = $false; $gearDoneTimer.Stop(); Clear-Gear }
         }
         foreach ($r in $rlReelsUi) { $r.Filling = $false }; $rlTickTimer.Stop(); Hide-RouletteTip   # a re-roll's spin: its perk is already picked
         $script:rlShown = $false

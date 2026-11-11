@@ -40,6 +40,9 @@ Prefer unzipping by hand? Use `DbD-Clock-Overlay.zip` from the release
   art by Behaviour Interactive - downloaded, not included.
 - Perk descriptions (roulette tooltips, `data/perk-text.json`): [Dead by Daylight wiki](https://deadbydaylight.wiki.gg),
   CC BY-SA 4.0; game text by Behaviour Interactive.
+- Item, add-on, offering, survivor and killer data (roulette extras, `data/items.json`):
+  [Dead by Daylight wiki](https://deadbydaylight.wiki.gg), CC BY-SA 4.0; game art and text by
+  Behaviour Interactive. Their icons are downloaded, not included.
 - Roulette look: the box frame, perk slot and tier pips (`assets/textures/dbd-*.png`) are cut from Dead by
   Daylight's own loadout screen - Behaviour Interactive's art, used under their
   [fan-content guidelines](https://support.deadbydaylight.com/hc/en-us/articles/4437901307668-General-Guidelines-on-Fan-Created-Content)
@@ -57,6 +60,6 @@ it, and shared changes must stay under the GPL. It comes with no warranty.
 The license covers this repository's own code and files only. The callout maps
 and perk icons the installer downloads belong to their owners and are not part
 of this project. Roboto (in `assets/fonts/`) is under the Apache License 2.0.
-`data/perk-text.json` holds perk descriptions from the Dead by Daylight wiki and
-stays under its licence, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). `assets/textures/dbd-*.png`
+`data/perk-text.json` and `data/items.json` hold data from the Dead by Daylight wiki and
+stay under its licence, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). `assets/textures/dbd-*.png`
 are Behaviour Interactive's art and are not covered by the GPL either.

@@ -9,12 +9,13 @@ if (-not $createdNew) { exit }   # already watching
 
 $overlay = Join-Path $PSScriptRoot 'ClockOverlay.ps1'
 $ps = Join-Path $env:SystemRoot 'System32\WindowsPowerShell\v1.0\powershell.exe'
+$hc = Join-Path $env:SystemRoot 'System32\conhost.exe'   # --headless: no window, even with Windows Terminal as default
 
 while ($true) {
     if (Get-Process -Name 'DeadByDaylight*' -ErrorAction SilentlyContinue) {
         $running = $null
         if (-not [System.Threading.Mutex]::TryOpenExisting('Local\DbdClockOverlay', [ref]$running)) {
-            Start-Process $ps -ArgumentList '-NoProfile', '-STA', '-WindowStyle', 'Hidden', '-ExecutionPolicy', 'Bypass', '-File', "`"$overlay`"" -WindowStyle Hidden
+            Start-Process $hc -ArgumentList '--headless', "`"$ps`"", '-NoProfile', '-STA', '-WindowStyle', 'Hidden', '-ExecutionPolicy', 'Bypass', '-File', "`"$overlay`"" -WindowStyle Hidden
             Start-Sleep -Seconds 15   # give it time to start before checking again
         } else { $running.Dispose() }
     }

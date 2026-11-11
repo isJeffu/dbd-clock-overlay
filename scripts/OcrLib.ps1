@@ -142,6 +142,32 @@ function Read-BitmapText([System.Drawing.Bitmap]$bmp) {
     ($result.Lines | ForEach-Object { $_.Text }) -join "`n"
 }
 
+# Fallback for the match-intro map name on bright, busy maps (Underground
+# Complex, 4 Nov): the title is white, so keep only near-white pixels in the
+# bottom-left band, as black text on white, scaled to ~60 px tall letters.
+function Read-MapTitleText([System.Drawing.Bitmap]$bmp, [int]$min = 215, [int]$spread = 40) {
+    $sy = [int]($bmp.Height * 0.76); $sw = [int]($bmp.Width * 0.45); $sh = [int]($bmp.Height * 0.16)
+    $f = 60.0 / (0.044 * $bmp.Height)
+    $ow = [int]($sw * $f); $oh = [int]($sh * $f)
+    $out = New-Object System.Drawing.Bitmap $ow, $oh, ([System.Drawing.Imaging.PixelFormat]::Format32bppArgb)
+    try {
+        $g = [System.Drawing.Graphics]::FromImage($out); $g.InterpolationMode = 'HighQualityBicubic'
+        $g.DrawImage($bmp, (New-Object System.Drawing.Rectangle 0, 0, $ow, $oh), (New-Object System.Drawing.Rectangle 0, $sy, $sw, $sh), [System.Drawing.GraphicsUnit]::Pixel); $g.Dispose()
+        $d = $out.LockBits((New-Object System.Drawing.Rectangle 0, 0, $ow, $oh), 'ReadWrite', $out.PixelFormat)
+        $n = $d.Stride * $oh; $px = New-Object byte[] $n
+        [Runtime.InteropServices.Marshal]::Copy($d.Scan0, $px, 0, $n)
+        for ($i = 0; $i -lt $n; $i += 4) {
+            $b = $px[$i]; $gg = $px[$i + 1]; $r = $px[$i + 2]
+            $lo = $b; if ($gg -lt $lo) { $lo = $gg }; if ($r -lt $lo) { $lo = $r }
+            $hi = $b; if ($gg -gt $hi) { $hi = $gg }; if ($r -gt $hi) { $hi = $r }
+            $v = if ($lo -ge $min -and ($hi - $lo) -le $spread) { 0 } else { 255 }
+            $px[$i] = $v; $px[$i + 1] = $v; $px[$i + 2] = $v; $px[$i + 3] = 255
+        }
+        [Runtime.InteropServices.Marshal]::Copy($px, 0, $d.Scan0, $n); $out.UnlockBits($d)
+        Read-BitmapText $out
+    } finally { $out.Dispose() }
+}
+
 # Screenshot of the primary monitor (physical pixels), optionally blacking out
 # a rectangle (the overlay itself, so it never reads its own map title)
 function Get-ScreenBitmap([System.Drawing.Rectangle]$blackout = [System.Drawing.Rectangle]::Empty) {
@@ -179,6 +205,8 @@ function Test-LoadoutTitle([System.Drawing.Bitmap]$from, [string]$layout = 'auto
     try { $t = Read-BitmapText $big } finally { $big.Dispose() }
     $key = ' ' + (ConvertTo-MatchKey ($t -replace "`n", ' ')) + ' '
     if (-not $key.Contains(' LOADOUT ')) { return $null }
+    # the name above LOADOUT (a killer's title, or a legendary outfit's own name like MINA) - the roulette's killer add-on rolls
+    $script:LastLoadoutName = (($key -split ' LOADOUT ')[0] -replace '\b\d+\b', '').Trim()
     # Who you play: the first slot's label says ITEM (survivor) or POWER (killer),
     # 1080p (300,165) 130x34. (Killer names don't always start with "THE" - a
     # killer showed as "MINA", 3 Nov - so the name is only the fallback.)
@@ -299,17 +327,25 @@ function Get-CollapseBar([System.Drawing.Bitmap]$bmp, [string]$layout = 'auto', 
     $step = [Math]::Max(1, [int](1.5 * $ui.U))
     $cls = New-Object System.Text.StringBuilder
     $orange = 0
+    # A real fill is much brighter than the strip just under the bar (30-130 levels,
+    # 4 Nov frames); grey fog read as a "full bar" was even all the way down (1-3)
+    $yu = [Math]::Min($bmp.Height - 1, [int](Get-DbdY $ui 46.0)); $lift = 0.0; $liftN = 0
     for ($x = $x0; $x -le $x1; $x += $step) {
         $c = $bmp.GetPixel($x, $yb); $a = $bmp.GetPixel($x, $ya)
         $r = ($c.R + $a.R) / 2; $g = ($c.G + $a.G) / 2; $b = ($c.B + $a.B) / 2
         $mx = [Math]::Max($r, [Math]::Max($g, $b)); $mn = [Math]::Min($r, [Math]::Min($g, $b))
-        if ($r -ge 120 -and $b -le 45 -and ($r - $b) -ge 100 -and $g -le 0.8 * $r) { [void]$cls.Append('F'); $orange++ }
+        $isOrange = $r -ge 120 -and $b -le 45 -and ($r - $b) -ge 100 -and $g -le 0.8 * $r
+        if ($isOrange -or ($mx -ge 85 -and $mx -le 235 -and ($mx - $mn) -lt 14)) {
+            $u = $bmp.GetPixel($x, $yu); $lift += ($a.R + $a.G + $a.B - $u.R - $u.G - $u.B) / 3; $liftN++
+        }
+        if ($isOrange) { [void]$cls.Append('F'); $orange++ }
         elseif ($mx -ge 85 -and $mx -le 235 -and ($mx - $mn) -lt 14) { [void]$cls.Append('F') }
         elseif ($mx -lt 95 -and $b -ge $r - 5) { [void]$cls.Append('.') }
         elseif ($r -ge 50 -and $r -lt 160 -and $b -le 35 -and $g -lt 0.6 * $r) { [void]$cls.Append('r') }   # dark-red trail just drained (orange phase)
         else { [void]$cls.Append('?') }
     }
     $s = $cls.ToString(); $n = $s.Length
+    $script:LastCollapseScan = $s   # for dev\replay-test.ps1 (what each sample along the bar looked like)
     # The fill starts at the left end; a few odd samples inside it are allowed
     # (a lone dark-red 'r' inside the fill is a blended pixel, not the trail - seen at 85% HUD scale)
     $m = [regex]::Match($s, '^(?:F|[.?r]{1,4}(?=F))*')
@@ -318,11 +354,19 @@ function Get-CollapseBar([System.Drawing.Bitmap]$bmp, [string]$layout = 'auto', 
     # skip the bright marker at the fill's edge, the rest must be dark track
     $tail = if ($rest.Length -gt 12) { $rest.Substring(12) } else { '' }
     $fillOk = $fillEnd -eq 0 -or (($fill.ToCharArray() | Where-Object { $_ -eq 'F' }).Count -ge 0.9 * $fillEnd)
-    $trackOk = $tail.Length -eq 0 -or (($tail.ToCharArray() | Where-Object { $_ -eq '.' -or $_ -eq 'r' }).Count -ge 0.8 * $tail.Length)
+    # (a full bar leaves only the end cap past the marker - ~15 odd samples, 194044)
+    $trackOk = $tail.Length -le 0.03 * $n -or (($tail.ToCharArray() | Where-Object { $_ -eq '.' -or $_ -eq 'r' }).Count -ge 0.8 * $tail.Length)
     # both parts must look right, and there must be some fill: a dark blue scene
     # alone looks like an empty track (an empty bar = collapse over anyway)
     if (-not ($fillOk -and $trackOk) -or $fillEnd -lt 10) { return $null }
-    @{ Frac = [Math]::Min(1.0, $fillEnd / ($n - 1)); Orange = ($orange -gt 0.5 * [Math]::Max(1, $fillEnd)) }
+    $isOrangeBar = $orange -gt 0.5 * [Math]::Max(1, $fillEnd)
+    # flat fog / haze, not the bar (fog is grey, never orange: an orange bar over a
+    # bright wall has little lift but is real - 4 Nov frames 194044 / 195725)
+    if (-not $isOrangeBar -and $liftN -and ($lift / $liftN) -lt 12) { return $null }
+    $frac = [Math]::Min(1.0, $fillEnd / ($n - 1))
+    if ($tail.Length -le 0.03 * $n -and -not $rest.Contains('.')) { $frac = 1.0 }   # fill reaches the end cap = full bar (gates just opened)
+    if ($frac -lt 0.03) { return $null }   # a sliver at the left end is usually blood/scenery (192217); real = ~2 s left anyway
+    @{ Frac = $frac; Orange = $isOrangeBar }
 }
 
 # Status effects named in the HUD strip (bottom right), with whatever else is
@@ -349,7 +393,15 @@ function Get-StatusEffects([string]$text) {
 # Finds the map whose name appears in the text. Longest name wins, so
 # "COAL TOWER II" beats "COAL TOWER". Roman numerals must end the word.
 function Find-MapInText([string]$text, $maps) {
-    $key = ' ' + (ConvertTo-MatchKey ($text -replace "`n", ' ')) + ' '
+    # the in-match "CHANNEL MAP" item lists realms under dates ("06/30" then
+    # "GRAVE OF GLENVALE") - drop each line that follows a date-only line (4 Nov)
+    $lines = $text -split "`n"; $kept = New-Object System.Collections.Generic.List[string]
+    for ($i = 0; $i -lt $lines.Count; $i++) {
+        if ($i -gt 0 -and $lines[$i - 1].Trim() -match '^\d{1,2}\s*/\s*\d{1,2}$') { continue }
+        $kept.Add($lines[$i])
+    }
+    $text = $kept -join "`n"
+    $key =' ' + (ConvertTo-MatchKey ($text -replace "`n", ' ')) + ' '
     $best = $null
     foreach ($m in $maps) {
         # 'The Game' turns up in ordinary sentences - only trust its realm name for that one

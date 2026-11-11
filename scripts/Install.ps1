@@ -61,15 +61,16 @@ function New-Link([string]$path, [string]$target, [string]$arguments, [string]$t
     $l = $sh.CreateShortcut($path)
     $l.TargetPath = $target; $l.Arguments = $arguments; $l.WorkingDirectory = $Dest; $l.Description = $tip
     if (Test-Path $icon) { $l.IconLocation = "$icon,0" }
-    if ($target -eq $ps -and $arguments -notlike '*-Pause*') { $l.WindowStyle = 7 }   # minimised: no console flash (the redownload window stays visible)
+    if ($target -eq $hc) { $l.WindowStyle = 7 }   # minimised: no console flash (the redownload window stays visible)
     $l.Save()
 }
-$runArgs = "-NoProfile -STA -WindowStyle Hidden -ExecutionPolicy Bypass -File `"$(Join-Path $Dest 'scripts\ClockOverlay.ps1')`""
+$hc = Join-Path $env:SystemRoot 'System32\conhost.exe'   # --headless: no window, even with Windows Terminal as default (Windows 11)
+$runArgs = "--headless `"$ps`" -NoProfile -STA -WindowStyle Hidden -ExecutionPolicy Bypass -File `"$(Join-Path $Dest 'scripts\ClockOverlay.ps1')`""
 $deskLnk = Join-Path $desk 'DbD Clock Overlay.lnk'
-if (-not $Update -or (Test-Path $deskLnk)) { New-Item -ItemType Directory -Force $desk | Out-Null; New-Link $deskLnk $ps $runArgs 'Start the DbD clock-callout overlay' }
+if (-not $Update -or (Test-Path $deskLnk)) { New-Item -ItemType Directory -Force $desk | Out-Null; New-Link $deskLnk $hc $runArgs 'Start the DbD clock-callout overlay' }
 if (-not $Update -or (Test-Path $menu)) {
     New-Item -ItemType Directory -Force $menu | Out-Null
-    New-Link (Join-Path $menu 'DbD Clock Overlay.lnk') $ps $runArgs 'Start the DbD clock-callout overlay'
+    New-Link (Join-Path $menu 'DbD Clock Overlay.lnk') $hc $runArgs 'Start the DbD clock-callout overlay'
     New-Link (Join-Path $menu 'Update DbD Clock Overlay.lnk') (Join-Path $Dest 'Update.cmd') '' 'Get the newest version'
     New-Link (Join-Path $menu 'Redownload maps and icons.lnk') $ps "-NoProfile -ExecutionPolicy Bypass -File `"$(Join-Path $Dest 'scripts\Setup.ps1')`" -Force -Pause" 'Download the callout maps and perk icons again (if some are missing or look wrong)'
     New-Link (Join-Path $menu 'Read me.lnk') (Join-Path $Dest 'README.txt') '' 'How DbD Clock Overlay works'
@@ -88,7 +89,7 @@ if (-not $Update) { Write-Host '' }
 # (with auto-start on, the watcher starts it whenever DbD is running)
 $now = if ($auto) { $false } elseif ($Update) { $overlayWasRunning } else {
     switch ($StartNow) { 'Yes' { $true } 'No' { $false } default { Ask 'Start the overlay now?' } } }
-if ($now) { Start-Process $ps -ArgumentList $runArgs -WindowStyle Hidden }
+if ($now) { Start-Process $hc -ArgumentList $runArgs -WindowStyle Hidden }
 
 if (-not $Update) {
     Write-Host 'All set. In DbD, set Display Mode to "Windowed Fullscreen".' -ForegroundColor Green

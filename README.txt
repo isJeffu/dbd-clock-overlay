@@ -9,6 +9,9 @@ Callout maps: Hens333 (hens333.com/callouts), images made by Lethia.
 Perk icons: Dead by Daylight wiki (deadbydaylight.wiki.gg), game art by Behaviour.
 Perk descriptions (roulette tooltips, data\perk-text.json): Dead by Daylight
 wiki, CC BY-SA 4.0 (creativecommons.org/licenses/by-sa/4.0); game text by Behaviour.
+Item, add-on, offering, survivor and killer names (roulette extras, data\items.json)
+and their icons: Dead by Daylight wiki, CC BY-SA 4.0; game art and text by Behaviour.
+The icons are downloaded on your PC, not included.
 Roulette look: the box frame, perk slot and tier pips (assets\textures\dbd-box.png,
 dbd-slot.png, dbd-pips.png) are cut from Dead by Daylight's own loadout screen - both
 Behaviour Interactive's art, used under their fan-content guidelines (free,
