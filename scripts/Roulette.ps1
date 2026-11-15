@@ -81,16 +81,19 @@ function New-RoulettePlayers([string]$wav, [int]$count, [double]$volume) {
 # Ticks (dozens per spin) use Windows' lightweight sound player: one call, no
 # work for the animation thread. The clunks keep MediaPlayer so they can
 # overlap the ticks.
-$rlTickSound = $null
-try { $rlTickSound = New-Object System.Media.SoundPlayer $rlTickWav; $rlTickSound.Load() } catch {}
-$rlLocks = New-RoulettePlayers $rlLockWav 3 0.8
+# ...except SoundPlayer plays one sound at a time: each tick cut the last one
+# off and it sounded choppy (user, 15 Nov). A small pool of MediaPlayers lets
+# each tick ring out fully while the next starts.
+$rlTicks = New-RoulettePlayers $rlTickWav 6 0.9
+$rlTickNext = 0
+$rlLocks = New-RoulettePlayers $rlLockWav 4 0.8   # one per reel: with 3, the 4th landing cut the 1st clunk off
 # Warm-up: the first play of a sound loads Windows' media pipeline, which froze
 # the reels for a moment as the first perk landed (user, 2 Nov). Play every
 # player once, muted, at start-up so that happens here instead.
-foreach ($p in @($rlLocks)) { $p.IsMuted = $true; $p.Play() }
+foreach ($p in @($rlLocks) + @($rlTicks)) { $p.IsMuted = $true; $p.Play() }
 $rlWarm = New-Object System.Windows.Threading.DispatcherTimer
 $rlWarm.Interval = [TimeSpan]::FromSeconds(2)
-$rlWarm.Add_Tick({ $this.Stop(); foreach ($p in @($rlLocks)) { $p.Stop(); $p.IsMuted = $false } })
+$rlWarm.Add_Tick({ $this.Stop(); foreach ($p in @($rlLocks) + @($rlTicks)) { $p.Stop(); $p.IsMuted = $false } })
 $rlWarm.Start()
 # Animations run at the monitor's refresh rate (WPF's default is 60 fps, which
 # looked stuttery on a 144 Hz screen - user, 2 Nov)
@@ -126,8 +129,12 @@ $rlIconWarm.Start()
 $rlLockNext = 0
 function Invoke-RouletteSound([string]$which) {
     if ($env:DBD_OVERLAY_QUIET) { return }   # tests
+    if ($script:rlDebug) { [void]$script:rlSndLog.Add(('{0} {1}' -f [Environment]::TickCount, $which)) }
     try {
-        if ($which -eq 'tick') { if ($rlTickSound) { $rlTickSound.Play() }; return }
+        if ($which -eq 'tick') {
+            $p = $rlTicks[$script:rlTickNext]; $script:rlTickNext = ($script:rlTickNext + 1) % $rlTicks.Count
+            $p.Stop(); $p.Position = [TimeSpan]::Zero; $p.Play(); return
+        }
         $p = $rlLocks[$script:rlLockNext]; $script:rlLockNext = ($script:rlLockNext + 1) % $rlLocks.Count
         $p.Stop(); $p.Position = [TimeSpan]::Zero; $p.Play()
     } catch {}
@@ -444,7 +451,7 @@ $rlOnFillDone = {
         $flash = New-Object System.Windows.Media.Animation.ColorAnimation $rlWhite, $rlRimCol, ([System.Windows.Duration][TimeSpan]::FromMilliseconds(450)); [void](Set-RouletteFps $flash)
         $r.RimBrush.BeginAnimation([System.Windows.Media.SolidColorBrush]::ColorProperty, $flash)
     }
-    if (-not (Test-RouletteFilling) -and -not $script:rlSpinning) { $rlTickTimer.Stop() }
+    if (-not (Test-RouletteFilling) -and -not $script:rlSpinning) { $rlTickTimer.Stop(); Save-RouletteSoundLog }
     Set-RouletteNames
 }
 
@@ -992,7 +999,22 @@ $rlBtnWindow.Content = $rlBtnStack
 $rlSpinning = $false; $rlShown = $false; $rlHasResult = $false
 $rlTickTimer = New-Object System.Windows.Threading.DispatcherTimer
 $rlTickTimer.Interval = [TimeSpan]::FromMilliseconds(20)
+$rlSndLog = New-Object System.Collections.ArrayList   # debug: when each sound fired + timer gaps, written after the spin
+function Save-RouletteSoundLog {
+    if (-not $script:rlDebug -or -not $script:rlSndLog.Count) { return }
+    $t0 = [int](($script:rlSndLog[0] -split ' ')[0])
+    $lines = $script:rlSndLog | ForEach-Object { $p = $_ -split ' ', 2; '{0,6} {1}' -f ([int]$p[0] - $t0), $p[1] }
+    try { Add-Content (Join-Path $root 'roulette-sound-log.txt') (@("--- spin $(Get-Date -f HH:mm:ss)") + $lines) } catch {}
+    $script:rlSndLog.Clear(); $script:rlTimerLast = 0
+}
 $rlTickTimer.Add_Tick({
+    if ($script:rlDebug) {
+        $nowD = [Environment]::TickCount
+        if ($script:rlTimerLast -and ($nowD - $script:rlTimerLast) -gt 40) { [void]$script:rlSndLog.Add(('{0} timer-gap {1}ms' -f $nowD, ($nowD - $script:rlTimerLast))) }
+        $script:rlTimerLast = $nowD
+    }
+    # a tick whenever any reel passes a perk (all 4 reels: the user prefers the
+    # dense rattle, 15 Nov - the choppiness was the old one-sound player)
     $tick = $false
     foreach ($r in $rlReelsUi) {
         if ($r.Done) { continue }
@@ -1147,7 +1169,7 @@ $rlOnReelDone = {
         $r.RimBrush.BeginAnimation([System.Windows.Media.SolidColorBrush]::ColorProperty, $flash)
     }
     if (@($rlReelsUi | Where-Object { -not $_.Done }).Count -eq 0) {
-        $rlTickTimer.Stop()
+        $rlTickTimer.Stop(); Save-RouletteSoundLog
         Show-RouletteFade $rlListPanel 100
         $rlListTimer.Start()
     }
