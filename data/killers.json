@@ -260,5 +260,11 @@
     "Crouch 2.5 s+ to hide from his sense",
     "Hook Spike: Broken till removed (5 s)",
     "Toxic Waste: Oblivious 13 s after scare",
-    "Perks: Scared to Death, Rampage, Silent" ] }
+    "Perks: Scared to Death, Rampage, Silent" ] },
+  { "title": "THE TERRIFIER", "lines": [
+    "115%, 32 m. Bag of Toys: 1 of 2 random Toys",
+    "Toys: acid, flamethrower, gun, flail, horn",
+    "Tortured 40 s: a DIFFERENT Toy downs you",
+    "Horn: 2+ Survivors = Oblivious 10 s",
+    "Perks: Laughingstock, Kill Spree, Funny Biz" ] }
 ]

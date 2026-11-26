@@ -1,4 +1,4 @@
-﻿{
+{
     "source":  "deadbydaylight.wiki.gg/wiki/Survivor_Perks (read 2026-10-17); seconds = [tier I, tier II, tier III]",
     "perks":  [
                   {
@@ -116,11 +116,11 @@
                                ]
                   },
                   {
-                      "name":  "Better Together",
-                      "file":  "IconPerks_betterTogether.png",
-                      "character":  "Nancy",
+                      "name":  "Best Gift Ever",
+                      "file":  "T_UI_iconsPerks_BestGiftEver.png",
+                      "character":  "Sienna",
                       "tags":  [
-                                   "info"
+                                   "items"
                                ]
                   },
                   {
@@ -129,6 +129,14 @@
                       "character":  "Rebecca",
                       "tags":  [
                                    "altruism"
+                               ]
+                  },
+                  {
+                      "name":  "Better Together",
+                      "file":  "IconPerks_betterTogether.png",
+                      "character":  "Nancy",
+                      "tags":  [
+                                   "info"
                                ]
                   },
                   {
@@ -429,10 +437,10 @@
                       "name":  "Decisive Strike",
                       "file":  "IconPerks_decisiveStrike.png",
                       "character":  "Laurie",
+                      "aka":  "Will to Live",
                       "tags":  [
                                    "antitunnel"
-                               ],
-                      "aka":  "Will to Live"
+                               ]
                   },
                   {
                       "name":  "Déjà Vu",
@@ -857,10 +865,10 @@
                       "name":  "Object of Obsession",
                       "file":  "IconPerks_objectOfObsession.png",
                       "character":  "Laurie",
+                      "aka":  "Bound by Obsession",
                       "tags":  [
                                    "info"
-                               ],
-                      "aka":  "Bound by Obsession"
+                               ]
                   },
                   {
                       "name":  "Off the Record",
@@ -1134,6 +1142,15 @@
                                ]
                   },
                   {
+                      "name":  "Shared Trauma",
+                      "file":  "T_UI_iconsPerks_SharedTrauma.png",
+                      "character":  "Sienna",
+                      "tags":  [
+                                   "info",
+                                   "altruism"
+                               ]
+                  },
+                  {
                       "name":  "Shoulder the Burden",
                       "file":  "IconPerks_shoulderTheBurden.png",
                       "character":  "Taurie",
@@ -1170,10 +1187,10 @@
                       "name":  "Sole Survivor",
                       "file":  "IconPerks_soleSurvivor.png",
                       "character":  "Laurie",
+                      "aka":  "Down to the Last",
                       "tags":  [
                                    "stealth"
-                               ],
-                      "aka":  "Down to the Last"
+                               ]
                   },
                   {
                       "name":  "Solidarity",
@@ -1352,6 +1369,14 @@
                       "character":  "Nea",
                       "tags":  [
                                    "stealth"
+                               ]
+                  },
+                  {
+                      "name":  "Valkyrie\u0027s Rage",
+                      "file":  "T_UI_iconsPerks_ValkyriesRage.png",
+                      "character":  "Sienna",
+                      "tags":  [
+                                   "chase"
                                ]
                   },
                   {
@@ -1955,10 +1980,10 @@
                             "name":  "Dying Light",
                             "file":  "IconPerks_dyingLight.png",
                             "character":  "Shape",
+                            "aka":  "Cull the Weak",
                             "tags":  [
                                          "obsession"
-                                     ],
-                            "aka":  "Cull the Weak"
+                                     ]
                         },
                         {
                             "name":  "Enduring",
@@ -2022,6 +2047,14 @@
                             "character":  "Good Guy",
                             "tags":  [
                                          "snowball"
+                                     ]
+                        },
+                        {
+                            "name":  "Funny Business",
+                            "file":  "T_UI_iconsPerks_FunnyBusiness.png",
+                            "character":  "Terrifier",
+                            "tags":  [
+                                         "slowdown"
                                      ]
                         },
                         {
@@ -2342,6 +2375,14 @@
                                      ]
                         },
                         {
+                            "name":  "Kill Spree",
+                            "file":  "T_UI_iconsPerks_KillSpree.png",
+                            "character":  "Terrifier",
+                            "tags":  [
+                                         "endgame"
+                                     ]
+                        },
+                        {
                             "name":  "Knock Out",
                             "file":  "IconPerks_knockOut.png",
                             "character":  "Cannibal",
@@ -2353,6 +2394,14 @@
                             "name":  "Languid Touch",
                             "file":  "IconPerks_languidTouch.png",
                             "character":  "Lich",
+                            "tags":  [
+                                         "antiexhaustion"
+                                     ]
+                        },
+                        {
+                            "name":  "Laughingstock",
+                            "file":  "T_UI_iconsPerks_Laughingstock.png",
+                            "character":  "Terrifier",
                             "tags":  [
                                          "antiexhaustion"
                                      ]
@@ -2521,11 +2570,11 @@
                             "name":  "Play with Your Food",
                             "file":  "IconPerks_playWithYourFood.png",
                             "character":  "Shape",
+                            "aka":  "See How They Run",
                             "tags":  [
                                          "antiloop",
                                          "obsession"
-                                     ],
-                            "aka":  "See How They Run"
+                                     ]
                         },
                         {
                             "name":  "Pop Goes the Weasel",
@@ -2590,10 +2639,10 @@
                             "name":  "Save the Best for Last",
                             "file":  "IconPerks_saveTheBestForLast.png",
                             "character":  "Shape",
+                            "aka":  "Keep Them Waiting",
                             "tags":  [
                                          "antiloop"
-                                     ],
-                            "aka":  "Keep Them Waiting"
+                                     ]
                         },
                         {
                             "name":  "Scourge Hook: Floods of Rage",
@@ -2763,14 +2812,6 @@
                                      ]
                         },
                         {
-                            "name":  "THWACK!",
-                            "file":  "IconPerks_thwack.png",
-                            "character":  "Skull Merchant",
-                            "tags":  [
-                                         "antiloop"
-                                     ]
-                        },
-                        {
                             "name":  "Terminus",
                             "file":  "IconPerks_terminus.png",
                             "character":  "Mastermind",
@@ -2801,6 +2842,14 @@
                             "character":  "Ghost Face",
                             "tags":  [
                                          "slowdown"
+                                     ]
+                        },
+                        {
+                            "name":  "THWACK!",
+                            "file":  "IconPerks_thwack.png",
+                            "character":  "Skull Merchant",
+                            "tags":  [
+                                         "antiloop"
                                      ]
                         },
                         {
